@@ -1,0 +1,2987 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.82 build 9453 
+                                                                                               Thu Aug  2 14:44:43 2012
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 9453
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 9453"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	12F675
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           # 35 "main.c"
+    43                           	psect config,class=CONFIG,delta=2 ;#
+    44                           # 35 "main.c"
+    45  2007  31CC               	dw 0x31DF & 0x31FC & 0x31EF & 0x31FF ;#
+    46                           	FNCALL	_main,_config
+    47                           	FNCALL	_main,_init
+    48                           	FNCALL	_main,_set
+    49                           	FNCALL	_main,_update_display
+    50                           	FNCALL	_set,_update_display
+    51                           	FNCALL	_set,_wait
+    52                           	FNCALL	_init,_write_spi_address
+    53                           	FNCALL	_init,_set_brightness
+    54                           	FNCALL	_set_brightness,_write_spi_address
+    55                           	FNCALL	_update_display,___awdiv
+    56                           	FNCALL	_update_display,_write_spi_address
+    57                           	FNCALL	_update_display,___awmod
+    58                           	FNCALL	_write_spi_address,_write_spi
+    59                           	FNCALL	_write_spi,_wait
+    60                           	FNROOT	_main
+    61                           	FNCALL	_ISR,i1_wait
+    62                           	FNCALL	intlevel1,_ISR
+    63                           	global	intlevel1
+    64                           	FNROOT	intlevel1
+    65                           	global	_time
+    66                           	global	_brightness
+    67                           	global	_TMR1
+    68                           psect	text366,local,class=CODE,delta=2
+    69                           global __ptext366
+    70  0000                     __ptext366:
+    71  000E                     _TMR1	set	14
+    72                           	global	_PIR1
+    73  000C                     _PIR1	set	12
+    74                           	global	_CARRY
+    75  0018                     _CARRY	set	24
+    76                           	global	_GIE
+    77  005F                     _GIE	set	95
+    78                           	global	_GPIE
+    79  005B                     _GPIE	set	91
+    80                           	global	_GPIF
+    81  0058                     _GPIF	set	88
+    82                           	global	_GPIO0
+    83  0028                     _GPIO0	set	40
+    84                           	global	_GPIO1
+    85  0029                     _GPIO1	set	41
+    86                           	global	_GPIO2
+    87  002A                     _GPIO2	set	42
+    88                           	global	_GPIO3
+    89  002B                     _GPIO3	set	43
+    90                           	global	_GPIO4
+    91  002C                     _GPIO4	set	44
+    92                           	global	_PEIE
+    93  005E                     _PEIE	set	94
+    94                           	global	_T1CKPS0
+    95  0084                     _T1CKPS0	set	132
+    96                           	global	_T1CKPS1
+    97  0085                     _T1CKPS1	set	133
+    98                           	global	_T1OSCEN
+    99  0083                     _T1OSCEN	set	131
+   100                           	global	_TMR1CS
+   101  0081                     _TMR1CS	set	129
+   102                           	global	_TMR1GE
+   103  0086                     _TMR1GE	set	134
+   104                           	global	_TMR1IF
+   105  0060                     _TMR1IF	set	96
+   106                           	global	_TMR1ON
+   107  0080                     _TMR1ON	set	128
+   108                           	global	_nT1SYNC
+   109  0082                     _nT1SYNC	set	130
+   110                           	global	_EEADR
+   111  009B                     _EEADR	set	155
+   112                           	global	_EECON1
+   113  009C                     _EECON1	set	156
+   114                           	global	_EECON2
+   115  009D                     _EECON2	set	157
+   116                           	global	_EEDATA
+   117  009A                     _EEDATA	set	154
+   118                           	global	_WPU
+   119  0095                     _WPU	set	149
+   120                           	global	_IOC0
+   121  04B0                     _IOC0	set	1200
+   122                           	global	_IOC1
+   123  04B1                     _IOC1	set	1201
+   124                           	global	_RD
+   125  04E0                     _RD	set	1248
+   126                           	global	_TMR1IE
+   127  0460                     _TMR1IE	set	1120
+   128                           	global	_TRISIO0
+   129  0428                     _TRISIO0	set	1064
+   130                           	global	_TRISIO1
+   131  0429                     _TRISIO1	set	1065
+   132                           	global	_TRISIO2
+   133  042A                     _TRISIO2	set	1066
+   134                           	global	_TRISIO3
+   135  042B                     _TRISIO3	set	1067
+   136                           	global	_TRISIO4
+   137  042C                     _TRISIO4	set	1068
+   138                           	global	_TRISIO5
+   139  042D                     _TRISIO5	set	1069
+   140                           	global	_WR
+   141  04E1                     _WR	set	1249
+   142                           	global	_WREN
+   143  04E2                     _WREN	set	1250
+   144                           	global	_nGPPU
+   145  040F                     _nGPPU	set	1039
+   146                           	file	"/tmp/cgtY3ELxx"
+   147                           	line	#
+   148                           psect cinit,class=CODE,delta=2
+   149                           global start_initialization
+   150  0340                     start_initialization:
+   151                           
+   152                           psect	bssBANK0,class=BANK0,space=1
+   153                           global __pbssBANK0
+   154  0047                     __pbssBANK0:
+   155  0047                     _time:
+   156  0047                            ds      3
+   157                           
+   158  004A                     _brightness:
+   159  004A                            ds      1
+   160                           
+   161                           ; Clear objects allocated to BANK0
+   162                           psect cinit,class=CODE,delta=2
+   163  0340  01C7               	clrf	((__pbssBANK0)+0)&07Fh
+   164  0341  01C8               	clrf	((__pbssBANK0)+1)&07Fh
+   165  0342  01C9               	clrf	((__pbssBANK0)+2)&07Fh
+   166  0343  01CA               	clrf	((__pbssBANK0)+3)&07Fh
+   167                           psect cinit,class=CODE,delta=2
+   168                           global end_of_initialization
+   169                           
+   170                           ;End of C runtime variable initialization code
+   171                           
+   172  0344                     end_of_initialization:
+   173  0344  0183               clrf status
+   174  0345  2AB8               ljmp _main	;jump to C main() function
+   175                           psect	cstackCOMMON,class=COMMON,space=1
+   176                           global __pcstackCOMMON
+   177  0000                     __pcstackCOMMON:
+   178                           	global	??_config
+   179  0000                     ??_config:	; 0 bytes @ 0x0
+   180                           psect	cstackBANK0,class=BANK0,space=1
+   181                           global __pcstackBANK0
+   182  0020                     __pcstackBANK0:
+   183                           	global	?_config
+   184  0020                     ?_config:	; 0 bytes @ 0x0
+   185                           	global	?_init
+   186  0020                     ?_init:	; 0 bytes @ 0x0
+   187                           	global	?_set
+   188  0020                     ?_set:	; 0 bytes @ 0x0
+   189                           	global	?_update_display
+   190  0020                     ?_update_display:	; 0 bytes @ 0x0
+   191                           	global	?_set_brightness
+   192  0020                     ?_set_brightness:	; 0 bytes @ 0x0
+   193                           	global	?_wait
+   194  0020                     ?_wait:	; 0 bytes @ 0x0
+   195                           	global	?_ISR
+   196  0020                     ?_ISR:	; 0 bytes @ 0x0
+   197                           	global	?i1_wait
+   198  0020                     ?i1_wait:	; 0 bytes @ 0x0
+   199                           	global	??i1_wait
+   200  0020                     ??i1_wait:	; 0 bytes @ 0x0
+   201  0020                     	ds	1
+   202                           	global	i1wait@c
+   203  0021                     i1wait@c:	; 1 bytes @ 0x1
+   204  0021                     	ds	1
+   205                           	global	i1wait@tmp
+   206  0022                     i1wait@tmp:	; 1 bytes @ 0x2
+   207  0022                     	ds	1
+   208                           	global	??_ISR
+   209  0023                     ??_ISR:	; 0 bytes @ 0x3
+   210  0023                     	ds	5
+   211                           	global	??_wait
+   212  0028                     ??_wait:	; 0 bytes @ 0x8
+   213                           	global	?___awdiv
+   214  0028                     ?___awdiv:	; 2 bytes @ 0x8
+   215                           	global	?___awmod
+   216  0028                     ?___awmod:	; 2 bytes @ 0x8
+   217                           	global	___awdiv@divisor
+   218  0028                     ___awdiv@divisor:	; 2 bytes @ 0x8
+   219                           	global	___awmod@divisor
+   220  0028                     ___awmod@divisor:	; 2 bytes @ 0x8
+   221  0028                     	ds	1
+   222                           	global	wait@c
+   223  0029                     wait@c:	; 1 bytes @ 0x9
+   224  0029                     	ds	1
+   225                           	global	wait@tmp
+   226  002A                     wait@tmp:	; 1 bytes @ 0xA
+   227                           	global	___awdiv@dividend
+   228  002A                     ___awdiv@dividend:	; 2 bytes @ 0xA
+   229                           	global	___awmod@dividend
+   230  002A                     ___awmod@dividend:	; 2 bytes @ 0xA
+   231  002A                     	ds	1
+   232                           	global	?_write_spi
+   233  002B                     ?_write_spi:	; 0 bytes @ 0xB
+   234                           	global	write_spi@data
+   235  002B                     write_spi@data:	; 4 bytes @ 0xB
+   236  002B                     	ds	1
+   237                           	global	??___awdiv
+   238  002C                     ??___awdiv:	; 0 bytes @ 0xC
+   239                           	global	??___awmod
+   240  002C                     ??___awmod:	; 0 bytes @ 0xC
+   241  002C                     	ds	1
+   242                           	global	___awdiv@counter
+   243  002D                     ___awdiv@counter:	; 1 bytes @ 0xD
+   244                           	global	___awmod@counter
+   245  002D                     ___awmod@counter:	; 1 bytes @ 0xD
+   246  002D                     	ds	1
+   247                           	global	___awdiv@sign
+   248  002E                     ___awdiv@sign:	; 1 bytes @ 0xE
+   249                           	global	___awmod@sign
+   250  002E                     ___awmod@sign:	; 1 bytes @ 0xE
+   251  002E                     	ds	1
+   252                           	global	??_write_spi
+   253  002F                     ??_write_spi:	; 0 bytes @ 0xF
+   254                           	global	___awdiv@quotient
+   255  002F                     ___awdiv@quotient:	; 2 bytes @ 0xF
+   256  002F                     	ds	4
+   257                           	global	write_spi@len
+   258  0033                     write_spi@len:	; 1 bytes @ 0x13
+   259  0033                     	ds	1
+   260                           	global	write_spi@i
+   261  0034                     write_spi@i:	; 1 bytes @ 0x14
+   262  0034                     	ds	1
+   263                           	global	?_write_spi_address
+   264  0035                     ?_write_spi_address:	; 0 bytes @ 0x15
+   265                           	global	write_spi_address@addr
+   266  0035                     write_spi_address@addr:	; 1 bytes @ 0x15
+   267  0035                     	ds	1
+   268                           	global	write_spi_address@data
+   269  0036                     write_spi_address@data:	; 2 bytes @ 0x16
+   270  0036                     	ds	2
+   271                           	global	??_write_spi_address
+   272  0038                     ??_write_spi_address:	; 0 bytes @ 0x18
+   273  0038                     	ds	2
+   274                           	global	write_spi_address@len
+   275  003A                     write_spi_address@len:	; 1 bytes @ 0x1A
+   276  003A                     	ds	1
+   277                           	global	??_update_display
+   278  003B                     ??_update_display:	; 0 bytes @ 0x1B
+   279                           	global	??_set_brightness
+   280  003B                     ??_set_brightness:	; 0 bytes @ 0x1B
+   281  003B                     	ds	3
+   282                           	global	??_set
+   283  003E                     ??_set:	; 0 bytes @ 0x1E
+   284                           	global	set_brightness@bri
+   285  003E                     set_brightness@bri:	; 1 bytes @ 0x1E
+   286  003E                     	ds	1
+   287                           	global	??_init
+   288  003F                     ??_init:	; 0 bytes @ 0x1F
+   289                           	global	set@setting
+   290  003F                     set@setting:	; 1 bytes @ 0x1F
+   291  003F                     	ds	1
+   292                           	global	?_main
+   293  0040                     ?_main:	; 2 bytes @ 0x20
+   294                           	global	main@argc
+   295  0040                     main@argc:	; 2 bytes @ 0x20
+   296  0040                     	ds	2
+   297                           	global	main@argv
+   298  0042                     main@argv:	; 2 bytes @ 0x22
+   299  0042                     	ds	2
+   300                           	global	??_main
+   301  0044                     ??_main:	; 0 bytes @ 0x24
+   302  0044                     	ds	1
+   303                           	global	main@loops
+   304  0045                     main@loops:	; 1 bytes @ 0x25
+   305  0045                     	ds	1
+   306                           	global	main@i
+   307  0046                     main@i:	; 1 bytes @ 0x26
+   308  0046                     	ds	1
+   309 ;;Data sizes: Strings 0, constant 0, data 0, bss 4, persistent 0 stack 0
+   310 ;;Auto spaces:   Size  Autos    Used
+   311 ;; COMMON           0      0       0
+   312 ;; BANK0           62     39      43
+   313                           
+   314 ;;
+   315 ;; Pointer list with targets:
+   316                           
+   317 ;; ?___awmod	int  size(1) Largest target is 0
+   318 ;;
+   319 ;; ?___awdiv	int  size(1) Largest target is 0
+   320 ;;
+   321                           
+   322                           
+   323 ;;
+   324 ;; Critical Paths under _main in COMMON
+   325 ;;
+   326 ;;   None.
+   327 ;;
+   328 ;; Critical Paths under _ISR in COMMON
+   329 ;;
+   330 ;;   None.
+   331 ;;
+   332 ;; Critical Paths under _main in BANK0
+   333 ;;
+   334 ;;   _main->_init
+   335 ;;   _main->_set
+   336 ;;   _set->_update_display
+   337 ;;   _init->_set_brightness
+   338 ;;   _set_brightness->_write_spi_address
+   339 ;;   _update_display->_write_spi_address
+   340 ;;   _write_spi_address->_write_spi
+   341 ;;   _write_spi->_wait
+   342 ;;
+   343 ;; Critical Paths under _ISR in BANK0
+   344 ;;
+   345 ;;   _ISR->i1_wait
+   346                           
+   347 ;;
+   348 ;;Main: autosize = 0, tempsize = 1, incstack = 0, save=0
+   349 ;;
+   350                           
+   351 ;;
+   352 ;;Call Graph Tables:
+   353 ;;
+   354 ;; ---------------------------------------------------------------------------------
+   355 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   356 ;; ---------------------------------------------------------------------------------
+   357 ;; (0) _main                                                 7     3      4    2205
+   358 ;;                                             32 BANK0      7     3      4
+   359 ;;                             _config
+   360 ;;                               _init
+   361 ;;                                _set
+   362 ;;                     _update_display
+   363 ;; ---------------------------------------------------------------------------------
+   364 ;; (1) _set                                                  2     2      0     912
+   365 ;;                                             30 BANK0      2     2      0
+   366 ;;                     _update_display
+   367 ;;                               _wait
+   368 ;; ---------------------------------------------------------------------------------
+   369 ;; (1) _init                                                 1     1      0     426
+   370 ;;                                             31 BANK0      1     1      0
+   371 ;;                  _write_spi_address
+   372 ;;                     _set_brightness
+   373 ;; ---------------------------------------------------------------------------------
+   374 ;; (2) _set_brightness                                       4     4      0     224
+   375 ;;                                             27 BANK0      4     4      0
+   376 ;;                  _write_spi_address
+   377 ;; ---------------------------------------------------------------------------------
+   378 ;; (1) _update_display                                       3     3      0     798
+   379 ;;                                             27 BANK0      3     3      0
+   380 ;;                            ___awdiv
+   381 ;;                  _write_spi_address
+   382 ;;                            ___awmod
+   383 ;; ---------------------------------------------------------------------------------
+   384 ;; (2) _write_spi_address                                    6     3      3     202
+   385 ;;                                             21 BANK0      6     3      3
+   386 ;;                          _write_spi
+   387 ;;                            ___awdiv (ARG)
+   388 ;;                            ___awmod (ARG)
+   389 ;; ---------------------------------------------------------------------------------
+   390 ;; (3) _write_spi                                           10     6      4     136
+   391 ;;                                             11 BANK0     10     6      4
+   392 ;;                               _wait
+   393 ;; ---------------------------------------------------------------------------------
+   394 ;; (2) ___awmod                                              7     3      4     296
+   395 ;;                                              8 BANK0      7     3      4
+   396 ;; ---------------------------------------------------------------------------------
+   397 ;; (2) ___awdiv                                              9     5      4     300
+   398 ;;                                              8 BANK0      9     5      4
+   399 ;; ---------------------------------------------------------------------------------
+   400 ;; (4) _wait                                                 3     3      0      46
+   401 ;;                                              8 BANK0      3     3      0
+   402 ;; ---------------------------------------------------------------------------------
+   403 ;; (1) _config                                               0     0      0       0
+   404 ;; ---------------------------------------------------------------------------------
+   405 ;; Estimated maximum stack depth 4
+   406 ;; ---------------------------------------------------------------------------------
+   407 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   408 ;; ---------------------------------------------------------------------------------
+   409 ;; (6) _ISR                                                  5     5      0     150
+   410 ;;                                              3 BANK0      5     5      0
+   411 ;;                             i1_wait
+   412 ;; ---------------------------------------------------------------------------------
+   413 ;; (7) i1_wait                                               3     3      0     150
+   414 ;;                                              0 BANK0      3     3      0
+   415 ;; ---------------------------------------------------------------------------------
+   416 ;; Estimated maximum stack depth 7
+   417 ;; ---------------------------------------------------------------------------------
+   418                           
+   419 ;; Call Graph Graphs:
+   420                           
+   421 ;; _main (ROOT)
+   422 ;;   _config
+   423 ;;   _init
+   424 ;;     _write_spi_address
+   425 ;;       _write_spi
+   426 ;;         _wait
+   427 ;;       ___awdiv (ARG)
+   428 ;;       ___awmod (ARG)
+   429 ;;     _set_brightness
+   430 ;;       _write_spi_address
+   431 ;;         _write_spi
+   432 ;;           _wait
+   433 ;;         ___awdiv (ARG)
+   434 ;;         ___awmod (ARG)
+   435 ;;   _set
+   436 ;;     _update_display
+   437 ;;       ___awdiv
+   438 ;;       _write_spi_address
+   439 ;;         _write_spi
+   440 ;;           _wait
+   441 ;;         ___awdiv (ARG)
+   442 ;;         ___awmod (ARG)
+   443 ;;       ___awmod
+   444 ;;     _wait
+   445 ;;   _update_display
+   446 ;;     ___awdiv
+   447 ;;     _write_spi_address
+   448 ;;       _write_spi
+   449 ;;         _wait
+   450 ;;       ___awdiv (ARG)
+   451 ;;       ___awmod (ARG)
+   452 ;;     ___awmod
+   453 ;;
+   454 ;; _ISR (ROOT)
+   455 ;;   i1_wait
+   456 ;;
+   457                           
+   458 ;; Address spaces:
+   459                           
+   460 ;;Name               Size   Autos  Total    Cost      Usage
+   461 ;;BITCOMMON            0      0       0       0        0.0%
+   462 ;;EEDATA              80      0       0       0        0.0%
+   463 ;;NULL                 0      0       0       0        0.0%
+   464 ;;CODE                 0      0       0       0        0.0%
+   465 ;;BITSFR0              0      0       0       1        0.0%
+   466 ;;SFR0                 0      0       0       1        0.0%
+   467 ;;COMMON               0      0       0       1        0.0%
+   468 ;;BITSFR1              0      0       0       2        0.0%
+   469 ;;SFR1                 0      0       0       2        0.0%
+   470 ;;STACK                0      0       9       2        0.0%
+   471 ;;BITBANK0            3E      0       0       3        0.0%
+   472 ;;BANK0               3E     27      2B       4       69.4%
+   473 ;;ABS                  0      0      2B       5        0.0%
+   474 ;;DATA                 0      0      34       6        0.0%
+   475                           
+   476                           	global	_main
+   477                           psect	maintext,global,class=CODE,delta=2
+   478                           global __pmaintext
+   479  02B8                     __pmaintext:
+   480                           
+   481 ;; *************** function _main *****************
+   482 ;; Defined at:
+   483 ;;		line 51 in file "main.c"
+   484 ;; Parameters:    Size  Location     Type
+   485 ;;  argc            2   32[BANK0 ] int 
+   486 ;;  argv            2   34[BANK0 ] PTR PTR unsigned char 
+   487 ;; Auto vars:     Size  Location     Type
+   488 ;;  i               1   38[BANK0 ] unsigned char 
+   489 ;;  loops           1   37[BANK0 ] unsigned char 
+   490 ;; Return value:  Size  Location     Type
+   491 ;;                  2   32[BANK0 ] int 
+   492 ;; Registers used:
+   493 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+   494 ;; Tracked objects:
+   495 ;;		On entry : 17F/0
+   496 ;;		On exit  : 0/0
+   497 ;;		Unchanged: 0/0
+   498 ;; Data sizes:     COMMON   BANK0
+   499 ;;      Params:         0       4
+   500 ;;      Locals:         0       2
+   501 ;;      Temps:          0       1
+   502 ;;      Totals:         0       7
+   503 ;;Total ram usage:        7 bytes
+   504 ;; Hardware stack levels required when called:    7
+   505 ;; This function calls:
+   506 ;;		_config
+   507 ;;		_init
+   508 ;;		_set
+   509 ;;		_update_display
+   510 ;; This function is called by:
+   511 ;;		Startup code after reset
+   512 ;; This function uses a non-reentrant model
+   513 ;;
+   514                           psect	maintext
+   515                           	file	"main.c"
+   516                           	line	51
+   517                           	global	__size_of_main
+   518  0029                     	__size_of_main	equ	__end_of_main-_main
+   519                           	
+   520  02B8                     _main:	
+   521                           	opt	stack 1
+   522                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+   523                           	line	53
+   524                           	
+   525  02B8                     l2563:	
+   526                           ;main.c: 53: config();
+   527  02B8  22E1               	fcall	_config
+   528                           	line	55
+   529                           	
+   530  02B9                     l2565:	
+   531                           ;main.c: 55: for (unsigned char i = 0; i < 20; i++);
+   532  02B9  1283               	bcf	status, 5	;RP0=0, select bank0
+   533  02BA  01C6               	clrf	(main@i)
+   534                           	
+   535  02BB                     l2567:	
+   536  02BB  3014               	movlw	(014h)
+   537  02BC  0246               	subwf	(main@i),w
+   538  02BD  1C03               	skipc
+   539  02BE  2AC0               	goto	u2931
+   540  02BF  2AC1               	goto	u2930
+   541  02C0                     u2931:
+   542  02C0  2AC3               	goto	l2571
+   543  02C1                     u2930:
+   544  02C1  2ACE               	goto	l2575
+   545                           	
+   546  02C2                     l2569:	
+   547  02C2  2ACE               	goto	l2575
+   548                           	
+   549  02C3                     l361:	
+   550                           	
+   551  02C3                     l2571:	
+   552  02C3  3001               	movlw	(01h)
+   553  02C4  00C4               	movwf	(??_main+0)+0
+   554  02C5  0844               	movf	(??_main+0)+0,w
+   555  02C6  07C6               	addwf	(main@i),f
+   556                           	
+   557  02C7                     l2573:	
+   558  02C7  3014               	movlw	(014h)
+   559  02C8  0246               	subwf	(main@i),w
+   560  02C9  1C03               	skipc
+   561  02CA  2ACC               	goto	u2941
+   562  02CB  2ACD               	goto	u2940
+   563  02CC                     u2941:
+   564  02CC  2AC3               	goto	l2571
+   565  02CD                     u2940:
+   566  02CD  2ACE               	goto	l2575
+   567                           	
+   568  02CE                     l362:	
+   569                           	line	57
+   570                           	
+   571  02CE                     l2575:	
+   572                           ;main.c: 57: init();
+   573  02CE  228E               	fcall	_init
+   574                           	line	59
+   575                           	
+   576  02CF                     l2577:	
+   577                           ;main.c: 59: set();
+   578  02CF  21F3               	fcall	_set
+   579                           	line	61
+   580                           	
+   581  02D0                     l2579:	
+   582                           ;main.c: 61: unsigned char loops = 0;
+   583  02D0  1283               	bcf	status, 5	;RP0=0, select bank0
+   584  02D1  01C5               	clrf	(main@loops)
+   585  02D2  2AD3               	goto	l2581
+   586                           	line	63
+   587                           ;main.c: 63: while (1)
+   588                           	
+   589  02D3                     l363:	
+   590                           	line	65
+   591                           	
+   592  02D3                     l2581:	
+   593                           ;main.c: 64: {
+   594                           ;main.c: 65: if (++loops == 0)
+   595  02D3  3001               	movlw	(01h)
+   596  02D4  1283               	bcf	status, 5	;RP0=0, select bank0
+   597  02D5  00C4               	movwf	(??_main+0)+0
+   598  02D6  0844               	movf	(??_main+0)+0,w
+   599  02D7  07C5               	addwf	(main@loops),f
+   600  02D8  1D03               	btfss	status,2
+   601  02D9  2ADB               	goto	u2951
+   602  02DA  2ADC               	goto	u2950
+   603  02DB                     u2951:
+   604  02DB  2AD3               	goto	l2581
+   605  02DC                     u2950:
+   606                           	line	68
+   607                           	
+   608  02DC                     l2583:	
+   609                           ;main.c: 66: {
+   610                           ;main.c: 68: update_display();
+   611  02DC  2014               	fcall	_update_display
+   612  02DD  2AD3               	goto	l2581
+   613                           	line	69
+   614                           	
+   615  02DE                     l364:	
+   616  02DE  2AD3               	goto	l2581
+   617                           	line	70
+   618                           	
+   619  02DF                     l365:	
+   620                           	line	63
+   621  02DF  2AD3               	goto	l2581
+   622                           	
+   623  02E0                     l366:	
+   624                           	line	72
+   625                           ;main.c: 69: }
+   626                           ;main.c: 70: }
+   627                           ;main.c: 71: return (0);
+   628                           ;	Return value of _main is never used
+   629                           	
+   630  02E0                     l367:	
+   631                           	global	start
+   632  02E0  280F               	ljmp	start
+   633                           	opt stack 0
+   634                           GLOBAL	__end_of_main
+   635  02E1                     	__end_of_main:
+   636 ;; =============== function _main ends ============
+   637                           
+   638                           	signat	_main,8314
+   639                           	global	_set
+   640                           psect	text367,local,class=CODE,delta=2
+   641                           global __ptext367
+   642  01F3                     __ptext367:
+   643                           
+   644 ;; *************** function _set *****************
+   645 ;; Defined at:
+   646 ;;		line 208 in file "main.c"
+   647 ;; Parameters:    Size  Location     Type
+   648 ;;		None
+   649 ;; Auto vars:     Size  Location     Type
+   650 ;;  setting         1   31[BANK0 ] unsigned char 
+   651 ;; Return value:  Size  Location     Type
+   652 ;;		None               void
+   653 ;; Registers used:
+   654 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+   655 ;; Tracked objects:
+   656 ;;		On entry : 0/0
+   657 ;;		On exit  : 0/0
+   658 ;;		Unchanged: 0/0
+   659 ;; Data sizes:     COMMON   BANK0
+   660 ;;      Params:         0       0
+   661 ;;      Locals:         0       1
+   662 ;;      Temps:          0       1
+   663 ;;      Totals:         0       2
+   664 ;;Total ram usage:        2 bytes
+   665 ;; Hardware stack levels used:    1
+   666 ;; Hardware stack levels required when called:    6
+   667 ;; This function calls:
+   668 ;;		_update_display
+   669 ;;		_wait
+   670 ;; This function is called by:
+   671 ;;		_main
+   672 ;; This function uses a non-reentrant model
+   673 ;;
+   674                           psect	text367
+   675                           	file	"main.c"
+   676                           	line	208
+   677                           	global	__size_of_set
+   678  0066                     	__size_of_set	equ	__end_of_set-_set
+   679                           	
+   680  01F3                     _set:	
+   681                           	opt	stack 1
+   682                           ; Regs used in _set: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+   683                           	line	209
+   684                           	
+   685  01F3                     l2515:	
+   686                           ;main.c: 209: unsigned char setting = 1;
+   687  01F3  1283               	bcf	status, 5	;RP0=0, select bank0
+   688  01F4  01BF               	clrf	(set@setting)
+   689  01F5  1403               	bsf	status,0
+   690  01F6  0DBF               	rlf	(set@setting),f
+   691                           	line	210
+   692                           ;main.c: 210: while (setting < 3)
+   693  01F7  2A4E               	goto	l2549
+   694                           	
+   695  01F8                     l400:	
+   696                           	line	212
+   697                           ;main.c: 211: {
+   698                           ;main.c: 212: if ((!GPIO0 && GPIO1))
+   699  01F8  1805               	btfsc	(40/8),(40)&7
+   700  01F9  29FB               	goto	u2861
+   701  01FA  29FC               	goto	u2860
+   702  01FB                     u2861:
+   703  01FB  2A1E               	goto	l401
+   704  01FC                     u2860:
+   705                           	
+   706  01FC                     l2517:	
+   707  01FC  1C85               	btfss	(41/8),(41)&7
+   708  01FD  29FF               	goto	u2871
+   709  01FE  2A00               	goto	u2870
+   710  01FF                     u2871:
+   711  01FF  2A1E               	goto	l401
+   712  0200                     u2870:
+   713  0200  2A12               	goto	l2529
+   714                           	line	214
+   715                           	
+   716  0201                     l2519:	
+   717                           ;main.c: 213: {
+   718                           ;main.c: 214: switch (setting)
+   719  0201  2A12               	goto	l2529
+   720                           	line	216
+   721                           ;main.c: 215: {
+   722                           ;main.c: 216: case 0:
+   723                           	
+   724  0202                     l403:	
+   725                           	line	217
+   726                           	
+   727  0202                     l2521:	
+   728                           ;main.c: 217: time.hour++;
+   729  0202  3001               	movlw	(01h)
+   730  0203  00BE               	movwf	(??_set+0)+0
+   731  0204  083E               	movf	(??_set+0)+0,w
+   732  0205  07C7               	addwf	(_time),f
+   733                           	line	218
+   734                           ;main.c: 218: break;
+   735  0206  2A4E               	goto	l2549
+   736                           	line	219
+   737                           ;main.c: 219: case 1:
+   738                           	
+   739  0207                     l405:	
+   740                           	line	220
+   741                           	
+   742  0207                     l2523:	
+   743                           ;main.c: 220: time.minute++;
+   744  0207  3001               	movlw	(01h)
+   745  0208  00BE               	movwf	(??_set+0)+0
+   746  0209  083E               	movf	(??_set+0)+0,w
+   747  020A  07C8               	addwf	0+(_time)+01h,f
+   748                           	line	221
+   749                           ;main.c: 221: break;
+   750  020B  2A4E               	goto	l2549
+   751                           	line	222
+   752                           ;main.c: 222: case 2:
+   753                           	
+   754  020C                     l406:	
+   755                           	line	223
+   756                           	
+   757  020C                     l2525:	
+   758                           ;main.c: 223: time.second++;
+   759  020C  3001               	movlw	(01h)
+   760  020D  00BE               	movwf	(??_set+0)+0
+   761  020E  083E               	movf	(??_set+0)+0,w
+   762  020F  07C9               	addwf	0+(_time)+02h,f
+   763                           	line	224
+   764                           ;main.c: 224: break;
+   765  0210  2A4E               	goto	l2549
+   766                           	line	225
+   767                           	
+   768  0211                     l2527:	
+   769                           ;main.c: 225: }
+   770  0211  2A4E               	goto	l2549
+   771                           	line	214
+   772                           	
+   773  0212                     l402:	
+   774                           	
+   775  0212                     l2529:	
+   776  0212  083F               	movf	(set@setting),w
+   777                           	; Switch size 1, requested type "space"
+   778                           ; Number of cases is 3, Range of values is 0 to 2
+   779                           ; switch strategies available:
+   780                           ; Name         Instructions Cycles
+   781                           ; direct_byte            9     6 (fixed)
+   782                           ; simple_byte           10     6 (average)
+   783                           ; jumptable            260     6 (fixed)
+   784                           ; rangetable             7     6 (fixed)
+   785                           ; spacedrange           12     9 (fixed)
+   786                           ; locatedrange           3     3 (fixed)
+   787                           ;	Chosen strategy is direct_byte
+   788                           
+   789  0213  0084               	movwf fsr
+   790  0214  3003               	movlw	3
+   791  0215  0204               	subwf	fsr,w
+   792  0216  1803               skipnc
+   793  0217  2A4E               goto l2549
+   794  0218  3000               movlw high(S2625)
+   795  0219  008A               movwf pclath
+   796  021A  3001               	movlw low(S2625)
+   797  021B  0704               	addwf fsr,w
+   798  021C  0082               	movwf pc
+   799                           psect	swtext1,local,class=CONST,delta=2
+   800                           global __pswtext1
+   801  0001                     __pswtext1:
+   802  0001                     S2625:
+   803  0001  2A02               	ljmp	l2521
+   804  0002  2A07               	ljmp	l2523
+   805  0003  2A0C               	ljmp	l2525
+   806                           psect	text367
+   807                           
+   808                           	line	225
+   809                           	
+   810  021D                     l404:	
+   811                           	line	226
+   812                           ;main.c: 226: }
+   813  021D  2A4E               	goto	l2549
+   814                           	line	227
+   815                           	
+   816  021E                     l401:	
+   817                           ;main.c: 227: else if ((!GPIO1 && GPIO0))
+   818  021E  1885               	btfsc	(41/8),(41)&7
+   819  021F  2A21               	goto	u2881
+   820  0220  2A22               	goto	u2880
+   821  0221                     u2881:
+   822  0221  2A3E               	goto	l408
+   823  0222                     u2880:
+   824                           	
+   825  0222                     l2531:	
+   826  0222  1C05               	btfss	(40/8),(40)&7
+   827  0223  2A25               	goto	u2891
+   828  0224  2A26               	goto	u2890
+   829  0225                     u2891:
+   830  0225  2A3E               	goto	l408
+   831  0226                     u2890:
+   832  0226  2A32               	goto	l2543
+   833                           	line	229
+   834                           	
+   835  0227                     l2533:	
+   836                           ;main.c: 228: {
+   837                           ;main.c: 229: switch (setting)
+   838  0227  2A32               	goto	l2543
+   839                           	line	231
+   840                           ;main.c: 230: {
+   841                           ;main.c: 231: case 0:
+   842                           	
+   843  0228                     l410:	
+   844                           	line	232
+   845                           	
+   846  0228                     l2535:	
+   847                           ;main.c: 232: time.hour--;
+   848  0228  3001               	movlw	low(01h)
+   849  0229  02C7               	subwf	(_time),f
+   850                           	line	233
+   851                           ;main.c: 233: break;
+   852  022A  2A4E               	goto	l2549
+   853                           	line	234
+   854                           ;main.c: 234: case 1:
+   855                           	
+   856  022B                     l412:	
+   857                           	line	235
+   858                           	
+   859  022B                     l2537:	
+   860                           ;main.c: 235: time.minute--;
+   861  022B  3001               	movlw	low(01h)
+   862  022C  02C8               	subwf	0+(_time)+01h,f
+   863                           	line	236
+   864                           ;main.c: 236: break;
+   865  022D  2A4E               	goto	l2549
+   866                           	line	237
+   867                           ;main.c: 237: case 2:
+   868                           	
+   869  022E                     l413:	
+   870                           	line	238
+   871                           	
+   872  022E                     l2539:	
+   873                           ;main.c: 238: time.second--;
+   874  022E  3001               	movlw	low(01h)
+   875  022F  02C9               	subwf	0+(_time)+02h,f
+   876                           	line	239
+   877                           ;main.c: 239: break;
+   878  0230  2A4E               	goto	l2549
+   879                           	line	240
+   880                           	
+   881  0231                     l2541:	
+   882                           ;main.c: 240: }
+   883  0231  2A4E               	goto	l2549
+   884                           	line	229
+   885                           	
+   886  0232                     l409:	
+   887                           	
+   888  0232                     l2543:	
+   889  0232  083F               	movf	(set@setting),w
+   890                           	; Switch size 1, requested type "space"
+   891                           ; Number of cases is 3, Range of values is 0 to 2
+   892                           ; switch strategies available:
+   893                           ; Name         Instructions Cycles
+   894                           ; direct_byte            9     6 (fixed)
+   895                           ; simple_byte           10     6 (average)
+   896                           ; jumptable            260     6 (fixed)
+   897                           ; rangetable             7     6 (fixed)
+   898                           ; spacedrange           12     9 (fixed)
+   899                           ; locatedrange           3     3 (fixed)
+   900                           ;	Chosen strategy is direct_byte
+   901                           
+   902  0233  0084               	movwf fsr
+   903  0234  3003               	movlw	3
+   904  0235  0204               	subwf	fsr,w
+   905  0236  1803               skipnc
+   906  0237  2A4E               goto l2549
+   907  0238  3003               movlw high(S2627)
+   908  0239  008A               movwf pclath
+   909  023A  3046               	movlw low(S2627)
+   910  023B  0704               	addwf fsr,w
+   911  023C  0082               	movwf pc
+   912                           psect	swtext2,local,class=CONST,delta=2
+   913                           global __pswtext2
+   914  0346                     __pswtext2:
+   915  0346                     S2627:
+   916  0346  2A28               	ljmp	l2535
+   917  0347  2A2B               	ljmp	l2537
+   918  0348  2A2E               	ljmp	l2539
+   919                           psect	text367
+   920                           
+   921                           	line	240
+   922                           	
+   923  023D                     l411:	
+   924                           	line	241
+   925                           ;main.c: 241: }
+   926  023D  2A4E               	goto	l2549
+   927                           	line	242
+   928                           	
+   929  023E                     l408:	
+   930                           ;main.c: 242: else if ((!GPIO1 && !GPIO0))
+   931  023E  1885               	btfsc	(41/8),(41)&7
+   932  023F  2A41               	goto	u2901
+   933  0240  2A42               	goto	u2900
+   934  0241                     u2901:
+   935  0241  2A4E               	goto	l2549
+   936  0242                     u2900:
+   937                           	
+   938  0242                     l2545:	
+   939  0242  1805               	btfsc	(40/8),(40)&7
+   940  0243  2A45               	goto	u2911
+   941  0244  2A46               	goto	u2910
+   942  0245                     u2911:
+   943  0245  2A4E               	goto	l2549
+   944  0246                     u2910:
+   945                           	line	244
+   946                           	
+   947  0246                     l2547:	
+   948                           ;main.c: 243: {
+   949                           ;main.c: 244: setting++;
+   950  0246  3001               	movlw	(01h)
+   951  0247  00BE               	movwf	(??_set+0)+0
+   952  0248  083E               	movf	(??_set+0)+0,w
+   953  0249  07BF               	addwf	(set@setting),f
+   954  024A  2A4E               	goto	l2549
+   955                           	line	245
+   956                           	
+   957  024B                     l415:	
+   958  024B  2A4E               	goto	l2549
+   959                           	line	246
+   960                           	
+   961  024C                     l414:	
+   962  024C  2A4E               	goto	l2549
+   963                           	
+   964  024D                     l407:	
+   965  024D  2A4E               	goto	l2549
+   966                           	
+   967  024E                     l399:	
+   968                           	line	210
+   969                           	
+   970  024E                     l2549:	
+   971  024E  3003               	movlw	(03h)
+   972  024F  023F               	subwf	(set@setting),w
+   973  0250  1C03               	skipc
+   974  0251  2A53               	goto	u2921
+   975  0252  2A54               	goto	u2920
+   976  0253                     u2921:
+   977  0253  29F8               	goto	l400
+   978  0254                     u2920:
+   979  0254  2A55               	goto	l2551
+   980                           	
+   981  0255                     l416:	
+   982                           	line	247
+   983                           	
+   984  0255                     l2551:	
+   985                           ;main.c: 245: }
+   986                           ;main.c: 246: }
+   987                           ;main.c: 247: update_display();
+   988  0255  2014               	fcall	_update_display
+   989                           	line	248
+   990                           	
+   991  0256                     l2553:	
+   992                           ;main.c: 248: wait(255);
+   993  0256  30FF               	movlw	(0FFh)
+   994  0257  230E               	fcall	_wait
+   995                           	line	249
+   996                           	
+   997  0258                     l417:	
+   998  0258  0008               	return
+   999                           	opt stack 0
+  1000                           GLOBAL	__end_of_set
+  1001  0259                     	__end_of_set:
+  1002 ;; =============== function _set ends ============
+  1003                           
+  1004                           	signat	_set,88
+  1005                           	global	_init
+  1006                           psect	text368,local,class=CODE,delta=2
+  1007                           global __ptext368
+  1008  028E                     __ptext368:
+  1009                           
+  1010 ;; *************** function _init *****************
+  1011 ;; Defined at:
+  1012 ;;		line 113 in file "main.c"
+  1013 ;; Parameters:    Size  Location     Type
+  1014 ;;		None
+  1015 ;; Auto vars:     Size  Location     Type
+  1016 ;;		None
+  1017 ;; Return value:  Size  Location     Type
+  1018 ;;		None               void
+  1019 ;; Registers used:
+  1020 ;;		wreg, status,2, status,0, btemp+1, pclath, cstack
+  1021 ;; Tracked objects:
+  1022 ;;		On entry : 0/0
+  1023 ;;		On exit  : 0/0
+  1024 ;;		Unchanged: 0/0
+  1025 ;; Data sizes:     COMMON   BANK0
+  1026 ;;      Params:         0       0
+  1027 ;;      Locals:         0       0
+  1028 ;;      Temps:          0       1
+  1029 ;;      Totals:         0       1
+  1030 ;;Total ram usage:        1 bytes
+  1031 ;; Hardware stack levels used:    1
+  1032 ;; Hardware stack levels required when called:    6
+  1033 ;; This function calls:
+  1034 ;;		_write_spi_address
+  1035 ;;		_set_brightness
+  1036 ;; This function is called by:
+  1037 ;;		_main
+  1038 ;; This function uses a non-reentrant model
+  1039 ;;
+  1040                           psect	text368
+  1041                           	file	"main.c"
+  1042                           	line	113
+  1043                           	global	__size_of_init
+  1044  002A                     	__size_of_init	equ	__end_of_init-_init
+  1045                           	
+  1046  028E                     _init:	
+  1047                           	opt	stack 1
+  1048                           ; Regs used in _init: [wreg+status,2+status,0+btemp+1+pclath+cstack]
+  1049                           	line	115
+  1050                           	
+  1051  028E                     l2501:	
+  1052                           ;main.c: 115: TMR1ON = 0; TMR1 = (49152); TMR1ON = 1;;
+  1053  028E  1283               	bcf	status, 5	;RP0=0, select bank0
+  1054  028F  1010               	bcf	(128/8),(128)&7
+  1055                           	
+  1056  0290                     l2503:	
+  1057  0290  3000               	movlw	low(0C000h)
+  1058  0291  008E               	movwf	(14)	;volatile
+  1059  0292  30C0               	movlw	high(0C000h)
+  1060  0293  008F               	movwf	((14))+1	;volatile
+  1061                           	
+  1062  0294                     l2505:	
+  1063  0294  1410               	bsf	(128/8),(128)&7
+  1064                           	line	119
+  1065                           	
+  1066  0295                     l2507:	
+  1067                           ;main.c: 119: write_spi_address(16, 0b1100, 1);
+  1068  0295  300C               	movlw	(0Ch)
+  1069  0296  00BF               	movwf	(??_init+0)+0
+  1070  0297  083F               	movf	(??_init+0)+0,w
+  1071  0298  00B5               	movwf	(?_write_spi_address)
+  1072  0299  3001               	movlw	low(01h)
+  1073  029A  00B6               	movwf	0+(?_write_spi_address)+01h
+  1074  029B  3000               	movlw	high(01h)
+  1075  029C  00B7               	movwf	(0+(?_write_spi_address)+01h)+1
+  1076  029D  3010               	movlw	(010h)
+  1077  029E  22FB               	fcall	_write_spi_address
+  1078                           	line	121
+  1079                           	
+  1080  029F                     l2509:	
+  1081                           ;main.c: 121: set_brightness(0xFF);
+  1082  029F  30FF               	movlw	(0FFh)
+  1083  02A0  2330               	fcall	_set_brightness
+  1084                           	line	123
+  1085                           	
+  1086  02A1                     l2511:	
+  1087                           ;main.c: 123: write_spi_address(16, 0b1011, 8);
+  1088  02A1  300B               	movlw	(0Bh)
+  1089  02A2  1283               	bcf	status, 5	;RP0=0, select bank0
+  1090  02A3  00BF               	movwf	(??_init+0)+0
+  1091  02A4  083F               	movf	(??_init+0)+0,w
+  1092  02A5  00B5               	movwf	(?_write_spi_address)
+  1093  02A6  3008               	movlw	low(08h)
+  1094  02A7  00B6               	movwf	0+(?_write_spi_address)+01h
+  1095  02A8  3000               	movlw	high(08h)
+  1096  02A9  00B7               	movwf	(0+(?_write_spi_address)+01h)+1
+  1097  02AA  3010               	movlw	(010h)
+  1098  02AB  22FB               	fcall	_write_spi_address
+  1099                           	line	125
+  1100                           	
+  1101  02AC                     l2513:	
+  1102                           ;main.c: 125: write_spi_address(16, 0b1001, 0xFF);
+  1103  02AC  3009               	movlw	(09h)
+  1104  02AD  1283               	bcf	status, 5	;RP0=0, select bank0
+  1105  02AE  00BF               	movwf	(??_init+0)+0
+  1106  02AF  083F               	movf	(??_init+0)+0,w
+  1107  02B0  00B5               	movwf	(?_write_spi_address)
+  1108  02B1  30FF               	movlw	low(0FFh)
+  1109  02B2  00B6               	movwf	0+(?_write_spi_address)+01h
+  1110  02B3  3000               	movlw	high(0FFh)
+  1111  02B4  00B7               	movwf	(0+(?_write_spi_address)+01h)+1
+  1112  02B5  3010               	movlw	(010h)
+  1113  02B6  22FB               	fcall	_write_spi_address
+  1114                           	line	126
+  1115                           	
+  1116  02B7                     l373:	
+  1117  02B7  0008               	return
+  1118                           	opt stack 0
+  1119                           GLOBAL	__end_of_init
+  1120  02B8                     	__end_of_init:
+  1121 ;; =============== function _init ends ============
+  1122                           
+  1123                           	signat	_init,88
+  1124                           	global	_set_brightness
+  1125                           psect	text369,local,class=CODE,delta=2
+  1126                           global __ptext369
+  1127  0330                     __ptext369:
+  1128                           
+  1129 ;; *************** function _set_brightness *****************
+  1130 ;; Defined at:
+  1131 ;;		line 257 in file "main.c"
+  1132 ;; Parameters:    Size  Location     Type
+  1133 ;;  bri             1    wreg     unsigned char 
+  1134 ;; Auto vars:     Size  Location     Type
+  1135 ;;  bri             1   30[BANK0 ] unsigned char 
+  1136 ;; Return value:  Size  Location     Type
+  1137 ;;		None               void
+  1138 ;; Registers used:
+  1139 ;;		wreg, status,2, status,0, btemp+1, pclath, cstack
+  1140 ;; Tracked objects:
+  1141 ;;		On entry : 0/0
+  1142 ;;		On exit  : 0/0
+  1143 ;;		Unchanged: 0/0
+  1144 ;; Data sizes:     COMMON   BANK0
+  1145 ;;      Params:         0       0
+  1146 ;;      Locals:         0       1
+  1147 ;;      Temps:          0       3
+  1148 ;;      Totals:         0       4
+  1149 ;;Total ram usage:        4 bytes
+  1150 ;; Hardware stack levels used:    1
+  1151 ;; Hardware stack levels required when called:    5
+  1152 ;; This function calls:
+  1153 ;;		_write_spi_address
+  1154 ;; This function is called by:
+  1155 ;;		_init
+  1156 ;; This function uses a non-reentrant model
+  1157 ;;
+  1158                           psect	text369
+  1159                           	file	"main.c"
+  1160                           	line	257
+  1161                           	global	__size_of_set_brightness
+  1162  0010                     	__size_of_set_brightness	equ	__end_of_set_brightness-_set_brightness
+  1163                           	
+  1164  0330                     _set_brightness:	
+  1165                           	opt	stack 1
+  1166                           ; Regs used in _set_brightness: [wreg+status,2+status,0+btemp+1+pclath+cstack]
+  1167                           ;set_brightness@bri stored from wreg
+  1168  0330  1283               	bcf	status, 5	;RP0=0, select bank0
+  1169  0331  00BE               	movwf	(set_brightness@bri)
+  1170                           	line	258
+  1171                           	
+  1172  0332                     l2499:	
+  1173                           ;main.c: 258: write_spi_address(16, 0b1010, bri);
+  1174  0332  300A               	movlw	(0Ah)
+  1175  0333  00BB               	movwf	(??_set_brightness+0)+0
+  1176  0334  083B               	movf	(??_set_brightness+0)+0,w
+  1177  0335  00B5               	movwf	(?_write_spi_address)
+  1178  0336  083E               	movf	(set_brightness@bri),w
+  1179  0337  00BC               	movwf	(??_set_brightness+1)+0
+  1180  0338  01BD               	clrf	(??_set_brightness+1)+0+1
+  1181  0339  083C               	movf	0+(??_set_brightness+1)+0,w
+  1182  033A  00B6               	movwf	0+(?_write_spi_address)+01h
+  1183  033B  083D               	movf	1+(??_set_brightness+1)+0,w
+  1184  033C  00B7               	movwf	1+(?_write_spi_address)+01h
+  1185  033D  3010               	movlw	(010h)
+  1186  033E  22FB               	fcall	_write_spi_address
+  1187                           	line	259
+  1188                           	
+  1189  033F                     l426:	
+  1190  033F  0008               	return
+  1191                           	opt stack 0
+  1192                           GLOBAL	__end_of_set_brightness
+  1193  0340                     	__end_of_set_brightness:
+  1194 ;; =============== function _set_brightness ends ============
+  1195                           
+  1196                           	signat	_set_brightness,4216
+  1197                           	global	_update_display
+  1198                           psect	text370,local,class=CODE,delta=2
+  1199                           global __ptext370
+  1200  0014                     __ptext370:
+  1201                           
+  1202 ;; *************** function _update_display *****************
+  1203 ;; Defined at:
+  1204 ;;		line 152 in file "main.c"
+  1205 ;; Parameters:    Size  Location     Type
+  1206 ;;		None
+  1207 ;; Auto vars:     Size  Location     Type
+  1208 ;;		None
+  1209 ;; Return value:  Size  Location     Type
+  1210 ;;		None               void
+  1211 ;; Registers used:
+  1212 ;;		wreg, status,2, status,0, btemp+1, pclath, cstack
+  1213 ;; Tracked objects:
+  1214 ;;		On entry : 0/0
+  1215 ;;		On exit  : 0/0
+  1216 ;;		Unchanged: 0/0
+  1217 ;; Data sizes:     COMMON   BANK0
+  1218 ;;      Params:         0       0
+  1219 ;;      Locals:         0       0
+  1220 ;;      Temps:          0       3
+  1221 ;;      Totals:         0       3
+  1222 ;;Total ram usage:        3 bytes
+  1223 ;; Hardware stack levels used:    1
+  1224 ;; Hardware stack levels required when called:    5
+  1225 ;; This function calls:
+  1226 ;;		___awdiv
+  1227 ;;		_write_spi_address
+  1228 ;;		___awmod
+  1229 ;; This function is called by:
+  1230 ;;		_main
+  1231 ;;		_set
+  1232 ;; This function uses a non-reentrant model
+  1233 ;;
+  1234                           psect	text370
+  1235                           	file	"main.c"
+  1236                           	line	152
+  1237                           	global	__size_of_update_display
+  1238  009A                     	__size_of_update_display	equ	__end_of_update_display-_update_display
+  1239                           	
+  1240  0014                     _update_display:	
+  1241                           	opt	stack 2
+  1242                           ; Regs used in _update_display: [wreg+status,2+status,0+btemp+1+pclath+cstack]
+  1243                           	line	154
+  1244                           	
+  1245  0014                     l2497:	
+  1246                           ;main.c: 154: write_spi_address(16, 1, time.hour / 10);
+  1247  0014  1283               	bcf	status, 5	;RP0=0, select bank0
+  1248  0015  01B5               	clrf	(?_write_spi_address)
+  1249  0016  1403               	bsf	status,0
+  1250  0017  0DB5               	rlf	(?_write_spi_address),f
+  1251  0018  300A               	movlw	low(0Ah)
+  1252  0019  00A8               	movwf	(?___awdiv)
+  1253  001A  3000               	movlw	high(0Ah)
+  1254  001B  00A9               	movwf	((?___awdiv))+1
+  1255  001C  0847               	movf	(_time),w
+  1256  001D  00BB               	movwf	(??_update_display+0)+0
+  1257  001E  01BC               	clrf	(??_update_display+0)+0+1
+  1258  001F  083B               	movf	0+(??_update_display+0)+0,w
+  1259  0020  00AA               	movwf	0+(?___awdiv)+02h
+  1260  0021  083C               	movf	1+(??_update_display+0)+0,w
+  1261  0022  00AB               	movwf	1+(?___awdiv)+02h
+  1262  0023  20AE               	fcall	___awdiv
+  1263  0024  1283               	bcf	status, 5	;RP0=0, select bank0
+  1264  0025  0829               	movf	(1+(?___awdiv)),w
+  1265  0026  01B7               	clrf	1+(?_write_spi_address)+01h
+  1266  0027  07B7               	addwf	1+(?_write_spi_address)+01h
+  1267  0028  0828               	movf	(0+(?___awdiv)),w
+  1268  0029  01B6               	clrf	0+(?_write_spi_address)+01h
+  1269  002A  07B6               	addwf	0+(?_write_spi_address)+01h
+  1270                           
+  1271  002B  3010               	movlw	(010h)
+  1272  002C  22FB               	fcall	_write_spi_address
+  1273                           	line	155
+  1274                           ;main.c: 155: write_spi_address(16, 2, time.hour % 10);
+  1275  002D  3002               	movlw	(02h)
+  1276  002E  1283               	bcf	status, 5	;RP0=0, select bank0
+  1277  002F  00BB               	movwf	(??_update_display+0)+0
+  1278  0030  083B               	movf	(??_update_display+0)+0,w
+  1279  0031  00B5               	movwf	(?_write_spi_address)
+  1280  0032  300A               	movlw	low(0Ah)
+  1281  0033  00A8               	movwf	(?___awmod)
+  1282  0034  3000               	movlw	high(0Ah)
+  1283  0035  00A9               	movwf	((?___awmod))+1
+  1284  0036  0847               	movf	(_time),w
+  1285  0037  00BC               	movwf	(??_update_display+1)+0
+  1286  0038  01BD               	clrf	(??_update_display+1)+0+1
+  1287  0039  083C               	movf	0+(??_update_display+1)+0,w
+  1288  003A  00AA               	movwf	0+(?___awmod)+02h
+  1289  003B  083D               	movf	1+(??_update_display+1)+0,w
+  1290  003C  00AB               	movwf	1+(?___awmod)+02h
+  1291  003D  218C               	fcall	___awmod
+  1292  003E  1283               	bcf	status, 5	;RP0=0, select bank0
+  1293  003F  0829               	movf	(1+(?___awmod)),w
+  1294  0040  01B7               	clrf	1+(?_write_spi_address)+01h
+  1295  0041  07B7               	addwf	1+(?_write_spi_address)+01h
+  1296  0042  0828               	movf	(0+(?___awmod)),w
+  1297  0043  01B6               	clrf	0+(?_write_spi_address)+01h
+  1298  0044  07B6               	addwf	0+(?_write_spi_address)+01h
+  1299                           
+  1300  0045  3010               	movlw	(010h)
+  1301  0046  22FB               	fcall	_write_spi_address
+  1302                           	line	158
+  1303                           ;main.c: 158: write_spi_address(16, 1, time.minute / 10);
+  1304  0047  1283               	bcf	status, 5	;RP0=0, select bank0
+  1305  0048  01B5               	clrf	(?_write_spi_address)
+  1306  0049  1403               	bsf	status,0
+  1307  004A  0DB5               	rlf	(?_write_spi_address),f
+  1308  004B  300A               	movlw	low(0Ah)
+  1309  004C  00A8               	movwf	(?___awdiv)
+  1310  004D  3000               	movlw	high(0Ah)
+  1311  004E  00A9               	movwf	((?___awdiv))+1
+  1312  004F  0848               	movf	0+(_time)+01h,w
+  1313  0050  00BB               	movwf	(??_update_display+0)+0
+  1314  0051  01BC               	clrf	(??_update_display+0)+0+1
+  1315  0052  083B               	movf	0+(??_update_display+0)+0,w
+  1316  0053  00AA               	movwf	0+(?___awdiv)+02h
+  1317  0054  083C               	movf	1+(??_update_display+0)+0,w
+  1318  0055  00AB               	movwf	1+(?___awdiv)+02h
+  1319  0056  20AE               	fcall	___awdiv
+  1320  0057  1283               	bcf	status, 5	;RP0=0, select bank0
+  1321  0058  0829               	movf	(1+(?___awdiv)),w
+  1322  0059  01B7               	clrf	1+(?_write_spi_address)+01h
+  1323  005A  07B7               	addwf	1+(?_write_spi_address)+01h
+  1324  005B  0828               	movf	(0+(?___awdiv)),w
+  1325  005C  01B6               	clrf	0+(?_write_spi_address)+01h
+  1326  005D  07B6               	addwf	0+(?_write_spi_address)+01h
+  1327                           
+  1328  005E  3010               	movlw	(010h)
+  1329  005F  22FB               	fcall	_write_spi_address
+  1330                           	line	159
+  1331                           ;main.c: 159: write_spi_address(16, 2, time.minute % 10);
+  1332  0060  3002               	movlw	(02h)
+  1333  0061  1283               	bcf	status, 5	;RP0=0, select bank0
+  1334  0062  00BB               	movwf	(??_update_display+0)+0
+  1335  0063  083B               	movf	(??_update_display+0)+0,w
+  1336  0064  00B5               	movwf	(?_write_spi_address)
+  1337  0065  300A               	movlw	low(0Ah)
+  1338  0066  00A8               	movwf	(?___awmod)
+  1339  0067  3000               	movlw	high(0Ah)
+  1340  0068  00A9               	movwf	((?___awmod))+1
+  1341  0069  0848               	movf	0+(_time)+01h,w
+  1342  006A  00BC               	movwf	(??_update_display+1)+0
+  1343  006B  01BD               	clrf	(??_update_display+1)+0+1
+  1344  006C  083C               	movf	0+(??_update_display+1)+0,w
+  1345  006D  00AA               	movwf	0+(?___awmod)+02h
+  1346  006E  083D               	movf	1+(??_update_display+1)+0,w
+  1347  006F  00AB               	movwf	1+(?___awmod)+02h
+  1348  0070  218C               	fcall	___awmod
+  1349  0071  1283               	bcf	status, 5	;RP0=0, select bank0
+  1350  0072  0829               	movf	(1+(?___awmod)),w
+  1351  0073  01B7               	clrf	1+(?_write_spi_address)+01h
+  1352  0074  07B7               	addwf	1+(?_write_spi_address)+01h
+  1353  0075  0828               	movf	(0+(?___awmod)),w
+  1354  0076  01B6               	clrf	0+(?_write_spi_address)+01h
+  1355  0077  07B6               	addwf	0+(?_write_spi_address)+01h
+  1356                           
+  1357  0078  3010               	movlw	(010h)
+  1358  0079  22FB               	fcall	_write_spi_address
+  1359                           	line	162
+  1360                           ;main.c: 162: write_spi_address(16, 1, time.second / 10);
+  1361  007A  1283               	bcf	status, 5	;RP0=0, select bank0
+  1362  007B  01B5               	clrf	(?_write_spi_address)
+  1363  007C  1403               	bsf	status,0
+  1364  007D  0DB5               	rlf	(?_write_spi_address),f
+  1365  007E  300A               	movlw	low(0Ah)
+  1366  007F  00A8               	movwf	(?___awdiv)
+  1367  0080  3000               	movlw	high(0Ah)
+  1368  0081  00A9               	movwf	((?___awdiv))+1
+  1369  0082  0849               	movf	0+(_time)+02h,w
+  1370  0083  00BB               	movwf	(??_update_display+0)+0
+  1371  0084  01BC               	clrf	(??_update_display+0)+0+1
+  1372  0085  083B               	movf	0+(??_update_display+0)+0,w
+  1373  0086  00AA               	movwf	0+(?___awdiv)+02h
+  1374  0087  083C               	movf	1+(??_update_display+0)+0,w
+  1375  0088  00AB               	movwf	1+(?___awdiv)+02h
+  1376  0089  20AE               	fcall	___awdiv
+  1377  008A  1283               	bcf	status, 5	;RP0=0, select bank0
+  1378  008B  0829               	movf	(1+(?___awdiv)),w
+  1379  008C  01B7               	clrf	1+(?_write_spi_address)+01h
+  1380  008D  07B7               	addwf	1+(?_write_spi_address)+01h
+  1381  008E  0828               	movf	(0+(?___awdiv)),w
+  1382  008F  01B6               	clrf	0+(?_write_spi_address)+01h
+  1383  0090  07B6               	addwf	0+(?_write_spi_address)+01h
+  1384                           
+  1385  0091  3010               	movlw	(010h)
+  1386  0092  22FB               	fcall	_write_spi_address
+  1387                           	line	163
+  1388                           ;main.c: 163: write_spi_address(16, 2, time.second % 10);
+  1389  0093  3002               	movlw	(02h)
+  1390  0094  1283               	bcf	status, 5	;RP0=0, select bank0
+  1391  0095  00BB               	movwf	(??_update_display+0)+0
+  1392  0096  083B               	movf	(??_update_display+0)+0,w
+  1393  0097  00B5               	movwf	(?_write_spi_address)
+  1394  0098  300A               	movlw	low(0Ah)
+  1395  0099  00A8               	movwf	(?___awmod)
+  1396  009A  3000               	movlw	high(0Ah)
+  1397  009B  00A9               	movwf	((?___awmod))+1
+  1398  009C  0849               	movf	0+(_time)+02h,w
+  1399  009D  00BC               	movwf	(??_update_display+1)+0
+  1400  009E  01BD               	clrf	(??_update_display+1)+0+1
+  1401  009F  083C               	movf	0+(??_update_display+1)+0,w
+  1402  00A0  00AA               	movwf	0+(?___awmod)+02h
+  1403  00A1  083D               	movf	1+(??_update_display+1)+0,w
+  1404  00A2  00AB               	movwf	1+(?___awmod)+02h
+  1405  00A3  218C               	fcall	___awmod
+  1406  00A4  1283               	bcf	status, 5	;RP0=0, select bank0
+  1407  00A5  0829               	movf	(1+(?___awmod)),w
+  1408  00A6  01B7               	clrf	1+(?_write_spi_address)+01h
+  1409  00A7  07B7               	addwf	1+(?_write_spi_address)+01h
+  1410  00A8  0828               	movf	(0+(?___awmod)),w
+  1411  00A9  01B6               	clrf	0+(?_write_spi_address)+01h
+  1412  00AA  07B6               	addwf	0+(?_write_spi_address)+01h
+  1413                           
+  1414  00AB  3010               	movlw	(010h)
+  1415  00AC  22FB               	fcall	_write_spi_address
+  1416                           	line	164
+  1417                           	
+  1418  00AD                     l385:	
+  1419  00AD  0008               	return
+  1420                           	opt stack 0
+  1421                           GLOBAL	__end_of_update_display
+  1422  00AE                     	__end_of_update_display:
+  1423 ;; =============== function _update_display ends ============
+  1424                           
+  1425                           	signat	_update_display,88
+  1426                           	global	_write_spi_address
+  1427                           psect	text371,local,class=CODE,delta=2
+  1428                           global __ptext371
+  1429  02FB                     __ptext371:
+  1430                           
+  1431 ;; *************** function _write_spi_address *****************
+  1432 ;; Defined at:
+  1433 ;;		line 147 in file "main.c"
+  1434 ;; Parameters:    Size  Location     Type
+  1435 ;;  len             1    wreg     unsigned char 
+  1436 ;;  addr            1   21[BANK0 ] unsigned char 
+  1437 ;;  data            2   22[BANK0 ] unsigned int 
+  1438 ;; Auto vars:     Size  Location     Type
+  1439 ;;  len             1   26[BANK0 ] unsigned char 
+  1440 ;; Return value:  Size  Location     Type
+  1441 ;;		None               void
+  1442 ;; Registers used:
+  1443 ;;		wreg, status,2, status,0, btemp+1, pclath, cstack
+  1444 ;; Tracked objects:
+  1445 ;;		On entry : 0/0
+  1446 ;;		On exit  : 0/0
+  1447 ;;		Unchanged: 0/0
+  1448 ;; Data sizes:     COMMON   BANK0
+  1449 ;;      Params:         0       3
+  1450 ;;      Locals:         0       1
+  1451 ;;      Temps:          0       2
+  1452 ;;      Totals:         0       6
+  1453 ;;Total ram usage:        6 bytes
+  1454 ;; Hardware stack levels used:    1
+  1455 ;; Hardware stack levels required when called:    4
+  1456 ;; This function calls:
+  1457 ;;		_write_spi
+  1458 ;; This function is called by:
+  1459 ;;		_init
+  1460 ;;		_update_display
+  1461 ;;		_set_brightness
+  1462 ;; This function uses a non-reentrant model
+  1463 ;;
+  1464                           psect	text371
+  1465                           	file	"main.c"
+  1466                           	line	147
+  1467                           	global	__size_of_write_spi_address
+  1468  0013                     	__size_of_write_spi_address	equ	__end_of_write_spi_address-_write_spi_address
+  1469                           	
+  1470  02FB                     _write_spi_address:	
+  1471                           	opt	stack 2
+  1472                           ; Regs used in _write_spi_address: [wreg+status,2+status,0+btemp+1+pclath+cstack]
+  1473                           ;write_spi_address@len stored from wreg
+  1474  02FB  1283               	bcf	status, 5	;RP0=0, select bank0
+  1475  02FC  00BA               	movwf	(write_spi_address@len)
+  1476                           	line	148
+  1477                           	
+  1478  02FD                     l2495:	
+  1479                           ;main.c: 148: write_spi(len, (addr << 8 | data));
+  1480  02FD  0835               	movf	(write_spi_address@addr),w
+  1481  02FE  00B8               	movwf	(??_write_spi_address+0)+0
+  1482  02FF  01B9               	clrf	(??_write_spi_address+0)+0+1
+  1483  0300  0838               	movf	(??_write_spi_address+0)+0,w
+  1484  0301  00B9               	movwf	(??_write_spi_address+0)+1
+  1485  0302  01B8               	clrf	(??_write_spi_address+0)+0
+  1486  0303  0836               	movf	(write_spi_address@data),w
+  1487  0304  0438               	iorwf	0+(??_write_spi_address+0)+0,w
+  1488  0305  00AB               	movwf	(?_write_spi)
+  1489  0306  0837               	movf	(write_spi_address@data+1),w
+  1490  0307  0439               	iorwf	1+(??_write_spi_address+0)+0,w
+  1491  0308  00AC               	movwf	1+(?_write_spi)
+  1492  0309  01AD               	clrf	2+(?_write_spi)
+  1493  030A  01AE               	clrf	3+(?_write_spi)
+  1494  030B  083A               	movf	(write_spi_address@len),w
+  1495  030C  2259               	fcall	_write_spi
+  1496                           	line	149
+  1497                           	
+  1498  030D                     l382:	
+  1499  030D  0008               	return
+  1500                           	opt stack 0
+  1501                           GLOBAL	__end_of_write_spi_address
+  1502  030E                     	__end_of_write_spi_address:
+  1503 ;; =============== function _write_spi_address ends ============
+  1504                           
+  1505                           	signat	_write_spi_address,12408
+  1506                           	global	_write_spi
+  1507                           psect	text372,local,class=CODE,delta=2
+  1508                           global __ptext372
+  1509  0259                     __ptext372:
+  1510                           
+  1511 ;; *************** function _write_spi *****************
+  1512 ;; Defined at:
+  1513 ;;		line 131 in file "main.c"
+  1514 ;; Parameters:    Size  Location     Type
+  1515 ;;  len             1    wreg     unsigned char 
+  1516 ;;  data            4   11[BANK0 ] unsigned long 
+  1517 ;; Auto vars:     Size  Location     Type
+  1518 ;;  len             1   19[BANK0 ] unsigned char 
+  1519 ;;  i               1   20[BANK0 ] unsigned char 
+  1520 ;; Return value:  Size  Location     Type
+  1521 ;;		None               void
+  1522 ;; Registers used:
+  1523 ;;		wreg, status,2, status,0, pclath, cstack
+  1524 ;; Tracked objects:
+  1525 ;;		On entry : 0/0
+  1526 ;;		On exit  : 0/0
+  1527 ;;		Unchanged: 0/0
+  1528 ;; Data sizes:     COMMON   BANK0
+  1529 ;;      Params:         0       4
+  1530 ;;      Locals:         0       2
+  1531 ;;      Temps:          0       4
+  1532 ;;      Totals:         0      10
+  1533 ;;Total ram usage:       10 bytes
+  1534 ;; Hardware stack levels used:    1
+  1535 ;; Hardware stack levels required when called:    3
+  1536 ;; This function calls:
+  1537 ;;		_wait
+  1538 ;; This function is called by:
+  1539 ;;		_write_spi_address
+  1540 ;; This function uses a non-reentrant model
+  1541 ;;
+  1542                           psect	text372
+  1543                           	file	"main.c"
+  1544                           	line	131
+  1545                           	global	__size_of_write_spi
+  1546  0035                     	__size_of_write_spi	equ	__end_of_write_spi-_write_spi
+  1547                           	
+  1548  0259                     _write_spi:	
+  1549                           	opt	stack 2
+  1550                           ; Regs used in _write_spi: [wreg+status,2+status,0+pclath+cstack]
+  1551                           ;write_spi@len stored from wreg
+  1552  0259  1283               	bcf	status, 5	;RP0=0, select bank0
+  1553  025A  00B3               	movwf	(write_spi@len)
+  1554                           	line	132
+  1555                           	
+  1556  025B                     l2479:	
+  1557                           ;main.c: 132: GPIO2 = 0;
+  1558  025B  1105               	bcf	(42/8),(42)&7
+  1559                           	line	133
+  1560                           ;main.c: 133: for (unsigned char i = 0; i < len; i++)
+  1561  025C  01B4               	clrf	(write_spi@i)
+  1562  025D  2A82               	goto	l2489
+  1563                           	line	134
+  1564                           	
+  1565  025E                     l377:	
+  1566                           	line	135
+  1567                           ;main.c: 134: {
+  1568                           ;main.c: 135: GPIO3 = 0;
+  1569  025E  1185               	bcf	(43/8),(43)&7
+  1570                           	line	136
+  1571                           	
+  1572  025F                     l2481:	
+  1573                           ;main.c: 136: GPIO4 = (data >> i) & 0x1;
+  1574  025F  082B               	movf	(write_spi@data),w
+  1575  0260  00AF               	movwf	(??_write_spi+0)+0
+  1576  0261  082C               	movf	(write_spi@data+1),w
+  1577  0262  00B0               	movwf	((??_write_spi+0)+0+1)
+  1578  0263  082D               	movf	(write_spi@data+2),w
+  1579  0264  00B1               	movwf	((??_write_spi+0)+0+2)
+  1580  0265  082E               	movf	(write_spi@data+3),w
+  1581  0266  00B2               	movwf	((??_write_spi+0)+0+3)
+  1582  0267  0A34               	incf	(write_spi@i),w
+  1583  0268  2A6E               	goto	u2820
+  1584  0269                     u2825:
+  1585  0269  1003               	clrc
+  1586  026A  0CB2               	rrf	(??_write_spi+0)+3,f
+  1587  026B  0CB1               	rrf	(??_write_spi+0)+2,f
+  1588  026C  0CB0               	rrf	(??_write_spi+0)+1,f
+  1589  026D  0CAF               	rrf	(??_write_spi+0)+0,f
+  1590  026E                     u2820:
+  1591  026E  3EFF               	addlw	-1
+  1592  026F  1D03               	skipz
+  1593  0270  2A69               	goto	u2825
+  1594  0271  182F               	btfsc	0+(??_write_spi+0)+0,0
+  1595  0272  2A74               	goto	u2831
+  1596  0273  2A77               	goto	u2830
+  1597                           	
+  1598  0274                     u2831:
+  1599  0274  1283               	bcf	status, 5	;RP0=0, select bank0
+  1600  0275  1605               	bsf	(44/8),(44)&7
+  1601  0276  2A79               	goto	u2844
+  1602  0277                     u2830:
+  1603  0277  1283               	bcf	status, 5	;RP0=0, select bank0
+  1604  0278  1205               	bcf	(44/8),(44)&7
+  1605  0279                     u2844:
+  1606                           	line	137
+  1607                           	
+  1608  0279                     l2483:	
+  1609                           ;main.c: 137: GPIO3 = 1;
+  1610  0279  1585               	bsf	(43/8),(43)&7
+  1611                           	line	139
+  1612                           	
+  1613  027A                     l2485:	
+  1614                           ;main.c: 139: wait(20);
+  1615  027A  3014               	movlw	(014h)
+  1616  027B  230E               	fcall	_wait
+  1617                           	line	133
+  1618                           	
+  1619  027C                     l2487:	
+  1620  027C  3001               	movlw	(01h)
+  1621  027D  1283               	bcf	status, 5	;RP0=0, select bank0
+  1622  027E  00AF               	movwf	(??_write_spi+0)+0
+  1623  027F  082F               	movf	(??_write_spi+0)+0,w
+  1624  0280  07B4               	addwf	(write_spi@i),f
+  1625  0281  2A82               	goto	l2489
+  1626                           	
+  1627  0282                     l376:	
+  1628                           	
+  1629  0282                     l2489:	
+  1630  0282  0833               	movf	(write_spi@len),w
+  1631  0283  0234               	subwf	(write_spi@i),w
+  1632  0284  1C03               	skipc
+  1633  0285  2A87               	goto	u2851
+  1634  0286  2A88               	goto	u2850
+  1635  0287                     u2851:
+  1636  0287  2A5E               	goto	l377
+  1637  0288                     u2850:
+  1638                           	
+  1639  0288                     l378:	
+  1640                           	line	141
+  1641                           ;main.c: 140: }
+  1642                           ;main.c: 141: GPIO2 = 1;
+  1643  0288  1505               	bsf	(42/8),(42)&7
+  1644                           	line	142
+  1645                           	
+  1646  0289                     l2491:	
+  1647                           ;main.c: 142: wait(20);
+  1648  0289  3014               	movlw	(014h)
+  1649  028A  230E               	fcall	_wait
+  1650                           	line	143
+  1651                           	
+  1652  028B                     l2493:	
+  1653                           ;main.c: 143: GPIO2 = 0;
+  1654  028B  1283               	bcf	status, 5	;RP0=0, select bank0
+  1655  028C  1105               	bcf	(42/8),(42)&7
+  1656                           	line	144
+  1657                           	
+  1658  028D                     l379:	
+  1659  028D  0008               	return
+  1660                           	opt stack 0
+  1661                           GLOBAL	__end_of_write_spi
+  1662  028E                     	__end_of_write_spi:
+  1663 ;; =============== function _write_spi ends ============
+  1664                           
+  1665                           	signat	_write_spi,8312
+  1666                           	global	___awmod
+  1667                           psect	text373,local,class=CODE,delta=2
+  1668                           global __ptext373
+  1669  018C                     __ptext373:
+  1670                           
+  1671 ;; *************** function ___awmod *****************
+  1672 ;; Defined at:
+  1673 ;;		line 5 in file "/usr/hitech/picc/9.82/sources/awmod.c"
+  1674 ;; Parameters:    Size  Location     Type
+  1675 ;;  divisor         2    8[BANK0 ] int 
+  1676 ;;  dividend        2   10[BANK0 ] int 
+  1677 ;; Auto vars:     Size  Location     Type
+  1678 ;;  sign            1   14[BANK0 ] unsigned char 
+  1679 ;;  counter         1   13[BANK0 ] unsigned char 
+  1680 ;; Return value:  Size  Location     Type
+  1681 ;;                  2    8[BANK0 ] int 
+  1682 ;; Registers used:
+  1683 ;;		wreg, status,2, status,0
+  1684 ;; Tracked objects:
+  1685 ;;		On entry : 0/0
+  1686 ;;		On exit  : 0/0
+  1687 ;;		Unchanged: 0/0
+  1688 ;; Data sizes:     COMMON   BANK0
+  1689 ;;      Params:         0       4
+  1690 ;;      Locals:         0       2
+  1691 ;;      Temps:          0       1
+  1692 ;;      Totals:         0       7
+  1693 ;;Total ram usage:        7 bytes
+  1694 ;; Hardware stack levels used:    1
+  1695 ;; Hardware stack levels required when called:    2
+  1696 ;; This function calls:
+  1697 ;;		Nothing
+  1698 ;; This function is called by:
+  1699 ;;		_update_display
+  1700 ;; This function uses a non-reentrant model
+  1701 ;;
+  1702                           psect	text373
+  1703                           	file	"/usr/hitech/picc/9.82/sources/awmod.c"
+  1704                           	line	5
+  1705                           	global	__size_of___awmod
+  1706  0067                     	__size_of___awmod	equ	__end_of___awmod-___awmod
+  1707                           	
+  1708  018C                     ___awmod:	
+  1709                           	opt	stack 4
+  1710                           ; Regs used in ___awmod: [wreg+status,2+status,0]
+  1711                           	line	8
+  1712                           	
+  1713  018C                     l2439:	
+  1714  018C  1283               	bcf	status, 5	;RP0=0, select bank0
+  1715  018D  01AE               	clrf	(___awmod@sign)
+  1716                           	line	9
+  1717  018E  1FAB               	btfss	(___awmod@dividend+1),7
+  1718  018F  2991               	goto	u2721
+  1719  0190  2992               	goto	u2720
+  1720  0191                     u2721:
+  1721  0191  299B               	goto	l2443
+  1722  0192                     u2720:
+  1723                           	line	10
+  1724                           	
+  1725  0192                     l2441:	
+  1726  0192  09AA               	comf	(___awmod@dividend),f
+  1727  0193  09AB               	comf	(___awmod@dividend+1),f
+  1728  0194  0AAA               	incf	(___awmod@dividend),f
+  1729  0195  1903               	skipnz
+  1730  0196  0AAB               	incf	(___awmod@dividend+1),f
+  1731                           	line	11
+  1732  0197  01AE               	clrf	(___awmod@sign)
+  1733  0198  1403               	bsf	status,0
+  1734  0199  0DAE               	rlf	(___awmod@sign),f
+  1735  019A  299B               	goto	l2443
+  1736                           	line	12
+  1737                           	
+  1738  019B                     l1007:	
+  1739                           	line	13
+  1740                           	
+  1741  019B                     l2443:	
+  1742  019B  1FA9               	btfss	(___awmod@divisor+1),7
+  1743  019C  299E               	goto	u2731
+  1744  019D  299F               	goto	u2730
+  1745  019E                     u2731:
+  1746  019E  29A5               	goto	l2447
+  1747  019F                     u2730:
+  1748                           	line	14
+  1749                           	
+  1750  019F                     l2445:	
+  1751  019F  09A8               	comf	(___awmod@divisor),f
+  1752  01A0  09A9               	comf	(___awmod@divisor+1),f
+  1753  01A1  0AA8               	incf	(___awmod@divisor),f
+  1754  01A2  1903               	skipnz
+  1755  01A3  0AA9               	incf	(___awmod@divisor+1),f
+  1756  01A4  29A5               	goto	l2447
+  1757                           	
+  1758  01A5                     l1008:	
+  1759                           	line	15
+  1760                           	
+  1761  01A5                     l2447:	
+  1762  01A5  0829               	movf	(___awmod@divisor+1),w
+  1763  01A6  0428               	iorwf	(___awmod@divisor),w
+  1764  01A7  1903               	skipnz
+  1765  01A8  29AA               	goto	u2741
+  1766  01A9  29AB               	goto	u2740
+  1767  01AA                     u2741:
+  1768  01AA  29E1               	goto	l2465
+  1769  01AB                     u2740:
+  1770                           	line	16
+  1771                           	
+  1772  01AB                     l2449:	
+  1773  01AB  01AD               	clrf	(___awmod@counter)
+  1774  01AC  1403               	bsf	status,0
+  1775  01AD  0DAD               	rlf	(___awmod@counter),f
+  1776                           	line	17
+  1777  01AE  29BB               	goto	l2455
+  1778                           	
+  1779  01AF                     l1011:	
+  1780                           	line	18
+  1781                           	
+  1782  01AF                     l2451:	
+  1783  01AF  3001               	movlw	01h
+  1784                           	
+  1785  01B0                     u2755:
+  1786  01B0  1003               	clrc
+  1787  01B1  0DA8               	rlf	(___awmod@divisor),f
+  1788  01B2  0DA9               	rlf	(___awmod@divisor+1),f
+  1789  01B3  3EFF               	addlw	-1
+  1790  01B4  1D03               	skipz
+  1791  01B5  29B0               	goto	u2755
+  1792                           	line	19
+  1793                           	
+  1794  01B6                     l2453:	
+  1795  01B6  3001               	movlw	(01h)
+  1796  01B7  00AC               	movwf	(??___awmod+0)+0
+  1797  01B8  082C               	movf	(??___awmod+0)+0,w
+  1798  01B9  07AD               	addwf	(___awmod@counter),f
+  1799  01BA  29BB               	goto	l2455
+  1800                           	line	20
+  1801                           	
+  1802  01BB                     l1010:	
+  1803                           	line	17
+  1804                           	
+  1805  01BB                     l2455:	
+  1806  01BB  1FA9               	btfss	(___awmod@divisor+1),(15)&7
+  1807  01BC  29BE               	goto	u2761
+  1808  01BD  29BF               	goto	u2760
+  1809  01BE                     u2761:
+  1810  01BE  29AF               	goto	l2451
+  1811  01BF                     u2760:
+  1812  01BF  29C1               	goto	l2457
+  1813                           	
+  1814  01C0                     l1012:	
+  1815  01C0  29C1               	goto	l2457
+  1816                           	line	21
+  1817                           	
+  1818  01C1                     l1013:	
+  1819                           	line	22
+  1820                           	
+  1821  01C1                     l2457:	
+  1822  01C1  0829               	movf	(___awmod@divisor+1),w
+  1823  01C2  022B               	subwf	(___awmod@dividend+1),w
+  1824  01C3  1D03               	skipz
+  1825  01C4  29C7               	goto	u2775
+  1826  01C5  0828               	movf	(___awmod@divisor),w
+  1827  01C6  022A               	subwf	(___awmod@dividend),w
+  1828  01C7                     u2775:
+  1829  01C7  1C03               	skipc
+  1830  01C8  29CA               	goto	u2771
+  1831  01C9  29CB               	goto	u2770
+  1832  01CA                     u2771:
+  1833  01CA  29D2               	goto	l2461
+  1834  01CB                     u2770:
+  1835                           	line	23
+  1836                           	
+  1837  01CB                     l2459:	
+  1838  01CB  0828               	movf	(___awmod@divisor),w
+  1839  01CC  02AA               	subwf	(___awmod@dividend),f
+  1840  01CD  0829               	movf	(___awmod@divisor+1),w
+  1841  01CE  1C03               	skipc
+  1842  01CF  03AB               	decf	(___awmod@dividend+1),f
+  1843  01D0  02AB               	subwf	(___awmod@dividend+1),f
+  1844  01D1  29D2               	goto	l2461
+  1845                           	
+  1846  01D2                     l1014:	
+  1847                           	line	24
+  1848                           	
+  1849  01D2                     l2461:	
+  1850  01D2  3001               	movlw	01h
+  1851                           	
+  1852  01D3                     u2785:
+  1853  01D3  1003               	clrc
+  1854  01D4  0CA9               	rrf	(___awmod@divisor+1),f
+  1855  01D5  0CA8               	rrf	(___awmod@divisor),f
+  1856  01D6  3EFF               	addlw	-1
+  1857  01D7  1D03               	skipz
+  1858  01D8  29D3               	goto	u2785
+  1859                           	line	25
+  1860                           	
+  1861  01D9                     l2463:	
+  1862  01D9  3001               	movlw	low(01h)
+  1863  01DA  02AD               	subwf	(___awmod@counter),f
+  1864  01DB  1D03               	btfss	status,2
+  1865  01DC  29DE               	goto	u2791
+  1866  01DD  29DF               	goto	u2790
+  1867  01DE                     u2791:
+  1868  01DE  29C1               	goto	l2457
+  1869  01DF                     u2790:
+  1870  01DF  29E1               	goto	l2465
+  1871                           	
+  1872  01E0                     l1015:	
+  1873  01E0  29E1               	goto	l2465
+  1874                           	line	26
+  1875                           	
+  1876  01E1                     l1009:	
+  1877                           	line	27
+  1878                           	
+  1879  01E1                     l2465:	
+  1880  01E1  082E               	movf	(___awmod@sign),w
+  1881  01E2  1D03               	skipz
+  1882  01E3  29E5               	goto	u2800
+  1883  01E4  29EB               	goto	l2469
+  1884  01E5                     u2800:
+  1885                           	line	28
+  1886                           	
+  1887  01E5                     l2467:	
+  1888  01E5  09AA               	comf	(___awmod@dividend),f
+  1889  01E6  09AB               	comf	(___awmod@dividend+1),f
+  1890  01E7  0AAA               	incf	(___awmod@dividend),f
+  1891  01E8  1903               	skipnz
+  1892  01E9  0AAB               	incf	(___awmod@dividend+1),f
+  1893  01EA  29EB               	goto	l2469
+  1894                           	
+  1895  01EB                     l1016:	
+  1896                           	line	29
+  1897                           	
+  1898  01EB                     l2469:	
+  1899  01EB  082B               	movf	(___awmod@dividend+1),w
+  1900  01EC  01A9               	clrf	(?___awmod+1)
+  1901  01ED  07A9               	addwf	(?___awmod+1)
+  1902  01EE  082A               	movf	(___awmod@dividend),w
+  1903  01EF  01A8               	clrf	(?___awmod)
+  1904  01F0  07A8               	addwf	(?___awmod)
+  1905                           
+  1906  01F1  29F2               	goto	l1017
+  1907                           	
+  1908  01F2                     l2471:	
+  1909                           	line	30
+  1910                           	
+  1911  01F2                     l1017:	
+  1912  01F2  0008               	return
+  1913                           	opt stack 0
+  1914                           GLOBAL	__end_of___awmod
+  1915  01F3                     	__end_of___awmod:
+  1916 ;; =============== function ___awmod ends ============
+  1917                           
+  1918                           	signat	___awmod,8314
+  1919                           	global	___awdiv
+  1920                           psect	text374,local,class=CODE,delta=2
+  1921                           global __ptext374
+  1922  00AE                     __ptext374:
+  1923                           
+  1924 ;; *************** function ___awdiv *****************
+  1925 ;; Defined at:
+  1926 ;;		line 5 in file "/usr/hitech/picc/9.82/sources/awdiv.c"
+  1927 ;; Parameters:    Size  Location     Type
+  1928 ;;  divisor         2    8[BANK0 ] int 
+  1929 ;;  dividend        2   10[BANK0 ] int 
+  1930 ;; Auto vars:     Size  Location     Type
+  1931 ;;  quotient        2   15[BANK0 ] int 
+  1932 ;;  sign            1   14[BANK0 ] unsigned char 
+  1933 ;;  counter         1   13[BANK0 ] unsigned char 
+  1934 ;; Return value:  Size  Location     Type
+  1935 ;;                  2    8[BANK0 ] int 
+  1936 ;; Registers used:
+  1937 ;;		wreg, status,2, status,0
+  1938 ;; Tracked objects:
+  1939 ;;		On entry : 0/0
+  1940 ;;		On exit  : 0/0
+  1941 ;;		Unchanged: 0/0
+  1942 ;; Data sizes:     COMMON   BANK0
+  1943 ;;      Params:         0       4
+  1944 ;;      Locals:         0       4
+  1945 ;;      Temps:          0       1
+  1946 ;;      Totals:         0       9
+  1947 ;;Total ram usage:        9 bytes
+  1948 ;; Hardware stack levels used:    1
+  1949 ;; Hardware stack levels required when called:    2
+  1950 ;; This function calls:
+  1951 ;;		Nothing
+  1952 ;; This function is called by:
+  1953 ;;		_update_display
+  1954 ;; This function uses a non-reentrant model
+  1955 ;;
+  1956                           psect	text374
+  1957                           	file	"/usr/hitech/picc/9.82/sources/awdiv.c"
+  1958                           	line	5
+  1959                           	global	__size_of___awdiv
+  1960  0075                     	__size_of___awdiv	equ	__end_of___awdiv-___awdiv
+  1961                           	
+  1962  00AE                     ___awdiv:	
+  1963                           	opt	stack 4
+  1964                           ; Regs used in ___awdiv: [wreg+status,2+status,0]
+  1965                           	line	9
+  1966                           	
+  1967  00AE                     l2399:	
+  1968  00AE  1283               	bcf	status, 5	;RP0=0, select bank0
+  1969  00AF  01AE               	clrf	(___awdiv@sign)
+  1970                           	line	10
+  1971  00B0  1FA9               	btfss	(___awdiv@divisor+1),7
+  1972  00B1  28B3               	goto	u2621
+  1973  00B2  28B4               	goto	u2620
+  1974  00B3                     u2621:
+  1975  00B3  28BD               	goto	l2403
+  1976  00B4                     u2620:
+  1977                           	line	11
+  1978                           	
+  1979  00B4                     l2401:	
+  1980  00B4  09A8               	comf	(___awdiv@divisor),f
+  1981  00B5  09A9               	comf	(___awdiv@divisor+1),f
+  1982  00B6  0AA8               	incf	(___awdiv@divisor),f
+  1983  00B7  1903               	skipnz
+  1984  00B8  0AA9               	incf	(___awdiv@divisor+1),f
+  1985                           	line	12
+  1986  00B9  01AE               	clrf	(___awdiv@sign)
+  1987  00BA  1403               	bsf	status,0
+  1988  00BB  0DAE               	rlf	(___awdiv@sign),f
+  1989  00BC  28BD               	goto	l2403
+  1990                           	line	13
+  1991                           	
+  1992  00BD                     l939:	
+  1993                           	line	14
+  1994                           	
+  1995  00BD                     l2403:	
+  1996  00BD  1FAB               	btfss	(___awdiv@dividend+1),7
+  1997  00BE  28C0               	goto	u2631
+  1998  00BF  28C1               	goto	u2630
+  1999  00C0                     u2631:
+  2000  00C0  28CB               	goto	l2409
+  2001  00C1                     u2630:
+  2002                           	line	15
+  2003                           	
+  2004  00C1                     l2405:	
+  2005  00C1  09AA               	comf	(___awdiv@dividend),f
+  2006  00C2  09AB               	comf	(___awdiv@dividend+1),f
+  2007  00C3  0AAA               	incf	(___awdiv@dividend),f
+  2008  00C4  1903               	skipnz
+  2009  00C5  0AAB               	incf	(___awdiv@dividend+1),f
+  2010                           	line	16
+  2011                           	
+  2012  00C6                     l2407:	
+  2013  00C6  3001               	movlw	(01h)
+  2014  00C7  00AC               	movwf	(??___awdiv+0)+0
+  2015  00C8  082C               	movf	(??___awdiv+0)+0,w
+  2016  00C9  06AE               	xorwf	(___awdiv@sign),f
+  2017  00CA  28CB               	goto	l2409
+  2018                           	line	17
+  2019                           	
+  2020  00CB                     l940:	
+  2021                           	line	18
+  2022                           	
+  2023  00CB                     l2409:	
+  2024  00CB  01AF               	clrf	(___awdiv@quotient)
+  2025  00CC  01B0               	clrf	(___awdiv@quotient+1)
+  2026                           	line	19
+  2027                           	
+  2028  00CD                     l2411:	
+  2029  00CD  0829               	movf	(___awdiv@divisor+1),w
+  2030  00CE  0428               	iorwf	(___awdiv@divisor),w
+  2031  00CF  1903               	skipnz
+  2032  00D0  28D2               	goto	u2641
+  2033  00D1  28D3               	goto	u2640
+  2034  00D2                     u2641:
+  2035  00D2  2911               	goto	l2431
+  2036  00D3                     u2640:
+  2037                           	line	20
+  2038                           	
+  2039  00D3                     l2413:	
+  2040  00D3  01AD               	clrf	(___awdiv@counter)
+  2041  00D4  1403               	bsf	status,0
+  2042  00D5  0DAD               	rlf	(___awdiv@counter),f
+  2043                           	line	21
+  2044  00D6  28E3               	goto	l2419
+  2045                           	
+  2046  00D7                     l943:	
+  2047                           	line	22
+  2048                           	
+  2049  00D7                     l2415:	
+  2050  00D7  3001               	movlw	01h
+  2051                           	
+  2052  00D8                     u2655:
+  2053  00D8  1003               	clrc
+  2054  00D9  0DA8               	rlf	(___awdiv@divisor),f
+  2055  00DA  0DA9               	rlf	(___awdiv@divisor+1),f
+  2056  00DB  3EFF               	addlw	-1
+  2057  00DC  1D03               	skipz
+  2058  00DD  28D8               	goto	u2655
+  2059                           	line	23
+  2060                           	
+  2061  00DE                     l2417:	
+  2062  00DE  3001               	movlw	(01h)
+  2063  00DF  00AC               	movwf	(??___awdiv+0)+0
+  2064  00E0  082C               	movf	(??___awdiv+0)+0,w
+  2065  00E1  07AD               	addwf	(___awdiv@counter),f
+  2066  00E2  28E3               	goto	l2419
+  2067                           	line	24
+  2068                           	
+  2069  00E3                     l942:	
+  2070                           	line	21
+  2071                           	
+  2072  00E3                     l2419:	
+  2073  00E3  1FA9               	btfss	(___awdiv@divisor+1),(15)&7
+  2074  00E4  28E6               	goto	u2661
+  2075  00E5  28E7               	goto	u2660
+  2076  00E6                     u2661:
+  2077  00E6  28D7               	goto	l2415
+  2078  00E7                     u2660:
+  2079  00E7  28E9               	goto	l2421
+  2080                           	
+  2081  00E8                     l944:	
+  2082  00E8  28E9               	goto	l2421
+  2083                           	line	25
+  2084                           	
+  2085  00E9                     l945:	
+  2086                           	line	26
+  2087                           	
+  2088  00E9                     l2421:	
+  2089  00E9  3001               	movlw	01h
+  2090                           	
+  2091  00EA                     u2675:
+  2092  00EA  1003               	clrc
+  2093  00EB  0DAF               	rlf	(___awdiv@quotient),f
+  2094  00EC  0DB0               	rlf	(___awdiv@quotient+1),f
+  2095  00ED  3EFF               	addlw	-1
+  2096  00EE  1D03               	skipz
+  2097  00EF  28EA               	goto	u2675
+  2098                           	line	27
+  2099  00F0  0829               	movf	(___awdiv@divisor+1),w
+  2100  00F1  022B               	subwf	(___awdiv@dividend+1),w
+  2101  00F2  1D03               	skipz
+  2102  00F3  28F6               	goto	u2685
+  2103  00F4  0828               	movf	(___awdiv@divisor),w
+  2104  00F5  022A               	subwf	(___awdiv@dividend),w
+  2105  00F6                     u2685:
+  2106  00F6  1C03               	skipc
+  2107  00F7  28F9               	goto	u2681
+  2108  00F8  28FA               	goto	u2680
+  2109  00F9                     u2681:
+  2110  00F9  2902               	goto	l2427
+  2111  00FA                     u2680:
+  2112                           	line	28
+  2113                           	
+  2114  00FA                     l2423:	
+  2115  00FA  0828               	movf	(___awdiv@divisor),w
+  2116  00FB  02AA               	subwf	(___awdiv@dividend),f
+  2117  00FC  0829               	movf	(___awdiv@divisor+1),w
+  2118  00FD  1C03               	skipc
+  2119  00FE  03AB               	decf	(___awdiv@dividend+1),f
+  2120  00FF  02AB               	subwf	(___awdiv@dividend+1),f
+  2121                           	line	29
+  2122                           	
+  2123  0100                     l2425:	
+  2124  0100  142F               	bsf	(___awdiv@quotient)+(0/8),(0)&7
+  2125  0101  2902               	goto	l2427
+  2126                           	line	30
+  2127                           	
+  2128  0102                     l946:	
+  2129                           	line	31
+  2130                           	
+  2131  0102                     l2427:	
+  2132  0102  3001               	movlw	01h
+  2133                           	
+  2134  0103                     u2695:
+  2135  0103  1003               	clrc
+  2136  0104  0CA9               	rrf	(___awdiv@divisor+1),f
+  2137  0105  0CA8               	rrf	(___awdiv@divisor),f
+  2138  0106  3EFF               	addlw	-1
+  2139  0107  1D03               	skipz
+  2140  0108  2903               	goto	u2695
+  2141                           	line	32
+  2142                           	
+  2143  0109                     l2429:	
+  2144  0109  3001               	movlw	low(01h)
+  2145  010A  02AD               	subwf	(___awdiv@counter),f
+  2146  010B  1D03               	btfss	status,2
+  2147  010C  290E               	goto	u2701
+  2148  010D  290F               	goto	u2700
+  2149  010E                     u2701:
+  2150  010E  28E9               	goto	l2421
+  2151  010F                     u2700:
+  2152  010F  2911               	goto	l2431
+  2153                           	
+  2154  0110                     l947:	
+  2155  0110  2911               	goto	l2431
+  2156                           	line	33
+  2157                           	
+  2158  0111                     l941:	
+  2159                           	line	34
+  2160                           	
+  2161  0111                     l2431:	
+  2162  0111  082E               	movf	(___awdiv@sign),w
+  2163  0112  1D03               	skipz
+  2164  0113  2915               	goto	u2710
+  2165  0114  291B               	goto	l2435
+  2166  0115                     u2710:
+  2167                           	line	35
+  2168                           	
+  2169  0115                     l2433:	
+  2170  0115  09AF               	comf	(___awdiv@quotient),f
+  2171  0116  09B0               	comf	(___awdiv@quotient+1),f
+  2172  0117  0AAF               	incf	(___awdiv@quotient),f
+  2173  0118  1903               	skipnz
+  2174  0119  0AB0               	incf	(___awdiv@quotient+1),f
+  2175  011A  291B               	goto	l2435
+  2176                           	
+  2177  011B                     l948:	
+  2178                           	line	36
+  2179                           	
+  2180  011B                     l2435:	
+  2181  011B  0830               	movf	(___awdiv@quotient+1),w
+  2182  011C  01A9               	clrf	(?___awdiv+1)
+  2183  011D  07A9               	addwf	(?___awdiv+1)
+  2184  011E  082F               	movf	(___awdiv@quotient),w
+  2185  011F  01A8               	clrf	(?___awdiv)
+  2186  0120  07A8               	addwf	(?___awdiv)
+  2187                           
+  2188  0121  2922               	goto	l949
+  2189                           	
+  2190  0122                     l2437:	
+  2191                           	line	37
+  2192                           	
+  2193  0122                     l949:	
+  2194  0122  0008               	return
+  2195                           	opt stack 0
+  2196                           GLOBAL	__end_of___awdiv
+  2197  0123                     	__end_of___awdiv:
+  2198 ;; =============== function ___awdiv ends ============
+  2199                           
+  2200                           	signat	___awdiv,8314
+  2201                           	global	_wait
+  2202                           psect	text375,local,class=CODE,delta=2
+  2203                           global __ptext375
+  2204  030E                     __ptext375:
+  2205                           
+  2206 ;; *************** function _wait *****************
+  2207 ;; Defined at:
+  2208 ;;		line 252 in file "main.c"
+  2209 ;; Parameters:    Size  Location     Type
+  2210 ;;  c               1    wreg     unsigned char 
+  2211 ;; Auto vars:     Size  Location     Type
+  2212 ;;  c               1    9[BANK0 ] unsigned char 
+  2213 ;;  tmp             1   10[BANK0 ] unsigned char 
+  2214 ;; Return value:  Size  Location     Type
+  2215 ;;		None               void
+  2216 ;; Registers used:
+  2217 ;;		wreg, status,2, status,0
+  2218 ;; Tracked objects:
+  2219 ;;		On entry : 0/0
+  2220 ;;		On exit  : 0/0
+  2221 ;;		Unchanged: 0/0
+  2222 ;; Data sizes:     COMMON   BANK0
+  2223 ;;      Params:         0       0
+  2224 ;;      Locals:         0       2
+  2225 ;;      Temps:          0       1
+  2226 ;;      Totals:         0       3
+  2227 ;;Total ram usage:        3 bytes
+  2228 ;; Hardware stack levels used:    1
+  2229 ;; Hardware stack levels required when called:    2
+  2230 ;; This function calls:
+  2231 ;;		Nothing
+  2232 ;; This function is called by:
+  2233 ;;		_write_spi
+  2234 ;;		_set
+  2235 ;; This function uses a non-reentrant model
+  2236 ;;
+  2237                           psect	text375
+  2238                           	file	"main.c"
+  2239                           	line	252
+  2240                           	global	__size_of_wait
+  2241  0011                     	__size_of_wait	equ	__end_of_wait-_wait
+  2242                           	
+  2243  030E                     _wait:	
+  2244                           	opt	stack 2
+  2245                           ; Regs used in _wait: [wreg+status,2+status,0]
+  2246                           ;wait@c stored from wreg
+  2247  030E  1283               	bcf	status, 5	;RP0=0, select bank0
+  2248  030F  00A9               	movwf	(wait@c)
+  2249                           	line	253
+  2250                           	
+  2251  0310                     l2355:	
+  2252                           ;main.c: 253: for (unsigned char tmp = 0; tmp <= c; tmp++);
+  2253  0310  01AA               	clrf	(wait@tmp)
+  2254  0311  2B17               	goto	l2359
+  2255                           	
+  2256  0312                     l421:	
+  2257                           	
+  2258  0312                     l2357:	
+  2259  0312  3001               	movlw	(01h)
+  2260  0313  00A8               	movwf	(??_wait+0)+0
+  2261  0314  0828               	movf	(??_wait+0)+0,w
+  2262  0315  07AA               	addwf	(wait@tmp),f
+  2263  0316  2B17               	goto	l2359
+  2264                           	
+  2265  0317                     l420:	
+  2266                           	
+  2267  0317                     l2359:	
+  2268  0317  082A               	movf	(wait@tmp),w
+  2269  0318  0229               	subwf	(wait@c),w
+  2270  0319  1803               	skipnc
+  2271  031A  2B1C               	goto	u2501
+  2272  031B  2B1D               	goto	u2500
+  2273  031C                     u2501:
+  2274  031C  2B12               	goto	l2357
+  2275  031D                     u2500:
+  2276  031D  2B1E               	goto	l423
+  2277                           	
+  2278  031E                     l422:	
+  2279                           	line	254
+  2280                           	
+  2281  031E                     l423:	
+  2282  031E  0008               	return
+  2283                           	opt stack 0
+  2284                           GLOBAL	__end_of_wait
+  2285  031F                     	__end_of_wait:
+  2286 ;; =============== function _wait ends ============
+  2287                           
+  2288                           	signat	_wait,4216
+  2289                           	global	_config
+  2290                           psect	text376,local,class=CODE,delta=2
+  2291                           global __ptext376
+  2292  02E1                     __ptext376:
+  2293                           
+  2294 ;; *************** function _config *****************
+  2295 ;; Defined at:
+  2296 ;;		line 75 in file "main.c"
+  2297 ;; Parameters:    Size  Location     Type
+  2298 ;;		None
+  2299 ;; Auto vars:     Size  Location     Type
+  2300 ;;		None
+  2301 ;; Return value:  Size  Location     Type
+  2302 ;;		None               void
+  2303 ;; Registers used:
+  2304 ;;		wreg, status,2
+  2305 ;; Tracked objects:
+  2306 ;;		On entry : 0/0
+  2307 ;;		On exit  : 0/0
+  2308 ;;		Unchanged: 0/0
+  2309 ;; Data sizes:     COMMON   BANK0
+  2310 ;;      Params:         0       0
+  2311 ;;      Locals:         0       0
+  2312 ;;      Temps:          0       0
+  2313 ;;      Totals:         0       0
+  2314 ;;Total ram usage:        0 bytes
+  2315 ;; Hardware stack levels used:    1
+  2316 ;; Hardware stack levels required when called:    2
+  2317 ;; This function calls:
+  2318 ;;		Nothing
+  2319 ;; This function is called by:
+  2320 ;;		_main
+  2321 ;; This function uses a non-reentrant model
+  2322 ;;
+  2323                           psect	text376
+  2324                           	file	"main.c"
+  2325                           	line	75
+  2326                           	global	__size_of_config
+  2327  001A                     	__size_of_config	equ	__end_of_config-_config
+  2328                           	
+  2329  02E1                     _config:	
+  2330                           	opt	stack 5
+  2331                           ; Regs used in _config: [wreg+status,2]
+  2332                           	line	77
+  2333                           	
+  2334  02E1                     l2339:	
+  2335                           ;main.c: 77: TMR1GE = 0;
+  2336  02E1  1283               	bcf	status, 5	;RP0=0, select bank0
+  2337  02E2  1310               	bcf	(134/8),(134)&7
+  2338                           	line	78
+  2339                           ;main.c: 78: T1CKPS0 = 0;
+  2340  02E3  1210               	bcf	(132/8),(132)&7
+  2341                           	line	79
+  2342                           ;main.c: 79: T1CKPS1 = 0;
+  2343  02E4  1290               	bcf	(133/8),(133)&7
+  2344                           	line	80
+  2345                           ;main.c: 80: T1OSCEN = 1;
+  2346  02E5  1590               	bsf	(131/8),(131)&7
+  2347                           	line	81
+  2348                           ;main.c: 81: TMR1CS = 1;
+  2349  02E6  1490               	bsf	(129/8),(129)&7
+  2350                           	line	82
+  2351                           ;main.c: 82: nT1SYNC = 1;
+  2352  02E7  1510               	bsf	(130/8),(130)&7
+  2353                           	line	86
+  2354                           ;main.c: 86: TRISIO4 = 0;
+  2355  02E8  1683               	bsf	status, 5	;RP0=1, select bank1
+  2356  02E9  1205               	bcf	(1068/8)^080h,(1068)&7
+  2357                           	line	88
+  2358                           ;main.c: 88: TRISIO3 = 0;
+  2359  02EA  1185               	bcf	(1067/8)^080h,(1067)&7
+  2360                           	line	90
+  2361                           ;main.c: 90: TRISIO2 = 0;
+  2362  02EB  1105               	bcf	(1066/8)^080h,(1066)&7
+  2363                           	line	92
+  2364                           ;main.c: 92: TRISIO0 = 1;
+  2365  02EC  1405               	bsf	(1064/8)^080h,(1064)&7
+  2366                           	line	93
+  2367                           ;main.c: 93: TRISIO1 = 1;
+  2368  02ED  1485               	bsf	(1065/8)^080h,(1065)&7
+  2369                           	line	95
+  2370                           ;main.c: 95: TRISIO5 = 1;
+  2371  02EE  1685               	bsf	(1069/8)^080h,(1069)&7
+  2372                           	line	98
+  2373                           ;main.c: 98: nGPPU = 1;
+  2374  02EF  1781               	bsf	(1039/8)^080h,(1039)&7
+  2375                           	line	100
+  2376                           	
+  2377  02F0                     l2341:	
+  2378                           ;main.c: 100: WPU = 0xFF;
+  2379  02F0  30FF               	movlw	(0FFh)
+  2380  02F1  0095               	movwf	(149)^080h	;volatile
+  2381                           	line	103
+  2382                           	
+  2383  02F2                     l2343:	
+  2384                           ;main.c: 103: PIR1 = 0;
+  2385  02F2  1283               	bcf	status, 5	;RP0=0, select bank0
+  2386  02F3  018C               	clrf	(12)	;volatile
+  2387                           	line	104
+  2388                           	
+  2389  02F4                     l2345:	
+  2390                           ;main.c: 104: GIE = 1;
+  2391  02F4  178B               	bsf	(95/8),(95)&7
+  2392                           	line	105
+  2393                           	
+  2394  02F5                     l2347:	
+  2395                           ;main.c: 105: PEIE = 1;
+  2396  02F5  170B               	bsf	(94/8),(94)&7
+  2397                           	line	106
+  2398                           	
+  2399  02F6                     l2349:	
+  2400                           ;main.c: 106: TMR1IE = 1;
+  2401  02F6  1683               	bsf	status, 5	;RP0=1, select bank1
+  2402  02F7  140C               	bsf	(1120/8)^080h,(1120)&7
+  2403                           	line	108
+  2404                           	
+  2405  02F8                     l2351:	
+  2406                           ;main.c: 108: IOC0 = 1;
+  2407  02F8  1416               	bsf	(1200/8)^080h,(1200)&7
+  2408                           	line	109
+  2409                           	
+  2410  02F9                     l2353:	
+  2411                           ;main.c: 109: IOC1 = 1;
+  2412  02F9  1496               	bsf	(1201/8)^080h,(1201)&7
+  2413                           	line	110
+  2414                           	
+  2415  02FA                     l370:	
+  2416  02FA  0008               	return
+  2417                           	opt stack 0
+  2418                           GLOBAL	__end_of_config
+  2419  02FB                     	__end_of_config:
+  2420 ;; =============== function _config ends ============
+  2421                           
+  2422                           	signat	_config,88
+  2423                           	global	_ISR
+  2424                           psect	text377,local,class=CODE,delta=2
+  2425                           global __ptext377
+  2426  0123                     __ptext377:
+  2427                           
+  2428 ;; *************** function _ISR *****************
+  2429 ;; Defined at:
+  2430 ;;		line 167 in file "main.c"
+  2431 ;; Parameters:    Size  Location     Type
+  2432 ;;		None
+  2433 ;; Auto vars:     Size  Location     Type
+  2434 ;;		None
+  2435 ;; Return value:  Size  Location     Type
+  2436 ;;		None               void
+  2437 ;; Registers used:
+  2438 ;;		wreg, status,2, status,0, pclath, cstack
+  2439 ;; Tracked objects:
+  2440 ;;		On entry : 0/0
+  2441 ;;		On exit  : 0/0
+  2442 ;;		Unchanged: 0/0
+  2443 ;; Data sizes:     COMMON   BANK0
+  2444 ;;      Params:         0       0
+  2445 ;;      Locals:         0       0
+  2446 ;;      Temps:          0       5
+  2447 ;;      Totals:         0       5
+  2448 ;;Total ram usage:        5 bytes
+  2449 ;; Hardware stack levels used:    1
+  2450 ;; Hardware stack levels required when called:    1
+  2451 ;; This function calls:
+  2452 ;;		i1_wait
+  2453 ;; This function is called by:
+  2454 ;;		Interrupt level 1
+  2455 ;; This function uses a non-reentrant model
+  2456 ;;
+  2457                           psect	text377
+  2458                           	file	"main.c"
+  2459                           	line	167
+  2460                           	global	__size_of_ISR
+  2461  0069                     	__size_of_ISR	equ	__end_of_ISR-_ISR
+  2462                           	
+  2463  0123                     _ISR:	
+  2464                           	opt	stack 1
+  2465                           ; Regs used in _ISR: [wreg+status,2+status,0+pclath+cstack]
+  2466                           psect	intentry,class=CODE,delta=2
+  2467                           global __pintentry
+  2468  0004                     __pintentry:
+  2469                           global interrupt_function
+  2470  0004                     interrupt_function:
+  2471                           	global saved_w
+  2472  005E                     	saved_w	set	btemp+0
+  2473  0004  00DE               	movwf	saved_w
+  2474  0005  0E03               	swapf	status,w
+  2475  0006  1283               	bcf	status, 5	;RP0=0, select bank0
+  2476  0007  00A4               	movwf	(??_ISR+1)
+  2477  0008  0804               	movf	fsr0,w
+  2478  0009  00A5               	movwf	(??_ISR+2)
+  2479  000A  080A               	movf	pclath,w
+  2480  000B  00A6               	movwf	(??_ISR+3)
+  2481  000C  085F               	movf	btemp+1,w
+  2482  000D  00A7               	movwf	(??_ISR+4)
+  2483  000E  2923               	ljmp	_ISR
+  2484                           psect	text377
+  2485                           	line	168
+  2486                           	
+  2487  0123                     i1l2361:	
+  2488                           ;main.c: 168: if (TMR1IE && TMR1IF)
+  2489  0123  1683               	bsf	status, 5	;RP0=1, select bank1
+  2490  0124  1C0C               	btfss	(1120/8)^080h,(1120)&7
+  2491  0125  2927               	goto	u251_21
+  2492  0126  2928               	goto	u251_20
+  2493  0127                     u251_21:
+  2494  0127  2951               	goto	i1l388
+  2495  0128                     u251_20:
+  2496                           	
+  2497  0128                     i1l2363:	
+  2498  0128  1283               	bcf	status, 5	;RP0=0, select bank0
+  2499  0129  1C0C               	btfss	(96/8),(96)&7
+  2500  012A  292C               	goto	u252_21
+  2501  012B  292D               	goto	u252_20
+  2502  012C                     u252_21:
+  2503  012C  2951               	goto	i1l388
+  2504  012D                     u252_20:
+  2505                           	line	170
+  2506                           	
+  2507  012D                     i1l2365:	
+  2508                           ;main.c: 169: {
+  2509                           ;main.c: 170: if (++time.second == 60)
+  2510  012D  3001               	movlw	(01h)
+  2511  012E  00A3               	movwf	(??_ISR+0)+0
+  2512  012F  0823               	movf	(??_ISR+0)+0,w
+  2513  0130  07C9               	addwf	0+(_time)+02h,f
+  2514  0131  0849               	movf	(0+(_time)+02h),w
+  2515  0132  3A3C               	xorlw	03Ch
+  2516  0133  1D03               	skipz
+  2517  0134  2936               	goto	u253_21
+  2518  0135  2937               	goto	u253_20
+  2519  0136                     u253_21:
+  2520  0136  2951               	goto	i1l388
+  2521  0137                     u253_20:
+  2522                           	line	172
+  2523                           	
+  2524  0137                     i1l2367:	
+  2525                           ;main.c: 171: {
+  2526                           ;main.c: 172: time.second = 0;
+  2527  0137  01C9               	clrf	0+(_time)+02h
+  2528                           	line	173
+  2529                           	
+  2530  0138                     i1l2369:	
+  2531                           ;main.c: 173: if ((++time.minute) == 60)
+  2532  0138  3001               	movlw	(01h)
+  2533  0139  00A3               	movwf	(??_ISR+0)+0
+  2534  013A  0823               	movf	(??_ISR+0)+0,w
+  2535  013B  07C8               	addwf	0+(_time)+01h,f
+  2536  013C  0848               	movf	(0+(_time)+01h),w
+  2537  013D  3A3C               	xorlw	03Ch
+  2538  013E  1D03               	skipz
+  2539  013F  2941               	goto	u254_21
+  2540  0140  2942               	goto	u254_20
+  2541  0141                     u254_21:
+  2542  0141  2951               	goto	i1l388
+  2543  0142                     u254_20:
+  2544                           	line	175
+  2545                           	
+  2546  0142                     i1l2371:	
+  2547                           ;main.c: 174: {
+  2548                           ;main.c: 175: time.minute = 0;
+  2549  0142  01C8               	clrf	0+(_time)+01h
+  2550                           	line	176
+  2551                           	
+  2552  0143                     i1l2373:	
+  2553                           ;main.c: 176: if (++time.hour == 24)
+  2554  0143  3001               	movlw	(01h)
+  2555  0144  00A3               	movwf	(??_ISR+0)+0
+  2556  0145  0823               	movf	(??_ISR+0)+0,w
+  2557  0146  07C7               	addwf	(_time),f
+  2558  0147  0847               	movf	((_time)),w
+  2559  0148  3A18               	xorlw	018h
+  2560  0149  1D03               	skipz
+  2561  014A  294C               	goto	u255_21
+  2562  014B  294D               	goto	u255_20
+  2563  014C                     u255_21:
+  2564  014C  2951               	goto	i1l388
+  2565  014D                     u255_20:
+  2566                           	line	178
+  2567                           	
+  2568  014D                     i1l2375:	
+  2569                           ;main.c: 177: {
+  2570                           ;main.c: 178: time.hour = 0;
+  2571  014D  01C7               	clrf	(_time)
+  2572  014E  2951               	goto	i1l388
+  2573                           	line	179
+  2574                           	
+  2575  014F                     i1l391:	
+  2576  014F  2951               	goto	i1l388
+  2577                           	line	180
+  2578                           	
+  2579  0150                     i1l390:	
+  2580  0150  2951               	goto	i1l388
+  2581                           	line	181
+  2582                           	
+  2583  0151                     i1l389:	
+  2584                           	line	182
+  2585                           	
+  2586  0151                     i1l388:	
+  2587                           	line	183
+  2588                           ;main.c: 179: }
+  2589                           ;main.c: 180: }
+  2590                           ;main.c: 181: }
+  2591                           ;main.c: 182: }
+  2592                           ;main.c: 183: if (GPIF)
+  2593  0151  1C0B               	btfss	(88/8),(88)&7
+  2594  0152  2954               	goto	u256_21
+  2595  0153  2955               	goto	u256_20
+  2596  0154                     u256_21:
+  2597  0154  297E               	goto	i1l2395
+  2598  0155                     u256_20:
+  2599                           	line	185
+  2600                           	
+  2601  0155                     i1l2377:	
+  2602                           ;main.c: 184: {
+  2603                           ;main.c: 185: if ((!GPIO1 && !GPIO0))
+  2604  0155  1283               	bcf	status, 5	;RP0=0, select bank0
+  2605  0156  1885               	btfsc	(41/8),(41)&7
+  2606  0157  2959               	goto	u257_21
+  2607  0158  295A               	goto	u257_20
+  2608  0159                     u257_21:
+  2609  0159  295A               	goto	i1l393
+  2610  015A                     u257_20:
+  2611                           	
+  2612  015A                     i1l2379:	
+  2613                           	line	188
+  2614                           ;main.c: 186: {
+  2615                           	
+  2616  015A                     i1l393:	
+  2617                           	line	189
+  2618                           ;main.c: 188: }
+  2619                           ;main.c: 189: if ((!GPIO0 && GPIO1))
+  2620  015A  1805               	btfsc	(40/8),(40)&7
+  2621  015B  295D               	goto	u258_21
+  2622  015C  295E               	goto	u258_20
+  2623  015D                     u258_21:
+  2624  015D  296B               	goto	i1l2387
+  2625  015E                     u258_20:
+  2626                           	
+  2627  015E                     i1l2381:	
+  2628  015E  1C85               	btfss	(41/8),(41)&7
+  2629  015F  2961               	goto	u259_21
+  2630  0160  2962               	goto	u259_20
+  2631  0161                     u259_21:
+  2632  0161  296B               	goto	i1l2387
+  2633  0162                     u259_20:
+  2634                           	line	191
+  2635                           	
+  2636  0162                     i1l2383:	
+  2637                           ;main.c: 190: {
+  2638                           ;main.c: 191: brightness = (brightness + 1) & 0xF;
+  2639  0162  084A               	movf	(_brightness),w
+  2640  0163  3E01               	addlw	01h
+  2641  0164  390F               	andlw	0Fh
+  2642  0165  00A3               	movwf	(??_ISR+0)+0
+  2643  0166  0823               	movf	(??_ISR+0)+0,w
+  2644  0167  00CA               	movwf	(_brightness)
+  2645                           	line	193
+  2646                           	
+  2647  0168                     i1l2385:	
+  2648                           ;main.c: 193: wait(100);
+  2649  0168  3064               	movlw	(064h)
+  2650  0169  231F               	fcall	i1_wait
+  2651  016A  296B               	goto	i1l2387
+  2652                           	line	194
+  2653                           	
+  2654  016B                     i1l394:	
+  2655                           	line	195
+  2656                           	
+  2657  016B                     i1l2387:	
+  2658                           ;main.c: 194: }
+  2659                           ;main.c: 195: if ((!GPIO1 && GPIO0))
+  2660  016B  1283               	bcf	status, 5	;RP0=0, select bank0
+  2661  016C  1885               	btfsc	(41/8),(41)&7
+  2662  016D  296F               	goto	u260_21
+  2663  016E  2970               	goto	u260_20
+  2664  016F                     u260_21:
+  2665  016F  297E               	goto	i1l2395
+  2666  0170                     u260_20:
+  2667                           	
+  2668  0170                     i1l2389:	
+  2669  0170  1C05               	btfss	(40/8),(40)&7
+  2670  0171  2973               	goto	u261_21
+  2671  0172  2974               	goto	u261_20
+  2672  0173                     u261_21:
+  2673  0173  297E               	goto	i1l2395
+  2674  0174                     u261_20:
+  2675                           	line	197
+  2676                           	
+  2677  0174                     i1l2391:	
+  2678                           ;main.c: 196: {
+  2679                           ;main.c: 197: brightness = (brightness - 1) & 0xF;
+  2680  0174  084A               	movf	(_brightness),w
+  2681  0175  3EFF               	addlw	0FFh
+  2682  0176  390F               	andlw	0Fh
+  2683  0177  00A3               	movwf	(??_ISR+0)+0
+  2684  0178  0823               	movf	(??_ISR+0)+0,w
+  2685  0179  00CA               	movwf	(_brightness)
+  2686                           	line	199
+  2687                           	
+  2688  017A                     i1l2393:	
+  2689                           ;main.c: 199: wait(100);
+  2690  017A  3064               	movlw	(064h)
+  2691  017B  231F               	fcall	i1_wait
+  2692  017C  297E               	goto	i1l2395
+  2693                           	line	200
+  2694                           	
+  2695  017D                     i1l395:	
+  2696  017D  297E               	goto	i1l2395
+  2697                           	line	201
+  2698                           	
+  2699  017E                     i1l392:	
+  2700                           	line	202
+  2701                           	
+  2702  017E                     i1l2395:	
+  2703                           ;main.c: 200: }
+  2704                           ;main.c: 201: }
+  2705                           ;main.c: 202: GPIE = 0;
+  2706  017E  118B               	bcf	(91/8),(91)&7
+  2707                           	line	203
+  2708                           	
+  2709  017F                     i1l2397:	
+  2710                           ;main.c: 203: GPIE = 1;
+  2711  017F  158B               	bsf	(91/8),(91)&7
+  2712                           	line	205
+  2713                           	
+  2714  0180                     i1l396:	
+  2715  0180  1283               	bcf	status, 5	;RP0=0, select bank0
+  2716  0181  0827               	movf	(??_ISR+4),w
+  2717  0182  00DF               	movwf	btemp+1
+  2718  0183  0826               	movf	(??_ISR+3),w
+  2719  0184  008A               	movwf	pclath
+  2720  0185  0825               	movf	(??_ISR+2),w
+  2721  0186  0084               	movwf	fsr0
+  2722  0187  0E24               	swapf	(??_ISR+1)^00h,w
+  2723  0188  0083               	movwf	status
+  2724  0189  0EDE               	swapf	saved_w,f
+  2725  018A  0E5E               	swapf	saved_w,w
+  2726  018B  0009               	retfie
+  2727                           	opt stack 0
+  2728                           GLOBAL	__end_of_ISR
+  2729  018C                     	__end_of_ISR:
+  2730 ;; =============== function _ISR ends ============
+  2731                           
+  2732                           	signat	_ISR,88
+  2733                           	global	i1_wait
+  2734                           psect	text378,local,class=CODE,delta=2
+  2735                           global __ptext378
+  2736  031F                     __ptext378:
+  2737                           
+  2738 ;; *************** function i1_wait *****************
+  2739 ;; Defined at:
+  2740 ;;		line 252 in file "main.c"
+  2741 ;; Parameters:    Size  Location     Type
+  2742 ;;  wait            1    wreg     unsigned char 
+  2743 ;; Auto vars:     Size  Location     Type
+  2744 ;;  wait            1    1[BANK0 ] unsigned char 
+  2745 ;;  wait            1    2[BANK0 ] unsigned char 
+  2746 ;; Return value:  Size  Location     Type
+  2747 ;;		None               void
+  2748 ;; Registers used:
+  2749 ;;		wreg, status,2, status,0
+  2750 ;; Tracked objects:
+  2751 ;;		On entry : 0/0
+  2752 ;;		On exit  : 0/0
+  2753 ;;		Unchanged: 0/0
+  2754 ;; Data sizes:     COMMON   BANK0
+  2755 ;;      Params:         0       0
+  2756 ;;      Locals:         0       2
+  2757 ;;      Temps:          0       1
+  2758 ;;      Totals:         0       3
+  2759 ;;Total ram usage:        3 bytes
+  2760 ;; Hardware stack levels used:    1
+  2761 ;; This function calls:
+  2762 ;;		Nothing
+  2763 ;; This function is called by:
+  2764 ;;		_ISR
+  2765 ;; This function uses a non-reentrant model
+  2766 ;;
+  2767                           psect	text378
+  2768                           	file	"main.c"
+  2769                           	line	252
+  2770                           	global	__size_ofi1_wait
+  2771  0011                     	__size_ofi1_wait	equ	__end_ofi1_wait-i1_wait
+  2772                           	
+  2773  031F                     i1_wait:	
+  2774                           	opt	stack 1
+  2775                           ; Regs used in i1_wait: [wreg+status,2+status,0]
+  2776                           ;i1wait@c stored from wreg
+  2777  031F  1283               	bcf	status, 5	;RP0=0, select bank0
+  2778  0320  00A1               	movwf	(i1wait@c)
+  2779                           	line	253
+  2780                           	
+  2781  0321                     i1l2473:	
+  2782                           ;main.c: 253: for (unsigned char tmp = 0; tmp <= c; tmp++);
+  2783  0321  01A2               	clrf	(i1wait@tmp)
+  2784  0322  2B28               	goto	i1l2477
+  2785                           	
+  2786  0323                     i1l421:	
+  2787                           	
+  2788  0323                     i1l2475:	
+  2789  0323  3001               	movlw	(01h)
+  2790  0324  00A0               	movwf	(??i1_wait+0)+0
+  2791  0325  0820               	movf	(??i1_wait+0)+0,w
+  2792  0326  07A2               	addwf	(i1wait@tmp),f
+  2793  0327  2B28               	goto	i1l2477
+  2794                           	
+  2795  0328                     i1l420:	
+  2796                           	
+  2797  0328                     i1l2477:	
+  2798  0328  0822               	movf	(i1wait@tmp),w
+  2799  0329  0221               	subwf	(i1wait@c),w
+  2800  032A  1803               	skipnc
+  2801  032B  2B2D               	goto	u281_21
+  2802  032C  2B2E               	goto	u281_20
+  2803  032D                     u281_21:
+  2804  032D  2B23               	goto	i1l2475
+  2805  032E                     u281_20:
+  2806  032E  2B2F               	goto	i1l423
+  2807                           	
+  2808  032F                     i1l422:	
+  2809                           	line	254
+  2810                           	
+  2811  032F                     i1l423:	
+  2812  032F  0008               	return
+  2813                           	opt stack 0
+  2814                           GLOBAL	__end_ofi1_wait
+  2815  0330                     	__end_ofi1_wait:
+  2816 ;; =============== function i1_wait ends ============
+  2817                           
+  2818                           	signat	i1_wait,88
+  2819                           psect	text379,local,class=CODE,delta=2
+  2820                           global __ptext379
+  2821  0000                     __ptext379:
+  2822                           	global	btemp
+  2823  005E                     	btemp set 05Eh
+  2824                           
+  2825                           	DABS	1,94,2	;btemp
+  2826                           	global	wtemp0
+  2827  005E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.82 build 9453 
+Symbol Table                                                                                   Thu Aug  2 14:44:43 2012
+
+      write_spi_address@len 003A       write_spi_address@addr 0035       write_spi_address@data 0036  
+                         pc 0002                          _RD 04E0                          _WR 04E1  
+              ___awdiv@sign 002E                          fsr 0004              _update_display 0014  
+                       l400 01F8                         l401 021E                         l410 0228  
+                       l402 0212                         l411 023D                         l403 0202  
+                       l420 0317                         l412 022B                         l404 021D  
+                       l421 0312                         l413 022E                         l405 0207  
+                       l422 031E                         l414 024C                         l406 020C  
+                       l423 031E                         l407 024D                         l415 024B  
+                       l416 0255                         l408 023E                         l417 0258  
+                       l409 0232                         l361 02C3                         l370 02FA  
+                       l426 033F                         l362 02CE                         l363 02D3  
+                       l364 02DE                         l373 02B7                         l365 02DF  
+                       l382 030D                         l366 02E0                         l367 02E0  
+                       l376 0282                         l377 025E                         l385 00AD  
+                       l378 0288                         l379 028D                         l399 024E  
+                       l940 00CB                         l941 0111                         l942 00E3  
+                       l943 00D7                         l944 00E8                         l945 00E9  
+                       l946 0102                         l947 0110                         l939 00BD  
+                       l948 011B                         l949 0122                         _GIE 005F  
+                       _ISR 0123                         _WPU 0095                         _set 01F3  
+                       fsr0 0004                ___awmod@sign 002E                        S2625 0001  
+                      S2627 0346                        ?_ISR 0020                        l1010 01BB  
+                      l1011 01AF                        l1012 01C0                        l1013 01C1  
+                      l1014 01D2                        l1015 01E0                        l1007 019B  
+                      l1016 01EB                        l1008 01A5                        l1017 01F2  
+                      l1009 01E1                        l2401 00B4                        l2411 00CD  
+                      l2403 00BD                        l2341 02F0                        l2421 00E9  
+                      l2413 00D3                        l2405 00C1                        l2501 028E  
+                      l2351 02F8                        l2343 02F2                        l2423 00FA  
+                      l2415 00D7                        l2431 0111                        l2407 00C6  
+                      l2511 02A1                        l2503 0290                        l2353 02F9  
+                      l2345 02F4                        l2433 0115                        l2425 0100  
+                      l2417 00DE                        l2409 00CB                        l2441 0192  
+                      l2513 02AC                        l2505 0294                        l2521 0202  
+                      l2347 02F5                        l2339 02E1                        l2355 0310  
+                      l2435 011B                        l2427 0102                        l2419 00E3  
+                      l2451 01AF                        l2443 019B                        l2507 0295  
+                      l2531 0222                        l2523 0207                        l2515 01F3  
+                      l2349 02F6                        l2357 0312                        l2437 0122  
+                      l2429 0109                        l2461 01D2                        l2453 01B6  
+                      l2445 019F                        l2509 029F                        l2541 0231  
+                      l2533 0227                        l2525 020C                        l2517 01FC  
+                      l2359 0317                        l2471 01F2                        l2463 01D9  
+                      l2455 01BB                        l2447 01A5                        l2439 018C  
+                      l2551 0255                        l2535 0228                        l2543 0232  
+                      l2527 0211                        l2519 0201                        l2457 01C1  
+                      l2449 01AB                        l2465 01E1                        l2481 025F  
+                      l2553 0256                        l2545 0242                        l2537 022B  
+                      l2529 0212                        l2467 01E5                        l2459 01CB  
+                      l2491 0289                        l2483 0279                        l2547 0246  
+                      l2539 022E                        l2571 02C3                        l2563 02B8  
+                      l2469 01EB                        l2493 028B                        l2485 027A  
+                      l2549 024E                        l2581 02D3                        l2573 02C7  
+                      l2565 02B9                        l2399 00AE                        l2487 027C  
+                      l2479 025B                        l2495 02FD                        l2583 02DC  
+                      l2575 02CE                        l2567 02BB                        l2489 0282  
+                      l2497 0014                        l2577 02CF                        l2569 02C2  
+                      l2499 0332                        l2579 02D0                        ?_set 0020  
+                      _IOC0 04B0                        _IOC1 04B1                        _GPIE 005B  
+                      _GPIF 0058                        u2500 031D                        u2501 031C  
+                      u2700 010F                        u2620 00B4                        u2701 010E  
+                      u2621 00B3                        u2710 0115                        u2630 00C1  
+                      u2631 00C0                        u2640 00D3                        u2800 01E5  
+                      u2720 0192                        u2641 00D2                        u2721 0191  
+                      u2730 019F                        u2731 019E                        u2660 00E7  
+                      u2740 01AB                        u2820 026E                        u2900 0242  
+                      u2661 00E6                        u2741 01AA                        u2901 0241  
+                      u2830 0277                        u2910 0246                        u2655 00D8  
+                      u2831 0274                        u2911 0245                        u2680 00FA  
+                      u2760 01BF                        u2920 0254                        u2681 00F9  
+                      u2761 01BE                        u2825 0269                        u2921 0253  
+                      u2770 01CB                        u2850 0288                        u2930 02C1  
+                      u2675 00EA                        u2771 01CA                        u2755 01B0  
+                      u2851 0287                        u2931 02C0                        _PEIE 005E  
+                      u2844 0279                        u2860 01FC                        u2940 02CD  
+                      u2685 00F6                        u2861 01FB                        u2941 02CC  
+                      u2790 01DF                        u2870 0200                        u2950 02DC  
+                      u2695 0103                        u2791 01DE                        u2775 01C7  
+                      u2871 01FF                        u2951 02DB                        u2880 0222  
+                      u2785 01D3                        u2881 0221                        u2890 0226  
+                      u2891 0225                        _PIR1 000C                        _TMR1 000E  
+                      _WREN 04E2                        _main 02B8                        _init 028E  
+                      _wait 030E                        _time 0047                        btemp 005E  
+                      start 000F               write_spi@data 002B                       ??_ISR 0023  
+    __end_of_update_display 00AE                       ??_set 003E                       ?_main 0040  
+                     ?_init 0020             __end_of___awdiv 0123                       _EEADR 009B  
+           __end_of___awmod 01F3                       ?_wait 0020                       _CARRY 0018  
+           ___awdiv@divisor 0028                       _GPIO0 0028                       _GPIO1 0029  
+                     _GPIO2 002A                       _GPIO3 002B                       _GPIO4 002C  
+                     i1l420 0328                       i1l421 0323                       i1l422 032F  
+                     i1l423 032F                       i1l390 0150                       i1l391 014F  
+                     i1l392 017E                       i1l393 015A                       i1l394 016B  
+                     i1l395 017D                       i1l396 0180                       i1l388 0151  
+                     i1l389 0151             ___awdiv@counter 002D                       _nGPPU 040F  
+                     main@i 0046                       pclath 000A                       wait@c 0029  
+                     status 0003                       wtemp0 005E                __end_of_main 02E1  
+              __end_of_init 02B8                __end_of_wait 031F             ?_update_display 0020  
+                    ??_main 0044                      ??_init 003F                      ??_wait 0028  
+                    _EEDATA 009A                      _EECON1 009C                      _EECON2 009D  
+          ___awdiv@dividend 002A                      i1l2361 0123                      i1l2371 0142  
+                    i1l2363 0128                      i1l2381 015E                      i1l2373 0143  
+                    i1l2365 012D                      i1l2391 0174                      i1l2383 0162  
+                    i1l2375 014D                      i1l2367 0137                      i1l2473 0321  
+                    i1l2393 017A                      i1l2385 0168                      i1l2377 0155  
+                    i1l2369 0138                      i1l2475 0323                      i1l2387 016B  
+                    i1l2379 015A                      i1l2395 017E                      i1l2477 0328  
+                    i1l2397 017F                      i1l2389 0170                      u251_20 0128  
+                    u251_21 0127                      u260_20 0170                      u252_20 012D  
+                    u260_21 016F                      u252_21 012C                      u261_20 0174  
+                    u253_20 0137                      u261_21 0173                      u253_21 0136  
+                    u254_20 0142                      u254_21 0141                      u255_20 014D  
+                    u255_21 014C                      u256_20 0155                      u256_21 0154  
+                    u281_20 032E                      u257_20 015A                      u281_21 032D  
+                    u257_21 0159                      u258_20 015E                      u258_21 015D  
+                    u259_20 0162                      u259_21 0161                      _TMR1GE 0086  
+                    _TMR1IE 0460                      _TMR1IF 0060                      _TMR1CS 0081  
+                    _TMR1ON 0080                      i1_wait 031F                   ??___awdiv 002C  
+                 ??___awmod 002C                      _config 02E1            ___awdiv@quotient 002F  
+           ___awmod@divisor 0028             ___awmod@counter 002D                      saved_w 005E  
+   __size_of_set_brightness 0010              __pcstackCOMMON 0000           set_brightness@bri 003E  
+                __pbssBANK0 0047                     ?i1_wait 0020                  __pmaintext 02B8  
+                __pintentry 0004                     ?_config 0020                     _T1CKPS0 0084  
+                   _T1CKPS1 0085                     _T1OSCEN 0083                  _brightness 004A  
+                   _TRISIO0 0428                     _TRISIO1 0429                     _TRISIO2 042A  
+                   _TRISIO3 042B                     _TRISIO4 042C                     _TRISIO5 042D  
+                   i1wait@c 0021             __size_ofi1_wait 0011            ??_update_display 003B  
+        __size_of_write_spi 0035                     _nT1SYNC 0082                     ___awdiv 00AE  
+                   ___awmod 018C             __size_of_config 001A                __size_of_ISR 0069  
+              __size_of_set 0066            ___awmod@dividend 002A              _set_brightness 0330  
+      end_of_initialization 0344                     wait@tmp 002A           _write_spi_address 02FB  
+        ?_write_spi_address 0035         ??_write_spi_address 0038      __end_of_set_brightness 0340  
+         __end_of_write_spi 028E   __end_of_write_spi_address 030E              __end_ofi1_wait 0330  
+              write_spi@len 0033              __end_of_config 02FB                   i1wait@tmp 0022  
+           ?_set_brightness 0020         start_initialization 0340                 __end_of_ISR 018C  
+               __end_of_set 0259                    ??i1_wait 0020                    ??_config 0000  
+             __pcstackBANK0 0020  __size_of_write_spi_address 0013                  set@setting 003F  
+                  ?___awdiv 0028                   __ptext370 0014                   __ptext371 02FB  
+                  ?___awmod 0028                   __ptext372 0259                   __ptext373 018C  
+                 __ptext374 00AE                   __ptext366 0000                   __ptext375 030E  
+                 __ptext367 01F3                   __ptext376 02E1                   __ptext368 028E  
+                 __ptext377 0123                   __ptext369 0330                   __ptext378 031F  
+                 __ptext379 0000                   __pswtext1 0001                   __pswtext2 0346  
+         interrupt_function 0004                   main@loops 0045                   _write_spi 0259  
+          __size_of___awdiv 0075            __size_of___awmod 0067            ??_set_brightness 003B  
+   __size_of_update_display 009A                  ?_write_spi 002B               __size_of_main 0029  
+             __size_of_init 002A               __size_of_wait 0011                    main@argc 0040  
+                  main@argv 0042                  write_spi@i 0034                    intlevel1 0000  
+               ??_write_spi 002F  

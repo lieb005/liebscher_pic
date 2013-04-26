@@ -1,0 +1,843 @@
+MPASM  5.42  ../../PIC_WORKSPACE/FLASHLED/FLA   7-11-2012  9:46:06         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ;----------------------------------------------------------------------
+                      00002 ; NAME: Flash Led for   PIC 12F675
+                      00003 ; BY:   Adrian Bergthaller
+                      00004 ; WEB:  http://www.bertys.ro
+                      00005 ;----------------------------------------------------------------------
+                      00006 
+                      00007 ;****************************************************************************
+                      00008 ;* 12F675                                                                   *                           
+                                                            *
+                      00009 ;*                             -----uu-----                                 *
+                      00010 ;*                   +5 V ----| vdd    vss |---- Gnd                        *
+                      00011 ;*                   led1 <---| gp5    gp0 |---> led4                       *
+                      00012 ;*                   led2 <---| gp4    gp1 |---> led3                       *
+                      00013 ;*                 switch --->| gp3    gp2 |<--- NC                         *
+                      00014 ;*                             ------------                                 *
+                      00015 ;*                                                                          *
+                      00016 ;****************************************************************************
+                      00017 
+                      00018 ; config. GPIO xx543210 = xx00 1100
+                      00019 
+                      00020 ; vers 0.1      25.03.2006
+                      00021 
+                      00022         list      p=12f675            ; list directive to define processor
+                      00023         #include "p12f675.inc"        ; processor specific variable definitions
+                      00001         LIST
+                      00002 ; P12F675.INC  Standard Header File, Version 1.04    Microchip Technology, Inc.
+                      00284         LIST
+                      00024 
+                      00025 ;----------------------------------------------------------------------
+                      00026 ; Configurare
+                      00027 ; _MCLRE_ON was _MCLRE_OFF
+2007   3FE4           00028         __CONFIG _INTRC_OSC_NOCLKOUT & _WDT_OFF & _PWRTE_ON & _MCLRE_ON & _CP_OFF & _CPD_OFF
+                      00029         ERRORLEVEL -302
+                      00030 ;----------------------------------------------------------------------
+                      00031 
+                      00032 ;----------------------------------------------------------------------
+                      00033 ; Constant define
+                      00034 ;----------------------------------------------------------------------
+                      00035 #define Led4            GPIO,0          ; (o) led yellow / gelb / galben
+                      00036 #define Led3            GPIO,1          ; (o) led red / rot / rosu
+                      00037 
+                      00038 #define rezerva         GPIO,2          ; (i) not connected
+                      00039 
+                      00040 #define swNext          GPIO,3          ; (i) intrare switch next ( not implemented )
+                      00041 #define Led2            GPIO,4          ; (o) led red / rot / rosu
+                      00042 #define Led1            GPIO,5          ; (o) led yellow / gelb / galben
+                      00043 
+                      00044 ;----------------------------------------------------------------------
+                      00045 ; RAM VARIABLES DEFINITIONS
+                      00046 ;----------------------------------------------------------------------
+                      00047 ; Bank0 = 20h-5Fh
+                      00048 
+                      00049         CBLOCK  0x020
+MPASM  5.42  ../../PIC_WORKSPACE/FLASHLED/FLA   7-11-2012  9:46:06         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00050 ; -------------------
+                      00051 ; delays 
+  00000020            00052         delayCnt:  1    ; contor delay 100uS
+  00000021            00053         delayCnt1: 1    ; contor delay 10mS
+  00000022            00054         delayCnt2: 1    ; contor delay 1S
+                      00055 ; -------------------
+                      00056 ; alte variabile ..
+  00000023            00057         cntFlash: 1             ; contor flash
+                      00058 
+                      00059         ENDC
+                      00060 
+                      00061 ;----------------------------------------------------------------------
+                      00062 ; MACRO DEFINITIONS
+                      00063 ;----------------------------------------------------------------------
+                      00064 ; Selects register bank 0
+                      00065 BANK0 MACRO
+                      00066         BCF     STATUS,RP0      ; clear bank select bits
+                      00067         ENDM
+                      00068 ;----------------------------------------------------------------------
+                      00069 ; Selects register bank 1
+                      00070 BANK1 MACRO
+                      00071         BSF     STATUS,RP0      ; 
+                      00072         ENDM
+                      00073 
+                      00074 ;----------------------------------------------------------------------
+                      00075 ; disable global irq 
+                      00076 DISABLE_IRQ MACRO
+                      00077         LOCAL STOP_INT
+                      00078 STOP_INT
+                      00079         BCF     INTCON,GIE      ; Disable global interrupt
+                      00080         BTFSC INTCON,GIE        ; check if disabled 
+                      00081         GOTO STOP_INT           ; nope, try again
+                      00082         ENDM
+                      00083 ;----------------------------------------------------------------------
+                      00084 ; enable global irq 
+                      00085 ENABLE_IRQ MACRO
+                      00086         LOCAL   START_INT
+                      00087 START_INT       
+                      00088         BSF     INTCON,GIE      ; Enable global interrupt
+                      00089         BTFSS INTCON,GIE        ; check if disabled 
+                      00090         GOTO START_INT          ; nope, try again
+                      00091         ENDM
+                      00092 
+                      00093 ;----------------------------------------------------------------------
+                      00094 ; macro definitions / comands / comenzi ..
+                      00095 
+                      00096 Led1_ON MACRO
+                      00097         bsf Led1
+                      00098         nop
+                      00099         ENDM
+                      00100 
+                      00101 Led1_OFF MACRO
+                      00102         bcf Led1
+MPASM  5.42  ../../PIC_WORKSPACE/FLASHLED/FLA   7-11-2012  9:46:06         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00103         nop
+                      00104         ENDM
+                      00105 
+                      00106 
+                      00107 Led2_ON MACRO
+                      00108         bsf Led2
+                      00109         nop
+                      00110         ENDM
+                      00111 
+                      00112 Led2_OFF MACRO
+                      00113         bcf Led2
+                      00114         nop
+                      00115         ENDM
+                      00116 
+                      00117 
+                      00118 Led3_ON MACRO
+                      00119         bsf Led3
+                      00120         nop
+                      00121         ENDM
+                      00122 
+                      00123 Led3_OFF MACRO
+                      00124         bcf Led3
+                      00125         nop
+                      00126         ENDM
+                      00127 
+                      00128 Led4_ON MACRO
+                      00129         bsf Led4
+                      00130         nop
+                      00131         ENDM
+                      00132 
+                      00133 Led4_OFF MACRO
+                      00134         bcf Led4
+                      00135         nop
+                      00136         ENDM
+                      00137 ;----------------------------------------------------------------------
+                      00138 ; END macro definitions
+                      00139 ;----------------------------------------------------------------------
+                      00140 
+                      00141 
+                      00142 ;********************************************************************** 
+                      00143 ;  PROGRAMUL
+                      00144 ;**********************************************************************
+                      00145         ORG     0x000                   ; processor reset vector
+0000   2???           00146         goto    MAIN                    ; go to beginning of program
+                      00147 
+                      00148 ;-----------------------------------------------------------------------------
+                      00149 ;       Interrupt service routine
+                      00150 ;-----------------------------------------------------------------------------
+                      00151         ORG     0x004                   ; interrupt vector location
+0004   0009           00152         RETFIE                          ; return from interrupt
+                      00153 
+                      00154 ;-----------------------------------------------------------------------------
+                      00155 ;        MAIN ROUTINE START HERE
+MPASM  5.42  ../../PIC_WORKSPACE/FLASHLED/FLA   7-11-2012  9:46:06         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00156 ;-----------------------------------------------------------------------------
+                      00157         ORG     0x010
+0010                  00158 MAIN:
+                      00159 ;-----------------------------------------------------------------------------
+                      00160 ; Init_Prog
+                      00161 ;  - Initialize program & setups
+                      00162 ;  - Initilaize all ports to known state before setup routines are called
+                      00163 ;-----------------------------------------------------------------------------
+0010                  00164 Init_Prog:
+                      00165 ; int osc calibration / Calibrarea oscilatorului intern de 4 Mhz
+                      00166         BANK1
+0010   1683               M         BSF     STATUS,RP0      ; 
+0011   23FF           00167         call    0x3FF           ; get the calibration value
+0012   0090           00168         movwf   OSCCAL
+                      00169         BANK0
+0013   1283               M         BCF     STATUS,RP0      ; clear bank select bits
+                      00170 ; disable irqs / dezactivare intreruperi
+                      00171         DISABLE_IRQ
+  0000                    M         LOCAL STOP_INT
+0014                      M STOP_INT
+0014   138B               M         BCF     INTCON,GIE      ; Disable global interrupt
+0015   1B8B               M         BTFSC INTCON,GIE        ; check if disabled 
+0016   2???               M         GOTO STOP_INT           ; nope, try again
+                      00172 ; ports init / initializare porturi
+0017   2???           00173         call Init_Ports
+                      00174 ; leds off / initializari leduri
+0018   2???           00175         call Init_Led
+                      00176 ; init.end / ok, la munca!
+                      00177 
+                      00178 ;-----------------------------------------------------------------------------
+                      00179 ; Program loop start here (forever_loop)
+                      00180 ;-----------------------------------------------------------------------------
+0019                  00181 Prog_Loop:
+                      00182         ; back to BANK0 / revin la Bank-ul 0
+                      00183         BANK0
+0019   1283               M         BCF     STATUS,RP0      ; clear bank select bits
+                      00184 
+001A   3005           00185         movlw 0x05
+001B   00A3           00186         movwf cntFlash
+                      00187 
+001C                  00188 flash1          ; flash mode 1
+                      00189         Led1_ON
+001C   1685               M         bsf Led1
+001D   0000               M         nop
+001E   2???           00190         call Delay_100mS
+                      00191         Led1_OFF
+001F   1285               M         bcf Led1
+0020   0000               M         nop
+0021   2???           00192         call Delay_100mS
+                      00193 
+                      00194         Led2_ON
+0022   1605               M         bsf Led2
+0023   0000               M         nop
+MPASM  5.42  ../../PIC_WORKSPACE/FLASHLED/FLA   7-11-2012  9:46:06         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0024   2???           00195         call Delay_100mS
+                      00196         Led2_OFF
+0025   1205               M         bcf Led2
+0026   0000               M         nop
+0027   2???           00197         call Delay_100mS
+                      00198 
+                      00199         Led3_ON
+0028   1485               M         bsf Led3
+0029   0000               M         nop
+002A   2???           00200         call Delay_100mS
+                      00201         Led3_OFF
+002B   1085               M         bcf Led3
+002C   0000               M         nop
+002D   2???           00202         call Delay_100mS
+                      00203 
+                      00204         Led4_ON
+002E   1405               M         bsf Led4
+002F   0000               M         nop
+0030   2???           00205         call Delay_100mS
+                      00206         Led4_OFF
+0031   1005               M         bcf Led4
+0032   0000               M         nop
+0033   2???           00207         call Delay_100mS
+                      00208 
+                      00209 
+                      00210         Led4_ON
+0034   1405               M         bsf Led4
+0035   0000               M         nop
+0036   2???           00211         call Delay_100mS
+                      00212         Led4_OFF
+0037   1005               M         bcf Led4
+0038   0000               M         nop
+0039   2???           00213         call Delay_100mS
+                      00214 
+                      00215 
+                      00216         Led3_ON
+003A   1485               M         bsf Led3
+003B   0000               M         nop
+003C   2???           00217         call Delay_100mS
+                      00218         Led3_OFF
+003D   1085               M         bcf Led3
+003E   0000               M         nop
+003F   2???           00219         call Delay_100mS
+                      00220 
+                      00221 
+                      00222         Led2_ON
+0040   1605               M         bsf Led2
+0041   0000               M         nop
+0042   2???           00223         call Delay_100mS
+                      00224         Led2_OFF
+0043   1205               M         bcf Led2
+0044   0000               M         nop
+0045   2???           00225         call Delay_100mS
+MPASM  5.42  ../../PIC_WORKSPACE/FLASHLED/FLA   7-11-2012  9:46:06         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00226 
+                      00227 
+                      00228         Led1_ON
+0046   1685               M         bsf Led1
+0047   0000               M         nop
+0048   2???           00229         call Delay_100mS
+                      00230         Led1_OFF
+0049   1285               M         bcf Led1
+004A   0000               M         nop
+004B   2???           00231         call Delay_100mS
+                      00232 
+004C   0BA3           00233         decfsz cntFlash, f
+004D   2???           00234         goto flash1
+                      00235 ; end 1
+                      00236 
+004E   2???           00237         call Init_Led
+004F   2???           00238         call Delay_100mS
+                      00239         
+0050   3010           00240         movlw 0x10
+0051   00A3           00241         movwf cntFlash
+0052                  00242 flash2          ; flash mode 2
+                      00243         Led1_ON
+0052   1685               M         bsf Led1
+0053   0000               M         nop
+                      00244         Led4_ON
+0054   1405               M         bsf Led4
+0055   0000               M         nop
+0056   2???           00245         call Delay_100mS
+                      00246 
+                      00247         Led1_OFF
+0057   1285               M         bcf Led1
+0058   0000               M         nop
+                      00248         Led4_OFF
+0059   1005               M         bcf Led4
+005A   0000               M         nop
+005B   2???           00249         call Delay_10mS
+                      00250         
+                      00251         Led1_ON
+005C   1685               M         bsf Led1
+005D   0000               M         nop
+                      00252         Led4_ON
+005E   1405               M         bsf Led4
+005F   0000               M         nop
+0060   2???           00253         call Delay_100mS
+                      00254 
+                      00255         Led1_OFF
+0061   1285               M         bcf Led1
+0062   0000               M         nop
+                      00256         Led4_OFF
+0063   1005               M         bcf Led4
+0064   0000               M         nop
+0065   2???           00257         call Delay_10mS
+0066   2???           00258         call Delay_10mS
+MPASM  5.42  ../../PIC_WORKSPACE/FLASHLED/FLA   7-11-2012  9:46:06         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00259 
+                      00260 
+                      00261         Led2_ON
+0067   1605               M         bsf Led2
+0068   0000               M         nop
+                      00262         Led3_ON
+0069   1485               M         bsf Led3
+006A   0000               M         nop
+006B   2???           00263         call Delay_100mS
+                      00264 
+                      00265         Led2_OFF
+006C   1205               M         bcf Led2
+006D   0000               M         nop
+                      00266         Led3_OFF
+006E   1085               M         bcf Led3
+006F   0000               M         nop
+0070   2???           00267         call Delay_10mS
+                      00268         
+                      00269         Led2_ON
+0071   1605               M         bsf Led2
+0072   0000               M         nop
+                      00270         Led3_ON
+0073   1485               M         bsf Led3
+0074   0000               M         nop
+0075   2???           00271         call Delay_100mS
+                      00272 
+                      00273         Led2_OFF
+0076   1205               M         bcf Led2
+0077   0000               M         nop
+                      00274         Led3_OFF
+0078   1085               M         bcf Led3
+0079   0000               M         nop
+007A   2???           00275         call Delay_10mS
+007B   2???           00276         call Delay_10mS
+                      00277 
+007C   0BA3           00278         decfsz cntFlash, f 
+007D   2???           00279         goto flash2
+                      00280 ; end 2
+                      00281 
+                      00282 
+007E   2???           00283         call Init_Led
+007F   2???           00284         call Delay_100mS
+                      00285         
+0080   3010           00286         movlw 0x10
+0081   00A3           00287         movwf cntFlash
+                      00288 
+0082                  00289 flash3  ; flash mode 3
+                      00290         Led1_ON
+0082   1685               M         bsf Led1
+0083   0000               M         nop
+                      00291         Led3_ON
+0084   1485               M         bsf Led3
+0085   0000               M         nop
+MPASM  5.42  ../../PIC_WORKSPACE/FLASHLED/FLA   7-11-2012  9:46:06         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0086   2???           00292         call Delay_100mS
+                      00293 
+                      00294         Led1_OFF
+0087   1285               M         bcf Led1
+0088   0000               M         nop
+                      00295         Led3_OFF
+0089   1085               M         bcf Led3
+008A   0000               M         nop
+008B   2???           00296         call Delay_10mS
+                      00297         
+                      00298         Led1_ON
+008C   1685               M         bsf Led1
+008D   0000               M         nop
+                      00299         Led3_ON
+008E   1485               M         bsf Led3
+008F   0000               M         nop
+0090   2???           00300         call Delay_100mS
+                      00301 
+                      00302         Led1_OFF
+0091   1285               M         bcf Led1
+0092   0000               M         nop
+                      00303         Led3_OFF
+0093   1085               M         bcf Led3
+0094   0000               M         nop
+0095   2???           00304         call Delay_10mS
+0096   2???           00305         call Delay_10mS
+                      00306 
+                      00307 
+                      00308         Led2_ON
+0097   1605               M         bsf Led2
+0098   0000               M         nop
+                      00309         Led4_ON
+0099   1405               M         bsf Led4
+009A   0000               M         nop
+009B   2???           00310         call Delay_100mS
+                      00311 
+                      00312         Led2_OFF
+009C   1205               M         bcf Led2
+009D   0000               M         nop
+                      00313         Led4_OFF
+009E   1005               M         bcf Led4
+009F   0000               M         nop
+00A0   2???           00314         call Delay_10mS
+                      00315         
+                      00316         Led2_ON
+00A1   1605               M         bsf Led2
+00A2   0000               M         nop
+                      00317         Led4_ON
+00A3   1405               M         bsf Led4
+00A4   0000               M         nop
+00A5   2???           00318         call Delay_100mS
+                      00319 
+                      00320         Led2_OFF
+MPASM  5.42  ../../PIC_WORKSPACE/FLASHLED/FLA   7-11-2012  9:46:06         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00A6   1205               M         bcf Led2
+00A7   0000               M         nop
+                      00321         Led4_OFF
+00A8   1005               M         bcf Led4
+00A9   0000               M         nop
+00AA   2???           00322         call Delay_10mS
+00AB   2???           00323         call Delay_10mS
+                      00324 
+00AC   0BA3           00325         decfsz cntFlash, f
+00AD   2???           00326         goto flash3
+                      00327 ; end 3
+                      00328 
+00AE   2???           00329         goto Prog_Loop
+                      00330 
+                      00331 ;-----------------------------------------------------------------------------
+                      00332 ; Library / PROCEDURI
+                      00333 ;-----------------------------------------------------------------------------
+                      00334 
+                      00335 ;-----------------------------------------------------------------------------
+                      00336 ; Delay 1S
+                      00337 ;-----------------------------------------------------------------------------
+00AF                  00338 Delay_1S:                                       ; Call = 2 cycles
+00AF   3064           00339         movlw   d'100'                          ; 1 cycles
+00B0   00A2           00340         movwf   delayCnt2                       ; 1 cycles
+00B1                  00341 Delay_1S_1:
+00B1   2???           00342         call    Delay_10mS                      ; 2 cycles
+00B2   0BA2           00343         decfsz  delayCnt2,f                     ; 
+00B3   2???           00344         goto    Delay_1S_1                      ; 1+2 cycles
+00B4   0008           00345         return
+                      00346 
+                      00347 ;-----------------------------------------------------------------------------
+                      00348 ; Delay 100 mS
+                      00349 ;-----------------------------------------------------------------------------
+00B5                  00350 Delay_100mS:                                    ; Call = 2 cycles
+00B5   300A           00351         movlw   d'10'                           ; 1 cycles
+00B6   00A2           00352         movwf   delayCnt2                       ; 1 cycles
+00B7                  00353 Delay_100mS_1:
+00B7   2???           00354         call    Delay_10mS                      ; 2 cycles
+00B8   0BA2           00355         decfsz  delayCnt2,f                     ; 
+00B9   2???           00356         goto    Delay_100mS_1                   ; 1+2 cycles
+00BA   0008           00357         return
+                      00358 
+                      00359 ;-----------------------------------------------------------------------------
+                      00360 ; Delay 10 mS
+                      00361 ;-----------------------------------------------------------------------------
+00BB                  00362 Delay_10mS:                                             ; Call = 2 cycles
+00BB   3064           00363         movlw   d'100'                          ; 1 cycles
+00BC   00A1           00364         movwf   delayCnt1                       ; 1 cycles
+00BD                  00365 Delay_10mS_1:
+00BD   2???           00366         call    Delay_100uS                     ; 2 cycles
+00BE   0BA1           00367         decfsz  delayCnt1,f                     ; 
+00BF   2???           00368         goto    Delay_10mS_1            ; 1+2 cycles
+00C0   0008           00369         return
+MPASM  5.42  ../../PIC_WORKSPACE/FLASHLED/FLA   7-11-2012  9:46:06         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00370 
+                      00371 ;-----------------------------------------------------------------------------
+                      00372 ; Delay 100 uS = (5+(3*Constant))*OSC/4
+                      00373 ;-----------------------------------------------------------------------------
+00C1                  00374 Delay_100uS:                                    ; Call = 2 cycles
+00C1   301F           00375         movlw   d'31'                           ; 1 cycle
+00C2   00A0           00376         movwf   delayCnt                        ; 1 cycle
+00C3   0BA0           00377         decfsz  delayCnt,f                      ; 
+00C4   2???           00378         goto    $-1                                     ; 1+2 cycles
+00C5   0008           00379     return                                              ; 2 cycles
+                      00380 
+                      00381 ;-----------------------------------------------------------------------------
+                      00382 ; Port init / Initialize Port
+                      00383 ;-----------------------------------------------------------------------------
+00C6                  00384 Init_Ports:
+                      00385         BANK0                           ; Bank 0
+00C6   1283               M         BCF     STATUS,RP0      ; clear bank select bits
+00C7   0185           00386         clrf    GPIO                    ; 1)Status of pins:  GPIO (GPIO=0 <ViL, =1 >ViH)
+00C8   3007           00387         movlw   b'00000111'             ; 2)Comparator configuration
+00C9   0099           00388         movwf   CMCON                   ; Set GP<2:0> digital IO (comparator Off)
+                      00389         BANK1                           ; Bank 1
+00CA   1683               M         BSF     STATUS,RP0      ; 
+00CB   1281           00390         bcf     OPTION_REG,5            ; 3)TMR0 clock source select:  Internal instruction cycle clock 
+                            (CLKOUT)
+00CC   1781           00391         bsf     OPTION_REG,7            ; 4)GPIO pull-ups: is disabled
+00CD   0195           00392         clrf    WPU                     ; 5)Clear weak pull-up register
+00CE   0196           00393         clrf    IOC                     ; 6)Clear Interrupt-on-change register
+                      00394 
+                      00395 ;-----------------------------------------------------------------------------
+                      00396 ; Port setup GP0-GP5
+                      00397 ;-----------------------------------------------------------------------------
+                      00398 ;GP0 (Led Y)            act as output
+                      00399 ;GP1 (Led R)            act as output (eventual rezerva)
+                      00400 ;GP2 (NC)                       act as input - rezerva
+                      00401 ;GP3 (switch)           can be input only
+                      00402 ;GP4 (Led R)            act as output
+                      00403 ;GP5 (Led Y)            act as output
+                      00404 ;-----------------------------------------------------------------------------
+                      00405 
+00CF   300C           00406         movlw   b'00001100'             ; 7) data direction TRISO 0: output, 1: input (Hi-Z mode)
+00D0   0085           00407         movwf   TRISIO          ; {0,0,GPIO<5:0>} 0-Output 1-Input
+                      00408 ; * 12F675 Only *                       ; initializaz registrul de selectare a intrarilor analogice
+00D1   019F           00409         clrf ANSEL                              ; 8)* xxxx ANS<3..0> =0 digital I/O, =1 analog input    
+                      00410         ;
+                      00411         BANK0
+00D2   1283               M         BCF     STATUS,RP0      ; clear bank select bits
+00D3   0008           00412         return
+                      00413 ;-----------------------------------------------------------------------------
+                      00414 
+                      00415 ;-----------------------------------------------------------------------------
+                      00416 ; Initialize Leduri
+                      00417 ;-----------------------------------------------------------------------------
+00D4                  00418 Init_Led:
+MPASM  5.42  ../../PIC_WORKSPACE/FLASHLED/FLA   7-11-2012  9:46:06         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00419         Led1_OFF
+00D4   1285               M         bcf Led1
+00D5   0000               M         nop
+                      00420         Led2_OFF
+00D6   1205               M         bcf Led2
+00D7   0000               M         nop
+                      00421         Led3_OFF
+00D8   1085               M         bcf Led3
+00D9   0000               M         nop
+                      00422         Led4_OFF
+00DA   1005               M         bcf Led4
+00DB   0000               M         nop
+00DC   0008           00423         return
+                      00424 ;-----------------------------------------------------------------------------
+                      00425 ; calibrarea oscilator intern
+                      00426 ;-----------------------------------------------------------------------------
+                      00427         org 3FFh
+                      00428 ; [34]9Ch for  pic 12F675
+03FF   349C           00429         retlw 0x9C      ;
+                      00430 ;-----------------------------------------------------------------------------
+3FE4                  00431         END                    ; directive 'end of program'
+MPASM  5.42  ../../PIC_WORKSPACE/FLASHLED/FLA   7-11-2012  9:46:06         PAGE 12
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ADCON0                            0000001F
+ADCS0                             00000004
+ADCS1                             00000005
+ADCS2                             00000006
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+ANS0                              00000000
+ANS1                              00000001
+ANS2                              00000002
+ANS3                              00000003
+ANSEL                             0000009F
+BANK0                             
+BANK1                             
+C                                 00000000
+CAL0                              00000002
+CAL1                              00000003
+CAL2                              00000004
+CAL3                              00000005
+CAL4                              00000006
+CAL5                              00000007
+CHS0                              00000002
+CHS1                              00000003
+CINV                              00000004
+CIS                               00000003
+CM0                               00000000
+CM1                               00000001
+CM2                               00000002
+CMCON                             00000019
+CMIE                              00000003
+CMIF                              00000003
+COUT                              00000006
+DC                                00000001
+DISABLE_IRQ                       
+Delay_100mS                       000000B5
+Delay_100mS_1                     000000B7
+Delay_100uS                       000000C1
+Delay_10mS                        000000BB
+Delay_10mS_1                      000000BD
+Delay_1S                          000000AF
+Delay_1S_1                        000000B1
+EEADR                             0000009B
+EECON1                            0000009C
+EECON2                            0000009D
+EEDAT                             0000009A
+EEDATA                            0000009A
+EEIE                              00000007
+EEIF                              00000007
+ENABLE_IRQ                        
+F                                 00000001
+MPASM  5.42  ../../PIC_WORKSPACE/FLASHLED/FLA   7-11-2012  9:46:06         PAGE 13
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+FSR                               00000004
+GIE                               00000007
+GO                                00000001
+GO_DONE                           00000001
+GP0                               00000000
+GP1                               00000001
+GP2                               00000002
+GP3                               00000003
+GP4                               00000004
+GP5                               00000005
+GPIE                              00000003
+GPIF                              00000000
+GPIO                              00000005
+GPIO0                             00000000
+GPIO1                             00000001
+GPIO2                             00000002
+GPIO3                             00000003
+GPIO4                             00000004
+GPIO5                             00000005
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IOC                               00000096
+IOC0                              00000000
+IOC1                              00000001
+IOC2                              00000002
+IOC3                              00000003
+IOC4                              00000004
+IOC5                              00000005
+IOCB                              00000096
+IOCB0                             00000000
+IOCB1                             00000001
+IOCB2                             00000002
+IOCB3                             00000003
+IOCB4                             00000004
+IOCB5                             00000005
+IRP                               00000007
+Init_Led                          000000D4
+Init_Ports                        000000C6
+Init_Prog                         00000010
+Led1                              GPIO,5
+Led1_OFF                          
+Led1_ON                           
+Led2                              GPIO,4
+Led2_OFF                          
+Led2_ON                           
+Led3                              GPIO,1
+Led3_OFF                          
+Led3_ON                           
+Led4                              GPIO,0
+Led4_OFF                          
+MPASM  5.42  ../../PIC_WORKSPACE/FLASHLED/FLA   7-11-2012  9:46:06         PAGE 14
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+Led4_ON                           
+MAIN                              00000010
+NOT_BOD                           00000000
+NOT_DONE                          00000001
+NOT_GPPU                          00000007
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+OPTION_REG                        00000081
+OSCCAL                            00000090
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PEIE                              00000006
+PIE1                              0000008C
+PIR1                              0000000C
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+Prog_Loop                         00000019
+RD                                00000000
+RP0                               00000005
+RP1                               00000006
+STATUS                            00000003
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1IE                              00000000
+T1IF                              00000000
+T1OSCEN                           00000003
+TMR0                              00000001
+TMR1CS                            00000001
+TMR1GE                            00000006
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TRISIO                            00000085
+VCFG                              00000006
+VR0                               00000000
+VR1                               00000001
+VR2                               00000002
+VR3                               00000003
+VRCON                             00000099
+VREN                              00000007
+VRR                               00000005
+MPASM  5.42  ../../PIC_WORKSPACE/FLASHLED/FLA   7-11-2012  9:46:06         PAGE 15
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+W                                 00000000
+WPU                               00000095
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_.org_2_00C4                      000000C4
+_BODEN_OFF                        00003FBF
+_BODEN_ON                         00003FFF
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003EFF
+_CP_OFF                           00003FFF
+_CP_ON                            00003F7F
+_EC_OSC                           00003FFB
+_EXTRC_OSC_CLKOUT                 00003FFF
+_EXTRC_OSC_NOCLKOUT               00003FFE
+_HS_OSC                           00003FFA
+_INTRC_OSC_CLKOUT                 00003FFD
+_INTRC_OSC_NOCLKOUT               00003FFC
+_LP_OSC                           00003FF8
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FEF
+_WDT_OFF                          00003FF7
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FF9
+__12F675                          00000001
+cntFlash                          00000023
+delayCnt                          00000020
+delayCnt1                         00000021
+delayCnt2                         00000022
+flash1                            0000001C
+flash2                            00000052
+flash3                            00000082
+rezerva                           GPIO,2
+swNext                            GPIO,3
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :     0 reported,     7 suppressed
+
+

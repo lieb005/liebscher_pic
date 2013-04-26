@@ -1,0 +1,710 @@
+[p LITE_MODE AUTOSTATIC LFSROK EMI_WORD ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 18F2550 ]
+"231 lc_meter.c
+[v F4883 `(v  1 t 0 ]
+"30 /opt/microchip/xc8/v1.12/sources/floor.c
+[s S541 flt 3 `[1]uc 1 mant 1 0 `uc 1 hmant 1 1 :7:0 
+`uc 1 lexp 1 1 :1:7 
+`uc 1 hexp 1 2 :7:0 
+`uc 1 sign 1 2 :1:7 
+]
+[u S547 both 3 `S541 1 flt 3 0 `d 1 fl 3 0 ]
+"5 /opt/microchip/xc8/v1.12/sources/abdiv.c
+[v ___abdiv `(c  1 e 1 0 ]
+"5 ../common/asfladd.c
+[v ___asfladd `(d  1 e 3 0 ]
+"5 ../common/asfldiv.c
+[v ___asfldiv `(d  1 e 3 0 ]
+"5 ../common/asflmul.c
+[v ___asflmul `(d  1 e 3 0 ]
+"5 ../common/asflsub.c
+[v ___asflsub `(d  1 e 3 0 ]
+"5 ../common/asftadd.c
+[v ___asftadd `(f  1 e 3 0 ]
+"5 ../common/asftdiv.c
+[v ___asftdiv `(f  1 e 3 0 ]
+"5 ../common/asftmul.c
+[v ___asftmul `(f  1 e 3 0 ]
+"5 ../common/asftsub.c
+[v ___asftsub `(f  1 e 3 0 ]
+"5 ../common/aslmul.c
+[v ___aslmul `(ul  1 e 4 0 ]
+"5 /opt/microchip/xc8/v1.12/sources/abmod.c
+[v ___abmod `(c  1 e 1 0 ]
+"5 /opt/microchip/xc8/v1.12/sources/abs.c
+[v _abs `(i  1 e 2 0 ]
+"32 /opt/microchip/xc8/v1.12/sources/abtofl.c
+[v ___abtofl `(d  1 e 3 0 ]
+"34 /opt/microchip/xc8/v1.12/sources/abtoft.c
+[v ___abtoft `(f  1 e 3 0 ]
+"10 /opt/microchip/xc8/v1.12/sources/aldiv.c
+[v ___aldiv `(l  1 e 4 0 ]
+"10 /opt/microchip/xc8/v1.12/sources/almod.c
+[v ___almod `(l  1 e 4 0 ]
+"37 /opt/microchip/xc8/v1.12/sources/altofl.c
+[v ___altofl `(d  1 e 3 0 ]
+"43 /opt/microchip/xc8/v1.12/sources/altoft.c
+[v ___altoft `(f  1 e 3 0 ]
+"10 /opt/microchip/xc8/v1.12/sources/atdiv.c
+[v ___atdiv `(m  1 e 3 0 ]
+"10 /opt/microchip/xc8/v1.12/sources/atmod.c
+[v ___atmod `(m  1 e 3 0 ]
+"38 /opt/microchip/xc8/v1.12/sources/attofl.c
+[v ___attofl `(d  1 e 3 0 ]
+"38 /opt/microchip/xc8/v1.12/sources/attoft.c
+[v ___attoft `(f  1 e 3 0 ]
+"10 /opt/microchip/xc8/v1.12/sources/awdiv.c
+[v ___awdiv `(i  1 e 2 0 ]
+"10 /opt/microchip/xc8/v1.12/sources/awmod.c
+[v ___awmod `(i  1 e 2 0 ]
+"32 /opt/microchip/xc8/v1.12/sources/awtofl.c
+[v ___awtofl `(d  1 e 3 0 ]
+"33 /opt/microchip/xc8/v1.12/sources/awtoft.c
+[v ___awtoft `(f  1 e 3 0 ]
+"3 /opt/microchip/xc8/v1.12/sources/bmul.c
+[v ___bmul `(uc  1 e 1 0 ]
+"64 /opt/microchip/xc8/v1.12/sources/double.c
+[v ___flpack `(d  1 e 3 0 ]
+"5 /opt/microchip/xc8/v1.12/sources/evalpoly.c
+[v _eval_poly `(d  1 e 3 0 ]
+"13 /opt/microchip/xc8/v1.12/sources/exp.c
+[v _exp `(d  1 e 3 0 ]
+"5 /opt/microchip/xc8/v1.12/sources/fabs.c
+[v _fabs `(d  1 e 3 0 ]
+"89 /opt/microchip/xc8/v1.12/sources/fladd.c
+[v ___fladd `(d  1 e 3 0 ]
+"50 /opt/microchip/xc8/v1.12/sources/fldiv.c
+[v ___fldiv `(d  1 e 3 0 ]
+"5 /opt/microchip/xc8/v1.12/sources/flge.c
+[v ___flge `(b  1 e 0 0 ]
+"51 /opt/microchip/xc8/v1.12/sources/flmul.c
+[v ___flmul `(d  1 e 3 0 ]
+"16 /opt/microchip/xc8/v1.12/sources/flneg.c
+[v ___flneg `(d  1 e 3 0 ]
+"63 /opt/microchip/xc8/v1.12/sources/float.c
+[v ___ftpack `(f  1 e 3 0 ]
+[v i2___ftpack `(f  1 e 3 0 ]
+[v i2___ftpack `(f  1 e 3 0 ]
+"14 /opt/microchip/xc8/v1.12/sources/floor.c
+[v _floor `(d  1 e 3 0 ]
+"22 /opt/microchip/xc8/v1.12/sources/flsub.c
+[v ___flsub `(d  1 e 3 0 ]
+"44 /opt/microchip/xc8/v1.12/sources/fltol.c
+[v ___fltol `(l  1 e 4 0 ]
+"255 /opt/microchip/xc8/v1.12/sources/frexp.c
+[v _frexp `(d  1 e 3 0 ]
+"278
+[v _ldexp `(d  1 e 3 0 ]
+"87 /opt/microchip/xc8/v1.12/sources/ftadd.c
+[v ___ftadd `(f  1 e 3 0 ]
+"50 /opt/microchip/xc8/v1.12/sources/ftdiv.c
+[v ___ftdiv `(f  1 e 3 0 ]
+[v i2___ftdiv `(f  1 e 3 0 ]
+[v i2___ftdiv `(f  1 e 3 0 ]
+"5 /opt/microchip/xc8/v1.12/sources/ftge.c
+[v ___ftge `(b  1 e 0 0 ]
+"52 /opt/microchip/xc8/v1.12/sources/ftmul.c
+[v ___ftmul `(f  1 e 3 0 ]
+"16 /opt/microchip/xc8/v1.12/sources/ftneg.c
+[v ___ftneg `(f  1 e 3 0 ]
+"22 /opt/microchip/xc8/v1.12/sources/ftsub.c
+[v ___ftsub `(f  1 e 3 0 ]
+"45 /opt/microchip/xc8/v1.12/sources/fttol.c
+[v ___fttol `(l  1 e 4 0 ]
+"5 /opt/microchip/xc8/v1.12/sources/lbdiv.c
+[v ___lbdiv `(uc  1 e 1 0 ]
+"5 /opt/microchip/xc8/v1.12/sources/lbmod.c
+[v ___lbmod `(uc  1 e 1 0 ]
+"28 /opt/microchip/xc8/v1.12/sources/lbtofl.c
+[v ___lbtofl `(d  1 e 3 0 ]
+"28 /opt/microchip/xc8/v1.12/sources/lbtoft.c
+[v ___lbtoft `(f  1 e 3 0 ]
+"10 /opt/microchip/xc8/v1.12/sources/lldiv.c
+[v ___lldiv `(ul  1 e 4 0 ]
+"10 /opt/microchip/xc8/v1.12/sources/llmod.c
+[v ___llmod `(ul  1 e 4 0 ]
+"31 /opt/microchip/xc8/v1.12/sources/lltofl.c
+[v ___lltofl `(d  1 e 3 0 ]
+"36 /opt/microchip/xc8/v1.12/sources/lltoft.c
+[v ___lltoft `(f  1 e 3 0 ]
+[v i2___lltoft `(f  1 e 3 0 ]
+[v i2___lltoft `(f  1 e 3 0 ]
+"3 /opt/microchip/xc8/v1.12/sources/lmul.c
+[v ___lmul `(ul  1 e 4 0 ]
+"6 /opt/microchip/xc8/v1.12/sources/log.c
+[v _log `(d  1 e 3 0 ]
+"40
+[v _log10 `(d  1 e 3 0 ]
+"10 /opt/microchip/xc8/v1.12/sources/ltdiv.c
+[v ___ltdiv `(um  1 e 3 0 ]
+"10 /opt/microchip/xc8/v1.12/sources/ltmod.c
+[v ___ltmod `(um  1 e 3 0 ]
+"31 /opt/microchip/xc8/v1.12/sources/lttofl.c
+[v ___lttofl `(d  1 e 3 0 ]
+"31 /opt/microchip/xc8/v1.12/sources/lttoft.c
+[v ___lttoft `(f  1 e 3 0 ]
+"10 /opt/microchip/xc8/v1.12/sources/lwdiv.c
+[v ___lwdiv `(ui  1 e 2 0 ]
+"10 /opt/microchip/xc8/v1.12/sources/lwmod.c
+[v ___lwmod `(ui  1 e 2 0 ]
+"29 /opt/microchip/xc8/v1.12/sources/lwtofl.c
+[v ___lwtofl `(d  1 e 3 0 ]
+"29 /opt/microchip/xc8/v1.12/sources/lwtoft.c
+[v ___lwtoft `(f  1 e 3 0 ]
+"6 /opt/microchip/xc8/v1.12/sources/pow.c
+[v _pow `(d  1 e 3 0 ]
+"3 /opt/microchip/xc8/v1.12/sources/tmul.c
+[v ___tmul `(um  1 e 3 0 ]
+"3 /opt/microchip/xc8/v1.12/sources/wmul.c
+[v ___wmul `(ui  1 e 2 0 ]
+"78 lc_meter.c
+[v _config `(v  1 e 0 0 ]
+"147
+[v _main `(i  1 e 2 0 ]
+"171
+[v _measure `(d  1 e 3 0 ]
+"203
+[v _calibrate `(v  1 e 0 0 ]
+"231
+[v _ISR `II(v  1 e 0 0 ]
+"22 LED_disp.c
+[v _pause `(v  1 e 0 0 ]
+"29
+[v _init_disp `(v  1 e 0 0 ]
+"60
+[v _test_display `(v  1 e 0 0 ]
+"65
+[v _set_brightness `(v  1 e 0 0 ]
+"70
+[v _write_disp_long `(v  1 e 0 0 ]
+"93
+[v _write_disp_double `(v  1 e 0 0 ]
+"137
+[v _write_disp `(v  1 e 0 0 ]
+"190
+[v _out_bit `(v  1 e 0 0 ]
+"206
+[v _write `(v  1 e 0 0 ]
+"5146 /opt/microchip/xc8/v1.12/include/pic18f2550.h
+[v _TMR3 `VEus  1 e 2 @4018 ]
+"6778
+[v _TMR1 `VEus  1 e 2 @4046 ]
+"7391
+[v _TMR0 `VEus  1 e 2 @4054 ]
+"8682
+[v _GIE `VEb  1 e 0 @32663 ]
+"8738
+[v _INT0IE `VEb  1 e 0 @32660 ]
+"8740
+[v _INT0IF `VEb  1 e 0 @32657 ]
+"8748
+[v _INT1IE `VEb  1 e 0 @32643 ]
+"8750
+[v _INT1IF `VEb  1 e 0 @32640 ]
+"8762
+[v _INT2IE `VEb  1 e 0 @32644 ]
+"8764
+[v _INT2IF `VEb  1 e 0 @32641 ]
+"8770
+[v _INTEDG0 `VEb  1 e 0 @32654 ]
+"8772
+[v _INTEDG1 `VEb  1 e 0 @32653 ]
+"8774
+[v _INTEDG2 `VEb  1 e 0 @32652 ]
+"8792
+[v _LA0 `VEb  1 e 0 @31816 ]
+"8796
+[v _LA2 `VEb  1 e 0 @31818 ]
+"8798
+[v _LA3 `VEb  1 e 0 @31819 ]
+"8802
+[v _LA5 `VEb  1 e 0 @31821 ]
+"8856
+[v _LB3 `VEb  1 e 0 @31827 ]
+"8986
+[v _PEIE `VEb  1 e 0 @32662 ]
+"9230
+[v _T08BIT `VEb  1 e 0 @32430 ]
+"9234
+[v _T0CS `VEb  1 e 0 @32429 ]
+"9256
+[v _T1OSCEN `VEb  1 e 0 @32363 ]
+"9262
+[v _T1RD16 `VEb  1 e 0 @32367 ]
+"9266
+[v _T1SYNC `VEb  1 e 0 @32362 ]
+"9280
+[v _T3CCP1 `VEb  1 e 0 @32139 ]
+"9282
+[v _T3CCP2 `VEb  1 e 0 @32142 ]
+"9288
+[v _T3NSYNC `VEb  1 e 0 @32138 ]
+"9290
+[v _T3RD16 `VEb  1 e 0 @32143 ]
+"9294
+[v _TMR0IE `VEb  1 e 0 @32661 ]
+"9296
+[v _TMR0IF `VEb  1 e 0 @32658 ]
+"9300
+[v _TMR0ON `VEb  1 e 0 @32431 ]
+"9302
+[v _TMR1CS `VEb  1 e 0 @32361 ]
+"9304
+[v _TMR1IE `VEb  1 e 0 @31976 ]
+"9306
+[v _TMR1IF `VEb  1 e 0 @31984 ]
+"9310
+[v _TMR1ON `VEb  1 e 0 @32360 ]
+"9320
+[v _TMR3CS `VEb  1 e 0 @32137 ]
+"9322
+[v _TMR3IE `VEb  1 e 0 @32001 ]
+"9324
+[v _TMR3IF `VEb  1 e 0 @32009 ]
+"9328
+[v _TMR3ON `VEb  1 e 0 @32136 ]
+"9340
+[v _TRISA0 `VEb  1 e 0 @31888 ]
+"9342
+[v _TRISA1 `VEb  1 e 0 @31889 ]
+"9344
+[v _TRISA2 `VEb  1 e 0 @31890 ]
+"9346
+[v _TRISA3 `VEb  1 e 0 @31891 ]
+"9348
+[v _TRISA4 `VEb  1 e 0 @31892 ]
+"9350
+[v _TRISA5 `VEb  1 e 0 @31893 ]
+"9354
+[v _TRISB0 `VEb  1 e 0 @31896 ]
+"9356
+[v _TRISB1 `VEb  1 e 0 @31897 ]
+"9358
+[v _TRISB2 `VEb  1 e 0 @31898 ]
+"9360
+[v _TRISB3 `VEb  1 e 0 @31899 ]
+"9504
+[v _nRBPU `VEb  1 e 0 @32655 ]
+"3 /opt/microchip/xc8/v1.12/sources/errno.c
+[v _errno `i  1 e 2 0 ]
+"66 lc_meter.c
+[v _running `uc  1 e 1 0 ]
+"67
+[v _sampling `uc  1 e 1 0 ]
+"69
+[v _idle_overflow `ui  1 e 2 0 ]
+"70
+[v _cal_overflow `ui  1 e 2 0 ]
+"71
+[v _tick_overflow `ui  1 e 2 0 ]
+"73
+[v _freq1 `d  1 e 3 0 ]
+"74
+[v _freq2 `d  1 e 3 0 ]
+"75
+[v _Ccal `d  1 e 3 0 ]
+"19 LED_disp.c
+[v _d `uc  1 e 1 0 ]
+"80 LED_disp.h
+[v _num_to_char `C[10]uc  1 e 10 0 ]
+"86
+[v _lcd_font `C[43]uc  1 e 43 0 ]
+"147 lc_meter.c
+[v _main `(i  1 e 2 0 ]
+{
+[v main@argc `i  1 p 2 32 ]
+[v main@argv `*.M*.Muc  1 p 3 34 ]
+"168
+} 0
+"78
+[v _config `(v  1 e 0 0 ]
+{
+"141
+} 0
+"29 LED_disp.c
+[v _init_disp `(v  1 e 0 0 ]
+{
+[v init_disp@digits `s  1 p 2 13 ]
+"57
+} 0
+"65
+[v _set_brightness `(v  1 e 0 0 ]
+{
+[v set_brightness@bright `uc  1 p 1 11 ]
+"67
+} 0
+"70
+[v _write_disp_long `(v  1 e 0 0 ]
+{
+"85
+[v write_disp_long@tmp `uc  1 a 1 29 ]
+"73
+[v write_disp_long@buffer `[10]uc  1 a 10 13 ]
+"82
+[v write_disp_long@index `c  1 a 1 31 ]
+"74
+[v write_disp_long@sig `uc  1 a 1 30 ]
+"70
+[v write_disp_long@num `l  1 p 4 155 ]
+"90
+} 0
+"93
+[v _write_disp_double `(v  1 e 0 0 ]
+{
+"95
+[v write_disp_double@buffer `[10]uc  1 a 10 2 ]
+"108
+[v write_disp_double@whole `ui  1 a 2 0 ]
+"109
+[v write_disp_double@index `c  1 a 1 21 ]
+"105
+[v write_disp_double@whole_size `uc  1 a 1 20 ]
+"96
+[v write_disp_double@sig `uc  1 a 1 19 ]
+"106
+[v write_disp_double@mantissa_size `c  1 a 1 18 ]
+"93
+[v write_disp_double@num `d  1 p 3 139 ]
+"131
+} 0
+"137
+[v _write_disp `(v  1 e 0 0 ]
+{
+"173
+[v write_disp@seg `ui  1 a 2 37 ]
+"141
+[v write_disp@buf `[8]uc  1 a 8 29 ]
+"142
+[v write_disp@i `c  1 a 1 41 ]
+"145
+[v write_disp@offset `c  1 a 1 40 ]
+"169
+[v write_disp@j `c  1 a 1 39 ]
+"137
+[v write_disp@chars `*.suc  1 p 2 11 ]
+"139
+[v write_disp@F4996 `[8]uc  1 s 8 F4996 ]
+"185
+} 0
+"60
+[v _test_display `(v  1 e 0 0 ]
+{
+[v test_display@test `uc  1 p 1 11 ]
+"62
+} 0
+"206
+[v _write `(v  1 e 0 0 ]
+{
+"210
+[v write@out `ui  1 a 2 8 ]
+"209
+[v write@i `c  1 a 1 10 ]
+"206
+[v write@address `uc  1 p 1 3 ]
+[v write@data `uc  1 p 1 4 ]
+"218
+} 0
+"5 /opt/microchip/xc8/v1.12/sources/abs.c
+[v _abs `(i  1 e 2 0 ]
+{
+[v abs@a `i  1 p 2 0 ]
+"9
+} 0
+"6 /opt/microchip/xc8/v1.12/sources/pow.c
+[v _pow `(d  1 e 3 0 ]
+{
+"8
+[v pow@yi `ul  1 a 4 135 ]
+"7
+[v pow@sign `uc  1 a 1 134 ]
+"6
+[v pow@x `d  1 p 3 121 ]
+[v pow@y `d  1 p 3 124 ]
+"31
+} 0
+"5 /opt/microchip/xc8/v1.12/sources/fabs.c
+[v _fabs `(d  1 e 3 0 ]
+{
+[v fabs@d `d  1 p 3 84 ]
+"9
+} 0
+"40 /opt/microchip/xc8/v1.12/sources/log.c
+[v _log10 `(d  1 e 3 0 ]
+{
+[v log10@x `d  1 p 3 57 ]
+"42
+} 0
+"190 LED_disp.c
+[v _out_bit `(v  1 e 0 0 ]
+{
+[v out_bit@b `uc  1 p 1 2 ]
+"201
+} 0
+"22
+[v _pause `(v  1 e 0 0 ]
+{
+"23
+[v pause@i `ui  1 a 2 0 ]
+"26
+} 0
+"34 /opt/microchip/xc8/v1.12/sources/abtoft.c
+[v ___abtoft `(f  1 e 3 0 ]
+{
+"36
+[v ___abtoft@sign `uc  1 a 1 13 ]
+"34
+[v ___abtoft@c `c  1 p 1 8 ]
+"44
+} 0
+"10 /opt/microchip/xc8/v1.12/sources/lldiv.c
+[v ___lldiv `(ul  1 e 4 0 ]
+{
+"11
+[v ___lldiv@quotient `ul  1 a 4 148 ]
+"12
+[v ___lldiv@counter `uc  1 a 1 152 ]
+"10
+[v ___lldiv@dividend `ul  1 p 4 139 ]
+[v ___lldiv@divisor `ul  1 p 4 143 ]
+"31
+} 0
+"10 /opt/microchip/xc8/v1.12/sources/llmod.c
+[v ___llmod `(ul  1 e 4 0 ]
+{
+"11
+[v ___llmod@counter `uc  1 a 1 154 ]
+"10
+[v ___llmod@dividend `ul  1 p 4 0 ]
+[v ___llmod@divisor `ul  1 p 4 4 ]
+"26
+} 0
+"36 /opt/microchip/xc8/v1.12/sources/lltoft.c
+[v ___lltoft `(f  1 e 3 0 ]
+{
+"37
+[v ___lltoft@exp `uc  1 a 1 16 ]
+"36
+[v ___lltoft@c `ul  1 p 4 8 ]
+"46
+} 0
+"6 /opt/microchip/xc8/v1.12/sources/log.c
+[v _log `(d  1 e 3 0 ]
+{
+"7
+[v log@exponent `i  1 a 2 55 ]
+"6
+[v log@x `d  1 p 3 52 ]
+"9
+[v log@coeff `C[9]d  1 s 27 coeff ]
+"36
+} 0
+"13 /opt/microchip/xc8/v1.12/sources/exp.c
+[v _exp `(d  1 e 3 0 ]
+{
+"14
+[v exp@exponent `i  1 a 2 118 ]
+"15
+[v exp@sign `uc  1 a 1 120 ]
+"13
+[v exp@x `d  1 p 3 112 ]
+"17
+[v exp@coeff `C[10]d  1 s 30 coeff ]
+"57
+} 0
+"50 /opt/microchip/xc8/v1.12/sources/ftdiv.c
+[v ___ftdiv `(f  1 e 3 0 ]
+{
+"52
+[v ___ftdiv@f3 `f  1 a 3 32 ]
+"51
+[v ___ftdiv@sign `uc  1 a 1 36 ]
+[v ___ftdiv@exp `uc  1 a 1 35 ]
+[v ___ftdiv@cntr `uc  1 a 1 31 ]
+"50
+[v ___ftdiv@f1 `f  1 p 3 14 ]
+[v ___ftdiv@f2 `f  1 p 3 17 ]
+"78
+} 0
+"16 /opt/microchip/xc8/v1.12/sources/ftneg.c
+[v ___ftneg `(f  1 e 3 0 ]
+{
+[v ___ftneg@f1 `f  1 p 3 81 ]
+"20
+} 0
+"5 /opt/microchip/xc8/v1.12/sources/evalpoly.c
+[v _eval_poly `(d  1 e 3 0 ]
+{
+"6
+[v eval_poly@res `d  1 a 3 49 ]
+"5
+[v eval_poly@x `d  1 p 3 37 ]
+[v eval_poly@d `*.cCd  1 p 2 40 ]
+[v eval_poly@n `i  1 p 2 42 ]
+"12
+} 0
+"3 /opt/microchip/xc8/v1.12/sources/wmul.c
+[v ___wmul `(ui  1 e 2 0 ]
+{
+"4
+[v ___wmul@product `ui  1 a 2 4 ]
+"3
+[v ___wmul@multiplier `ui  1 p 2 0 ]
+[v ___wmul@multiplicand `ui  1 p 2 2 ]
+"13
+} 0
+"5 ../common/asftmul.c
+[v ___asftmul `(f  1 e 3 0 ]
+{
+[v ___asftmul@f1p `*.0f  1 p 2 37 ]
+[v ___asftmul@f2 `f  1 p 3 39 ]
+"7
+} 0
+"52 /opt/microchip/xc8/v1.12/sources/ftmul.c
+[v ___ftmul `(f  1 e 3 0 ]
+{
+"54
+[v ___ftmul@f3_as_product `um  1 a 3 32 ]
+"53
+[v ___ftmul@sign `uc  1 a 1 36 ]
+[v ___ftmul@cntr `uc  1 a 1 35 ]
+[v ___ftmul@exp `uc  1 a 1 31 ]
+"52
+[v ___ftmul@f1 `f  1 p 3 14 ]
+[v ___ftmul@f2 `f  1 p 3 17 ]
+"84
+} 0
+"5 ../common/asftsub.c
+[v ___asftsub `(f  1 e 3 0 ]
+{
+[v ___asftsub@f1p `*.0f  1 p 2 107 ]
+[v ___asftsub@f2 `f  1 p 3 109 ]
+"7
+} 0
+"22 /opt/microchip/xc8/v1.12/sources/ftsub.c
+[v ___ftsub `(f  1 e 3 0 ]
+{
+[v ___ftsub@f1 `f  1 p 3 101 ]
+[v ___ftsub@f2 `f  1 p 3 104 ]
+"25
+} 0
+"14 /opt/microchip/xc8/v1.12/sources/floor.c
+[v _floor `(d  1 e 3 0 ]
+{
+"15
+[v floor@i `d  1 a 3 104 ]
+"16
+[v floor@expon `i  1 a 2 107 ]
+"14
+[v floor@x `d  1 p 3 101 ]
+"30
+} 0
+"43 /opt/microchip/xc8/v1.12/sources/altoft.c
+[v ___altoft `(f  1 e 3 0 ]
+{
+"44
+[v ___altoft@sign `uc  1 a 1 90 ]
+[v ___altoft@exp `uc  1 a 1 89 ]
+"43
+[v ___altoft@c `l  1 p 4 81 ]
+"57
+} 0
+"87 /opt/microchip/xc8/v1.12/sources/ftadd.c
+[v ___ftadd `(f  1 e 3 0 ]
+{
+"88
+[v ___ftadd@exp1 `uc  1 a 1 100 ]
+[v ___ftadd@exp2 `uc  1 a 1 99 ]
+[v ___ftadd@sign `uc  1 a 1 98 ]
+"87
+[v ___ftadd@f1 `f  1 p 3 84 ]
+[v ___ftadd@f2 `f  1 p 3 87 ]
+"148
+} 0
+"5 /opt/microchip/xc8/v1.12/sources/ftge.c
+[v ___ftge `(b  1 e 0 0 ]
+{
+[v ___ftge@ff1 `f  1 p 3 0 ]
+[v ___ftge@ff2 `f  1 p 3 3 ]
+"13
+} 0
+"278 /opt/microchip/xc8/v1.12/sources/frexp.c
+[v _ldexp `(d  1 e 3 0 ]
+{
+[v ldexp@value `d  1 p 3 52 ]
+[v ldexp@newexp `i  1 p 2 55 ]
+"307
+} 0
+"63 /opt/microchip/xc8/v1.12/sources/float.c
+[v ___ftpack `(f  1 e 3 0 ]
+{
+[v ___ftpack@arg `um  1 p 3 0 ]
+[v ___ftpack@exp `uc  1 p 1 3 ]
+[v ___ftpack@sign `uc  1 p 1 4 ]
+"86
+} 0
+"33 /opt/microchip/xc8/v1.12/sources/awtoft.c
+[v ___awtoft `(f  1 e 3 0 ]
+{
+"34
+[v ___awtoft@sign `uc  1 a 1 13 ]
+"33
+[v ___awtoft@c `i  1 p 2 8 ]
+"42
+} 0
+"45 /opt/microchip/xc8/v1.12/sources/fttol.c
+[v ___fttol `(l  1 e 4 0 ]
+{
+"47
+[v ___fttol@lval `ul  1 a 4 76 ]
+"46
+[v ___fttol@exp1 `uc  1 a 1 80 ]
+[v ___fttol@sign1 `uc  1 a 1 75 ]
+"45
+[v ___fttol@f1 `f  1 p 3 66 ]
+"73
+} 0
+"255 /opt/microchip/xc8/v1.12/sources/frexp.c
+[v _frexp `(d  1 e 3 0 ]
+{
+[v frexp@value `d  1 p 3 0 ]
+[v frexp@eptr `*.0i  1 p 2 3 ]
+"274
+} 0
+"231 lc_meter.c
+[v _ISR `II(v  1 e 0 0 ]
+{
+"290
+} 0
+"203
+[v _calibrate `(v  1 e 0 0 ]
+{
+"228
+} 0
+"50 /opt/microchip/xc8/v1.12/sources/ftdiv.c
+[v i2___ftdiv `(f  1 e 3 0 ]
+{
+[v i2___ftdiv@f3 `f  1 a 3 29 ]
+[v i2___ftdiv@sign `uc  1 a 1 33 ]
+[v i2___ftdiv@exp `uc  1 a 1 32 ]
+[v i2___ftdiv@cntr `uc  1 a 1 28 ]
+[v i2___ftdiv@f1 `f  1 p 3 17 ]
+[v i2___ftdiv@f2 `f  1 p 3 20 ]
+"78
+} 0
+"36 /opt/microchip/xc8/v1.12/sources/lltoft.c
+[v i2___lltoft `(f  1 e 3 0 ]
+{
+[v i2___lltoft@exp `uc  1 a 1 16 ]
+[v i2___lltoft@c `ul  1 p 4 8 ]
+"46
+} 0
+"63 /opt/microchip/xc8/v1.12/sources/float.c
+[v i2___ftpack `(f  1 e 3 0 ]
+{
+[v i2___ftpack@arg `um  1 p 3 0 ]
+[v i2___ftpack@exp `uc  1 p 1 3 ]
+[v i2___ftpack@sign `uc  1 p 1 4 ]
+"86
+} 0

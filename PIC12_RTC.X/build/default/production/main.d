@@ -1,0 +1,1 @@
+ build/default/production/main.d  build/default/production/main.p1:  main.c /opt/microchip/xc8/v1.01/include/pic12f675.h /opt/microchip/xc8/v1.01/include/htc.h /opt/microchip/xc8/v1.01/include/eeprom_routines.h /opt/microchip/xc8/v1.01/include/pic_chip_select.h /opt/microchip/xc8/v1.01/include/pic.h

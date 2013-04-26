@@ -1,0 +1,3 @@
+Error[1027] ../../Downloads/PIC/USB-Blaster6/MCHPFSUSB25/USB/usb_device.c 86 : unable to locate 'Compiler.h'
+Error[1027] ../../Downloads/PIC/USB-Blaster6/MCHPFSUSB25/USB/usb_device.c 87 : unable to locate 'usb.h'
+Error[1027] ../../Downloads/PIC/USB-Blaster6/MCHPFSUSB25/USB/usb_device.c 88 : unable to locate 'HardwareProfile.h'

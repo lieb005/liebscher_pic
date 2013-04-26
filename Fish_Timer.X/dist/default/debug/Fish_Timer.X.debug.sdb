@@ -1,0 +1,258 @@
+[p LITE_MODE AUTOSTATIC PIC14 PICREGULAR PICMID ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 12F675 ]
+"153 main.c
+[v F859 `(v  1 t 0 ]
+"5 /opt/microchip/xc8/v1.12/sources/abdiv.c
+[v ___abdiv `(c  1 e 1 0 ]
+"5 /opt/microchip/xc8/v1.12/sources/abmod.c
+[v ___abmod `(c  1 e 1 0 ]
+"34 /opt/microchip/xc8/v1.12/sources/abtoft.c
+[v ___abtoft `(f  1 e 3 0 ]
+"5 /opt/microchip/xc8/v1.12/sources/aldiv.c
+[v ___aldiv `(l  1 e 4 0 ]
+"5 /opt/microchip/xc8/v1.12/sources/almod.c
+[v ___almod `(l  1 e 4 0 ]
+"43 /opt/microchip/xc8/v1.12/sources/altoft.c
+[v ___altoft `(f  1 e 3 0 ]
+"5 /opt/microchip/xc8/v1.12/sources/atdiv.c
+[v ___atdiv `(m  1 e 3 0 ]
+"5 /opt/microchip/xc8/v1.12/sources/atmod.c
+[v ___atmod `(m  1 e 3 0 ]
+"38 /opt/microchip/xc8/v1.12/sources/attoft.c
+[v ___attoft `(f  1 e 3 0 ]
+"5 /opt/microchip/xc8/v1.12/sources/awdiv.c
+[v ___awdiv `(i  1 e 2 0 ]
+"5 /opt/microchip/xc8/v1.12/sources/awmod.c
+[v ___awmod `(i  1 e 2 0 ]
+"33 /opt/microchip/xc8/v1.12/sources/awtoft.c
+[v ___awtoft `(f  1 e 3 0 ]
+"3 /opt/microchip/xc8/v1.12/sources/bmul.c
+[v ___bmul `(uc  1 e 1 0 ]
+"63 /opt/microchip/xc8/v1.12/sources/float.c
+[v ___ftpack `(f  1 e 3 0 ]
+"87 /opt/microchip/xc8/v1.12/sources/ftadd.c
+[v ___ftadd `(f  1 e 3 0 ]
+"50 /opt/microchip/xc8/v1.12/sources/ftdiv.c
+[v ___ftdiv `(f  1 e 3 0 ]
+"5 /opt/microchip/xc8/v1.12/sources/ftge.c
+[v ___ftge `(b  1 e 0 0 ]
+"52 /opt/microchip/xc8/v1.12/sources/ftmul.c
+[v ___ftmul `(f  1 e 3 0 ]
+"16 /opt/microchip/xc8/v1.12/sources/ftneg.c
+[v ___ftneg `(f  1 e 3 0 ]
+"17 /opt/microchip/xc8/v1.12/sources/ftsub.c
+[v ___ftsub `(f  1 e 3 0 ]
+"45 /opt/microchip/xc8/v1.12/sources/fttol.c
+[v ___fttol `(l  1 e 4 0 ]
+"5 /opt/microchip/xc8/v1.12/sources/lbdiv.c
+[v ___lbdiv `(uc  1 e 1 0 ]
+"5 /opt/microchip/xc8/v1.12/sources/lbmod.c
+[v ___lbmod `(uc  1 e 1 0 ]
+"28 /opt/microchip/xc8/v1.12/sources/lbtoft.c
+[v ___lbtoft `(f  1 e 3 0 ]
+"5 /opt/microchip/xc8/v1.12/sources/lldiv.c
+[v ___lldiv `(ul  1 e 4 0 ]
+"5 /opt/microchip/xc8/v1.12/sources/llmod.c
+[v ___llmod `(ul  1 e 4 0 ]
+"36 /opt/microchip/xc8/v1.12/sources/lltoft.c
+[v ___lltoft `(f  1 e 3 0 ]
+"3 /opt/microchip/xc8/v1.12/sources/lmul.c
+[v ___lmul `(ul  1 e 4 0 ]
+"5 /opt/microchip/xc8/v1.12/sources/ltdiv.c
+[v ___ltdiv `(um  1 e 3 0 ]
+"5 /opt/microchip/xc8/v1.12/sources/ltmod.c
+[v ___ltmod `(um  1 e 3 0 ]
+"31 /opt/microchip/xc8/v1.12/sources/lttoft.c
+[v ___lttoft `(f  1 e 3 0 ]
+"5 /opt/microchip/xc8/v1.12/sources/lwdiv.c
+[v ___lwdiv `(ui  1 e 2 0 ]
+"5 /opt/microchip/xc8/v1.12/sources/lwmod.c
+[v ___lwmod `(ui  1 e 2 0 ]
+"29 /opt/microchip/xc8/v1.12/sources/lwtoft.c
+[v ___lwtoft `(f  1 e 3 0 ]
+"3 /opt/microchip/xc8/v1.12/sources/tmul.c
+[v ___tmul `(um  1 e 3 0 ]
+"3 /opt/microchip/xc8/v1.12/sources/wmul.c
+[v ___wmul `(ui  1 e 2 0 ]
+"7 eeprom.c
+[v _eecpymem `(v  1 e 0 0 ]
+"25
+[v _memcpyee `(v  1 e 0 0 ]
+"49
+[v ___eetoc `(uc  1 e 1 0 ]
+"57
+[v ___eetoi `(ui  1 e 2 0 ]
+"65
+[v ___eetom `(um  1 e 3 0 ]
+"73
+[v ___eetol `(ul  1 e 4 0 ]
+"81
+[v ___ctoee `(uc  1 e 1 0 ]
+"88
+[v ___itoee `(ui  1 e 2 0 ]
+"95
+[v ___mtoee `(um  1 e 3 0 ]
+"102
+[v ___ltoee `(ul  1 e 4 0 ]
+"109
+[v ___eetoft `(f  1 e 3 0 ]
+"117
+[v ___eetofl `(d  1 e 3 0 ]
+"125
+[v ___fttoee `(f  1 e 3 0 ]
+"132
+[v ___fltoee `(d  1 e 3 0 ]
+"44 main.c
+[v _main `(i  1 e 2 0 ]
+"61
+[v _config `(v  1 e 0 0 ]
+"115
+[v _blink `(v  1 e 0 0 ]
+"127
+[v _start `(v  1 e 0 0 ]
+[v i1_start `(v  1 e 0 0 ]
+[v i1_start `(v  1 e 0 0 ]
+"135
+[v _stop `(v  1 e 0 0 ]
+[v i1_stop `(v  1 e 0 0 ]
+[v i1_stop `(v  1 e 0 0 ]
+"140
+[v _reset `(v  1 e 0 0 ]
+[v i1_reset `(v  1 e 0 0 ]
+[v i1_reset `(v  1 e 0 0 ]
+"148
+[v _idle_loop `(v  1 e 0 0 ]
+[v i1_idle_loop `(v  1 e 0 0 ]
+[v i1_idle_loop `(v  1 e 0 0 ]
+"153
+[v _ISR `II(v  1 e 0 0 ]
+"437 /opt/microchip/xc8/v1.12/include/pic12f675.h
+[v _TMR1 `VEus  1 e 2 @14 ]
+"962
+[v _WPU `VEuc  1 e 1 @149 ]
+"1369
+[v _ANSEL `VEuc  1 e 1 @159 ]
+"1506
+[v _GIE `VEb  1 e 0 @95 ]
+"1532
+[v _GPIO1 `VEb  1 e 0 @41 ]
+"1542
+[v _INTE `VEb  1 e 0 @92 ]
+"1544
+[v _INTEDG `VEb  1 e 0 @1038 ]
+"1546
+[v _INTF `VEb  1 e 0 @89 ]
+"1574
+[v _PEIE `VEb  1 e 0 @94 ]
+"1582
+[v _PSA `VEb  1 e 0 @1035 ]
+"1598
+[v _T1CKPS0 `VEb  1 e 0 @132 ]
+"1600
+[v _T1CKPS1 `VEb  1 e 0 @133 ]
+"1612
+[v _TMR1CS `VEb  1 e 0 @129 ]
+"1614
+[v _TMR1GE `VEb  1 e 0 @134 ]
+"1616
+[v _TMR1IE `VEb  1 e 0 @1120 ]
+"1618
+[v _TMR1IF `VEb  1 e 0 @96 ]
+"1620
+[v _TMR1ON `VEb  1 e 0 @128 ]
+"1624
+[v _TRISIO1 `VEb  1 e 0 @1065 ]
+"1626
+[v _TRISIO2 `VEb  1 e 0 @1066 ]
+"1666
+[v _nBOD `VEb  1 e 0 @1136 ]
+"1668
+[v _nBOR `VEb  1 e 0 @1136 ]
+"1672
+[v _nGPPU `VEb  1 e 0 @1039 ]
+"1676
+[v _nPOR `VEb  1 e 0 @1137 ]
+"1238 /Volumes/build/bamboo/xml-data/build-dir/XC8-RELEASE-JOB1/nz/build/dist/osx/include/pic12f675.h
+[v _EEDATA `VEuc  1 e 1 @154 ]
+"1275
+[v _EEADR `VEuc  1 e 1 @155 ]
+"1294
+[v _EECON1 `VEuc  1 e 1 @156 ]
+"1331
+[v _EECON2 `VEuc  1 e 1 @157 ]
+"1478
+[v _CARRY `VEb  1 e 0 @24 ]
+"1584
+[v _RD `VEb  1 e 0 @1248 ]
+"1658
+[v _WR `VEb  1 e 0 @1249 ]
+"1660
+[v _WREN `VEb  1 e 0 @1250 ]
+"38 main.c
+[v _count `ul  1 e 4 0 ]
+"44
+[v _main `(i  1 e 2 0 ]
+{
+[v main@argc `i  1 p 2 6 ]
+[v main@argv `**uc  1 p 2 8 ]
+"58
+} 0
+"61
+[v _config `(v  1 e 0 0 ]
+{
+"112
+} 0
+"127
+[v _start `(v  1 e 0 0 ]
+{
+"132
+} 0
+"148
+[v _idle_loop `(v  1 e 0 0 ]
+{
+"150
+} 0
+"135
+[v _stop `(v  1 e 0 0 ]
+{
+"137
+} 0
+"140
+[v _reset `(v  1 e 0 0 ]
+{
+"145
+} 0
+"153
+[v _ISR `II(v  1 e 0 0 ]
+{
+"197
+} 0
+"115
+[v _blink `(v  1 e 0 0 ]
+{
+"117
+[v blink@tmp `i  1 a 2 0 ]
+"124
+} 0
+"127
+[v i1_start `(v  1 e 0 0 ]
+{
+"132
+} 0
+"135
+[v i1_stop `(v  1 e 0 0 ]
+{
+"137
+} 0
+"148
+[v i1_idle_loop `(v  1 e 0 0 ]
+{
+"150
+} 0
+"140
+[v i1_reset `(v  1 e 0 0 ]
+{
+"145
+} 0

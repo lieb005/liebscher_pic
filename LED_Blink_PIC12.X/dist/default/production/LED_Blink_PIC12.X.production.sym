@@ -1,0 +1,103 @@
+__S0 2008 0 ABS 0
+__S1 24 0 ABS 0
+__S2 0 0 ABS 0
+__Hintentry 0 0 CODE 0
+__Lintentry 0 0 CODE 0
+_WPU1 4A9 0 ABS 0
+_main 3EA 0 CODE 0
+btemp 5E 0 ABS 0
+start 0 0 CODE 0
+_GPIO1 29 0 ABS 0
+_GPIO2 2A 0 ABS 0
+reset_vec 0 0 CODE 0
+wtemp0 5E 0 ABS 0
+_nGPPU 40F 0 ABS 0
+__Hosccal 3FF 0 CODE 0
+__Losccal 3FF 0 CODE 0
+__Hconfig 2008 0 CONFIG 0
+__Lconfig 2007 0 CONFIG 0
+___osccal_val 3FF 0 CODE 0
+__Hram 7FE 0 ABS 0
+__Lram 7FE 0 ABS 0
+__Hfunctab 0 0 CODE 0
+__Lfunctab 0 0 CODE 0
+__Hcommon 7FE 0 ABS 0
+__Lcommon 7FE 0 ABS 0
+__Heeprom_data 0 0 EEDATA 2
+__Leeprom_data 0 0 EEDATA 2
+__Habs1 7FE 0 ABS 0
+__Labs1 7FE 0 ABS 0
+__Hsfr0 7FE 0 ABS 0
+__Lsfr0 7FE 0 ABS 0
+__Hsfr1 7FE 0 ABS 0
+__Lsfr1 7FE 0 ABS 0
+__Hcode 7FE 0 ABS 0
+__Lcode 7FE 0 ABS 0
+__HcstackBANK0 7FE 0 ABS 0
+__LcstackBANK0 7FE 0 ABS 0
+__pcstackBANK0 20 0 BANK0 1
+__Hinit 0 0 CODE 0
+__Linit 0 0 CODE 0
+__end_of_main 3FF 0 CODE 0
+__Htext 7FE 0 ABS 0
+__Ltext 7FE 0 ABS 0
+end_of_initialization 3E8 0 CODE 0
+_TRISIO1 429 0 ABS 0
+_TRISIO2 42A 0 ABS 0
+__Hstrings 7FE 0 ABS 0
+__Lstrings 7FE 0 ABS 0
+__Hbank0 7FE 0 ABS 0
+__Lbank0 7FE 0 ABS 0
+__Hbank1 7FE 0 BANK1 1
+__Lbank1 7FE 0 BANK1 1
+__Hpowerup 0 0 CODE 0
+__Lpowerup 0 0 CODE 0
+__Hclrtext 7FE 0 ABS 0
+__Lclrtext 7FE 0 ABS 0
+__end_of__initialization 3E8 0 CODE 0
+__Hidloc 0 0 IDLOC 0
+__Lidloc 0 0 IDLOC 0
+__Hcinit 7FE 0 ABS 0
+__Lcinit 7FE 0 ABS 0
+__size_of_main 0 0 ABS 0
+__Hend_init 5 0 CODE 0
+__Lend_init 0 0 CODE 0
+__Hreset_vec 0 0 CODE 0
+__Lreset_vec 0 0 CODE 0
+intlevel0 0 0 CODE 0
+intlevel1 0 0 CODE 0
+intlevel2 0 0 CODE 0
+intlevel3 0 0 CODE 0
+intlevel4 0 0 CODE 0
+intlevel5 0 0 CODE 0
+__HcstackCOMMON 7FE 0 ABS 0
+__LcstackCOMMON 7FE 0 ABS 0
+__pcstackCOMMON 0 0 COMMON 1
+start_initialization 3E8 0 CODE 0
+__Hmaintext 7FE 0 ABS 0
+__Lmaintext 7FE 0 ABS 0
+__pmaintext 3EA 0 CODE 0
+__CFG_MCLRE$ON 0 0 ABS 0
+__initialization 3E8 0 CODE 0
+__CFG_FOSC$INTRCCLK 0 0 ABS 0
+%segments
+reset_vec 0 9 CODE 0 0
+config 400E 400F CONFIG 400E 0
+cstackBANK0 20 23 BANK0 20 1
+maintext 7D4 7FD CODE 7D4 0
+cinit 7D0 7D3 CODE 7D0 0
+%locals
+dist/default/production/LED_Blink_PIC12.X.production.obj
+main.c
+22 3EA 0 CODE 0
+23 3EC 0 CODE 0
+24 3ED 0 CODE 0
+25 3EF 0 CODE 0
+26 3F1 0 CODE 0
+29 3F2 0 CODE 0
+27 3FC 0 CODE 0
+31 3FD 0 CODE 0
+33 3FE 0 CODE 0
+/tmp/cgtmaoUV6
+141 3E8 0 CODE 0
+142 3E9 0 CODE 0

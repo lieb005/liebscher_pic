@@ -1,0 +1,23 @@
+/* 
+ * File:   main.c
+ * Author: mark
+ *
+ * Created on 11. November 2012, 10:19
+ */
+//#define _LEGACY_HEADERS
+#include <stdio.h>
+#include <stdlib.h>
+#include <xc.h>
+//#include <pic12f675.h>
+
+//__CONFIG (WDT);
+//0b00000111101010
+/*
+ * 
+ */
+int main(int argc, char** argv)
+{
+    //__CONFIG()
+    return (EXIT_SUCCESS);
+}
+

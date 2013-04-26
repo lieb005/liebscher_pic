@@ -1,0 +1,414 @@
+
+
+Microchip Technology PIC LITE Macro Assembler V1.12 build 49521 
+                                                                                               Wed Feb 20 18:30:05 2013
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 49521
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+     2                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+     3                           
+     4                           opt pagewidth 120
+     5                           
+     6                           	opt lm
+     7                           
+     8                           	processor	12F675
+     9                           clrc	macro
+    10  0000                     	endm
+    11                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    12                           
+    13  0000                     	endm
+    14                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    15                           
+    16  0000                     	endm
+    17                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    18                           
+    19  0000                     	endm
+    20                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    21                           
+    22  0000                     	endm
+    23                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    24                           
+    25  0000                     	endm
+    26                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    27                           
+    28  0000                     	endm
+    29                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    30                           
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    43  0000                     INDF equ 00h ;# 
+    44                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    45  0001                     TMR0 equ 01h ;# 
+    46                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    47  0002                     PCL equ 02h ;# 
+    48                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    49  0003                     STATUS equ 03h ;# 
+    50                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    51  0004                     FSR equ 04h ;# 
+    52                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    53  0005                     GPIO equ 05h ;# 
+    54                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    55  000A                     PCLATH equ 0Ah ;# 
+    56                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    57  000B                     INTCON equ 0Bh ;# 
+    58                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    59  000C                     PIR1 equ 0Ch ;# 
+    60                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    61  000E                     TMR1 equ 0Eh ;# 
+    62                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    63  000E                     TMR1L equ 0Eh ;# 
+    64                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    65  000F                     TMR1H equ 0Fh ;# 
+    66                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    67  0010                     T1CON equ 010h ;# 
+    68                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    69  0019                     CMCON equ 019h ;# 
+    70                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    71  001E                     ADRESH equ 01Eh ;# 
+    72                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    73  001F                     ADCON0 equ 01Fh ;# 
+    74                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    75  0081                     OPTION_REG equ 081h ;# 
+    76                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    77  0085                     TRISIO equ 085h ;# 
+    78                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    79  008C                     PIE1 equ 08Ch ;# 
+    80                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    81  008E                     PCON equ 08Eh ;# 
+    82                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    83  0090                     OSCCAL equ 090h ;# 
+    84                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    85  0095                     WPU equ 095h ;# 
+    86                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    87  0096                     IOC equ 096h ;# 
+    88                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    89  0096                     IOCB equ 096h ;# 
+    90                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    91  0099                     VRCON equ 099h ;# 
+    92                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    93  009A                     EEDATA equ 09Ah ;# 
+    94                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    95  009A                     EEDAT equ 09Ah ;# 
+    96                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    97  009B                     EEADR equ 09Bh ;# 
+    98                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+    99  009C                     EECON1 equ 09Ch ;# 
+   100                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   101  009D                     EECON2 equ 09Dh ;# 
+   102                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   103  009E                     ADRESL equ 09Eh ;# 
+   104                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   105  009F                     ANSEL equ 09Fh ;# 
+   106                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   107                           
+   108  0029                     _GPIO1	set	0x29
+   109                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   110  002A                     _GPIO2	set	0x2A
+   111                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   112  0429                     _TRISIO1	set	0x429
+   113                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   114  042A                     _TRISIO2	set	0x42A
+   115                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   116  04A9                     _WPU1	set	0x4A9
+   117                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   118  040F                     _nGPPU	set	0x40F
+   119                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   120                           
+   121  03EA                     __pmaintext:	;psect for function _main
+   122                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   123                           
+   124  0000                     __CFG_FOSC$INTRCCLK equ 0x0
+   125                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   126  0000                     __CFG_MCLRE$ON equ 0x0
+   127                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   128                           
+   129                           opt pagewidth 120
+   130                           
+   131  03E8                     start_initialization:
+   132                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   133                           
+   134  03E8                     __initialization:
+   135                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   136                           
+   137                           opt pagewidth 120
+   138                           
+   139                           	opt lm
+   140  03E8                     end_of_initialization:
+   141  03E8                     __end_of__initialization:clrf status
+      + 03E8  0183               	clrf	3
+   142  03E9  2BEA               ljmp _main	;jump to C main() function
+   143                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   144                           
+   145  0000                     __pcstackCOMMON:
+   146  0000                     ??_main:	; 0 bytes @ 0x0
+   147                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   148                           
+   149  0020                     __pcstackBANK0:
+   150  0020                     ?_main:	; 2 bytes @ 0x0
+   151  0020                     main@argc:	; 2 bytes @ 0x0
+   152  0020                     	ds	2
+   153  0022                     main@argv:	; 2 bytes @ 0x2
+   154  0022                     	ds	2
+   155                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   156                           
+   157                           opt pagewidth 120
+   158                           
+   159                           	opt lm
+   160                           
+   161                           	processor	12F675
+   162                           clrc	macro
+   163                           	bcf	3,0
+   164                           	endm
+   165                           clrz	macro
+   166                           	bcf	3,2
+   167                           	endm
+   168                           setc	macro
+   169                           	bsf	3,0
+   170                           	endm
+   171                           setz	macro
+   172                           	bsf	3,2
+   173                           	endm
+   174                           skipc	macro
+   175                           	btfss	3,0
+   176                           	endm
+   177                           skipz	macro
+   178                           	btfss	3,2
+   179                           	endm
+   180                           skipnc	macro
+   181                           	btfsc	3,0
+   182                           	endm
+   183                           skipnz	macro
+   184                           	btfsc	3,2
+   185                           	endm
+   186                           indf	equ	0
+   187                           indf0	equ	0
+   188                           pc	equ	2
+   189                           pcl	equ	2
+   190                           status	equ	3
+   191                           fsr	equ	4
+   192                           fsr0	equ	4
+   193                           c	equ	1
+   194                           z	equ	0
+   195                           pclath	equ	10
+   196                           # 46 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   197                           INDF equ 00h ;# 
+   198                           # 65 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   199                           TMR0 equ 01h ;# 
+   200                           # 84 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   201                           PCL equ 02h ;# 
+   202                           # 103 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   203                           STATUS equ 03h ;# 
+   204                           # 190 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   205                           FSR equ 04h ;# 
+   206                           # 209 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   207                           GPIO equ 05h ;# 
+   208                           # 296 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   209                           PCLATH equ 0Ah ;# 
+   210                           # 315 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   211                           INTCON equ 0Bh ;# 
+   212                           # 392 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   213                           PIR1 equ 0Ch ;# 
+   214                           # 439 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   215                           TMR1 equ 0Eh ;# 
+   216                           # 445 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   217                           TMR1L equ 0Eh ;# 
+   218                           # 464 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   219                           TMR1H equ 0Fh ;# 
+   220                           # 483 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   221                           T1CON equ 010h ;# 
+   222                           # 547 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   223                           CMCON equ 019h ;# 
+   224                           # 605 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   225                           ADRESH equ 01Eh ;# 
+   226                           # 624 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   227                           ADCON0 equ 01Fh ;# 
+   228                           # 707 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   229                           OPTION_REG equ 081h ;# 
+   230                           # 776 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   231                           TRISIO equ 085h ;# 
+   232                           # 825 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   233                           PIE1 equ 08Ch ;# 
+   234                           # 872 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   235                           PCON equ 08Eh ;# 
+   236                           # 905 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   237                           OSCCAL equ 090h ;# 
+   238                           # 964 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   239                           WPU equ 095h ;# 
+   240                           # 1008 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   241                           IOC equ 096h ;# 
+   242                           # 1013 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   243                           IOCB equ 096h ;# 
+   244                           # 1181 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   245                           VRCON equ 099h ;# 
+   246                           # 1240 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   247                           EEDATA equ 09Ah ;# 
+   248                           # 1245 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   249                           EEDAT equ 09Ah ;# 
+   250                           # 1277 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   251                           EEADR equ 09Bh ;# 
+   252                           # 1296 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   253                           EECON1 equ 09Ch ;# 
+   254                           # 1333 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   255                           EECON2 equ 09Dh ;# 
+   256                           # 1352 "/opt/microchip/xc8/v1.12/include/pic12f675.h"
+   257                           ADRESL equ 09Eh ;# 
+   258  0015                     	__size_of_main	equ	__end_of_main-_main
+   259                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   260  03EA                     _main:	
+   261                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   262                           
+   263                           opt pagewidth 120
+   264                           
+   265  03EA                     l477:	
+   266                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   267  03EA  1683               	bsf	status, 5	;RP0=1, select bank1
+   268  03EB  1105               	bcf	(1066/8)^080h,(1066)&7	;volatile
+   269                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   270                           
+   271  03EC  1485               	bsf	(1065/8)^080h,(1065)&7	;volatile
+   272                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   273                           
+   274  03ED  1283               	bcf	status, 5	;RP0=0, select bank0
+   275  03EE  1105               	bcf	(42/8),(42)&7	;volatile
+   276                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   277                           
+   278  03EF  1683               	bsf	status, 5	;RP0=1, select bank1
+   279  03F0  1381               	bcf	(1039/8)^080h,(1039)&7	;volatile
+   280                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   281                           
+   282  03F1  1495               	bsf	(1193/8)^080h,(1193)&7	;volatile
+   283                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   284                           
+   285                           opt pagewidth 120
+   286  03F2                     l15:	
+   287                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   288                           
+   289                           opt pagewidth 120
+   290  03F2  1283               	bcf	status, 5	;RP0=0, select bank0
+   291  03F3  1C85               	btfss	(41/8),(41)&7	;volatile
+   292  03F4  2BF6               	goto	u31
+   293  03F5  2BF9               	goto	u30
+   294                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   295  03F6                     u31:
+   296  03F6  1283               	bcf	status, 5	;RP0=0, select bank0
+   297  03F7  1505               	bsf	(42/8),(42)&7	;volatile
+   298  03F8  2BFB               	goto	u44
+   299  03F9                     u30:
+   300  03F9  1283               	bcf	status, 5	;RP0=0, select bank0
+   301  03FA  1105               	bcf	(42/8),(42)&7	;volatile
+   302  03FB                     u44:
+   303  03FB  2BF2               	goto	l15
+   304                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   305                           
+   306  03FC                     l16:	
+   307                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   308  03FC  2BF2               	goto	l15
+   309                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   310  03FD                     l17:	
+   311                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   312                           
+   313                           opt pagewidth 120
+   314  03FD  1505               	bsf	(42/8),(42)&7	;volatile
+   315                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   316                           
+   317                           opt pagewidth 120
+   318                           
+   319  03FE                     l18:	
+   320                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   321  03FE  2800               	ljmp	start
+   322                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   323                           
+   324  03FF                     	__end_of_main:
+   325                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   326                           
+   327                           opt pagewidth 120
+   328  005E                     	btemp set 05Eh
+   329                           opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 49521"
+   330                           
+   331                           opt pagewidth 120
+   332  005E                     	wtemp0 set btemp
+
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        0
+    BSS         0
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMMON            0      0       0
+    BANK0            62      4       4
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMMON
+
+    None.
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 4     0      4       0
+                                              0 BANK0      4     0      4
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 0
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BITCOMMON            0      0       0       0        0.0%
+EEDATA              80      0       0       0        0.0%
+NULL                 0      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+BITSFR0              0      0       0       1        0.0%
+SFR0                 0      0       0       1        0.0%
+COMMON               0      0       0       1        0.0%
+BITSFR1              0      0       0       2        0.0%
+SFR1                 0      0       0       2        0.0%
+STACK                0      0       0       2        0.0%
+BITBANK0            3E      0       0       3        0.0%
+BANK0               3E      4       4       4        6.5%
+ABS                  0      0       0       5        0.0%
+DATA                 0      0       0       6        0.0%
+
+
+Microchip Technology PIC Macro Assembler V1.12 build 49521 
+Symbol Table                                                                                   Wed Feb 20 18:30:05 2013
+
+                     l15 03F2                       l16 03FC                       l17 03FD  
+                     l18 03FE                       u30 03F9                       u31 03F6  
+                     u44 03FB                      l477 03EA                     _WPU1 04A9  
+                   _main 03EA                     btemp 005E                     start 0000  
+          __CFG_MCLRE$ON 0000                    ?_main 0020                    _GPIO1 0029  
+                  _GPIO2 002A                    _nGPPU 040F                    status 0003  
+                  wtemp0 005E          __initialization 03E8             __end_of_main 03FF  
+                 ??_main 0000  __end_of__initialization 03E8           __pcstackCOMMON 0000  
+             __pmaintext 03EA                  _TRISIO1 0429                  _TRISIO2 042A  
+   end_of_initialization 03E8      start_initialization 03E8            __pcstackBANK0 0020  
+          __size_of_main 0015                 main@argc 0020                 main@argv 0022  
+     __CFG_FOSC$INTRCCLK 0000  

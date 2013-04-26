@@ -1,0 +1,112 @@
+_RD 4E0 0 ABS
+_WR 4E1 0 ABS
+__S0 2008 0 ABS
+__S1 26 0 ABS
+__S2 0 0 ABS
+_GIE 5F 0 ABS
+__Hintentry 0 0 CODE
+__Lintentry 0 0 CODE
+_WREN 4E2 0 ABS
+_main 3D7 0 CODE
+btemp 5E 0 ABS
+_exit 0 0 CODE
+start 0 0 CODE
+main@argc 20 0 BANK0
+_GPIO0 28 0 ABS
+_GPIO2 2A 0 ABS
+_GPIO3 2B 0 ABS
+_GPIO4 2C 0 ABS
+reset_vec 0 0 CODE
+_EEADR 9B 0 ABS
+wtemp0 5E 0 ABS
+__Hosccal 3FF 0 CODE
+__Losccal 3FF 0 CODE
+_CARRY 18 0 ABS
+__Hconfig 2008 0 CONFIG
+__Lconfig 2007 0 CONFIG
+main@i 24 0 BANK0
+___osccal_val 3FF 0 CODE
+__Hram 7FE 0 ABS
+__Lram 7FE 0 ABS
+?_main 20 0 BANK0
+__Hfunctab 0 0 CODE
+__Lfunctab 0 0 CODE
+_EECON1 9C 0 ABS
+_EECON2 9D 0 ABS
+__Hcommon 7FE 0 ABS
+__Lcommon 7FE 0 ABS
+__Heeprom_data 0 0 EEDATA
+__Leeprom_data 0 0 EEDATA
+main@argv 22 0 BANK0
+_EEDATA 9A 0 ABS
+__Habs1 7FE 0 ABS
+__Labs1 7FE 0 ABS
+__Hsfr0 7FE 0 ABS
+__Lsfr0 7FE 0 ABS
+_TRISIO 85 0 ABS
+__Hsfr1 7FE 0 ABS
+__Lsfr1 7FE 0 ABS
+__Hcode 7FE 0 ABS
+__Lcode 7FE 0 ABS
+??_main 0 0 COMMON
+__HcstackBANK0 7FE 0 ABS
+__LcstackBANK0 7FE 0 ABS
+__pcstackBANK0 20 0 BANK0
+__Hinit 0 0 CODE
+__Linit 0 0 CODE
+__end_of_main 3FF 0 CODE
+__Htext 7FE 0 ABS
+__Ltext 7FE 0 ABS
+end_of_initialization 3D5 0 CODE
+__Hstrings 7FE 0 ABS
+__Lstrings 7FE 0 ABS
+__Hbank0 7FE 0 ABS
+__Lbank0 7FE 0 ABS
+__Hbank1 7FE 0 BANK1
+__Lbank1 7FE 0 BANK1
+__Hpowerup 0 0 CODE
+__Lpowerup 0 0 CODE
+__Hclrtext 7FE 0 ABS
+__Lclrtext 7FE 0 ABS
+__Hidloc 0 0 IDLOC
+__Lidloc 0 0 IDLOC
+__Hcinit 7FE 0 ABS
+__Lcinit 7FE 0 ABS
+__size_of_main 0 0 ABS
+__Hend_init 5 0 CODE
+__Lend_init 0 0 CODE
+__Hreset_vec 0 0 CODE
+__Lreset_vec 0 0 CODE
+intlevel0 0 0 CODE
+intlevel1 0 0 CODE
+intlevel2 0 0 CODE
+intlevel3 0 0 CODE
+intlevel4 0 0 CODE
+intlevel5 0 0 CODE
+__HcstackCOMMON 7FE 0 ABS
+__LcstackCOMMON 7FE 0 ABS
+__pcstackCOMMON 0 0 COMMON
+start_initialization 3D5 0 CODE
+__Hmaintext 7FE 0 ABS
+__Lmaintext 7FE 0 ABS
+__pmaintext 3D7 0 CODE
+%segments
+reset_vec 0 9 CODE 0
+config 400E 400F CONFIG 400E
+cstackBANK0 20 25 BANK0 20
+maintext 7AE 7FD CODE 7AE
+cinit 7AA 7AD CODE 7AA
+%locals
+dist/default/debug/PIC12_test.X.debug.obj
+main.c
+33 3D7 0 CODE
+34 3D9 0 CODE
+38 3DA 0 CODE
+39 3FA 0 CODE
+36 3FD 0 CODE
+42 3FE 0 CODE
+/tmp/cgt43YQJX
+86 3D5 0 CODE
+87 3D6 0 CODE
+main.c
+31 2007 0 CONFIG

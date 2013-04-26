@@ -1,0 +1,2515 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.83 build 10920 
+                                                                                               Sat Jul 28 18:27:40 2012
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 10920"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F1825
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0001                     indf1	equ	1
+    35  0002                     pc	equ	2
+    36  0002                     pcl	equ	2
+    37  0003                     status	equ	3
+    38  0004                     fsr0l	equ	4
+    39  0005                     fsr0h	equ	5
+    40  0006                     fsr1l	equ	6
+    41  0007                     fsr1h	equ	7
+    42  0008                     bsr	equ	8
+    43  0009                     wreg	equ	9
+    44  000B                     intcon	equ	11
+    45  0001                     c	equ	1
+    46  0000                     z	equ	0
+    47  000A                     pclath	equ	10
+    48                           	FNCALL	_main,_setup
+    49                           	FNCALL	_setup,_set_PWM_Duty
+    50                           	FNROOT	_main
+    51                           	FNCALL	_ISR,___awmod
+    52                           	FNCALL	_ISR,_update_lights
+    53                           	FNCALL	_update_lights,_get_PWM_Duty
+    54                           	FNCALL	_update_lights,i1_set_PWM_Duty
+    55                           	FNCALL	intlevel1,_ISR
+    56                           	global	intlevel1
+    57                           	FNROOT	intlevel1
+    58                           	global	_blinks_h
+    59                           	global	_blinks_l
+    60                           	global	_rear_state
+    61                           	global	_front_state
+    62                           	global	_blink_L
+    63                           	global	_blink_R
+    64                           	global	_blink_state
+    65                           	global	_PR2
+    66                           psect	text227,local,class=CODE,delta=2
+    67                           global __ptext227
+    68  0000                     __ptext227:
+    69  001B                     _PR2	set	27
+    70                           	global	_TMR0
+    71  0015                     _TMR0	set	21
+    72                           	global	_TMR2
+    73  001A                     _TMR2	set	26
+    74                           	global	_CARRY
+    75  0018                     _CARRY	set	24
+    76                           	global	_GIE
+    77  005F                     _GIE	set	95
+    78                           	global	_IOCIE
+    79  005B                     _IOCIE	set	91
+    80                           	global	_PEIE
+    81  005E                     _PEIE	set	94
+    82                           	global	_RC2
+    83  0072                     _RC2	set	114
+    84                           	global	_TMR0IE
+    85  005D                     _TMR0IE	set	93
+    86                           	global	_TMR0IF
+    87  005A                     _TMR0IF	set	90
+    88                           	global	_OPTION_REG
+    89  0095                     _OPTION_REG	set	149
+    90                           	global	_TRISA
+    91  008C                     _TRISA	set	140
+    92                           	global	_TRISC
+    93  008E                     _TRISC	set	142
+    94                           	global	_IRCF0
+    95  04CB                     _IRCF0	set	1227
+    96                           	global	_IRCF1
+    97  04CC                     _IRCF1	set	1228
+    98                           	global	_IRCF2
+    99  04CD                     _IRCF2	set	1229
+   100                           	global	_IRCF3
+   101  04CE                     _IRCF3	set	1230
+   102                           	global	_SCS0
+   103  04C8                     _SCS0	set	1224
+   104                           	global	_SCS1
+   105  04C9                     _SCS1	set	1225
+   106                           	global	_nWPUEN
+   107  04AF                     _nWPUEN	set	1199
+   108                           	global	_EEADR
+   109  0191                     _EEADR	set	401
+   110                           	global	_EECON1
+   111  0195                     _EECON1	set	405
+   112                           	global	_EECON2
+   113  0196                     _EECON2	set	406
+   114                           	global	_EEDATA
+   115  0193                     _EEDATA	set	403
+   116                           	global	_RD
+   117  0CA8                     _RD	set	3240
+   118                           	global	_WR
+   119  0CA9                     _WR	set	3241
+   120                           	global	_WREN
+   121  0CAA                     _WREN	set	3242
+   122                           	global	_WPUA
+   123  020C                     _WPUA	set	524
+   124                           	global	_WPUC
+   125  020E                     _WPUC	set	526
+   126                           	global	_CCP1CON
+   127  0293                     _CCP1CON	set	659
+   128                           	global	_CCPR1L
+   129  0291                     _CCPR1L	set	657
+   130                           	global	_DC1B0
+   131  149C                     _DC1B0	set	5276
+   132                           	global	_DC1B1
+   133  149D                     _DC1B1	set	5277
+   134                           	global	_IOCAF
+   135  0393                     _IOCAF	set	915
+   136                           	global	_IOCAN
+   137  0392                     _IOCAN	set	914
+   138                           	global	_IOCAP
+   139  0391                     _IOCAP	set	913
+   140                           	global	_IOCAF0
+   141  1C98                     _IOCAF0	set	7320
+   142                           	global	_IOCAF1
+   143  1C99                     _IOCAF1	set	7321
+   144                           	global	_IOCAF2
+   145  1C9A                     _IOCAF2	set	7322
+   146                           	global	_IOCAF3
+   147  1C9B                     _IOCAF3	set	7323
+   148                           	global	_IOCAF4
+   149  1C9C                     _IOCAF4	set	7324
+   150                           	global	_IOCAF5
+   151  1C9D                     _IOCAF5	set	7325
+   152                           	file	"/tmp/cgtFXQzEq"
+   153                           	line	#
+   154                           psect cinit,class=CODE,delta=2
+   155                           global start_initialization
+   156  027D                     start_initialization:
+   157                           
+   158                           psect	bitbssCOMMON,class=COMMON,bit,space=1
+   159                           global __pbitbssCOMMON
+   160  03E0                     __pbitbssCOMMON:
+   161  03E0                     _blink_L:
+   162  03E0                            ds      1
+   163                           
+   164  03E1                     _blink_R:
+   165  03E1                            ds      1
+   166                           
+   167  03E2                     _blink_state:
+   168  03E2                            ds      1
+   169                           
+   170                           psect	bssCOMMON,class=COMMON,space=1
+   171                           global __pbssCOMMON
+   172  007D                     __pbssCOMMON:
+   173  007D                     _front_state:
+   174  007D                            ds      1
+   175                           
+   176                           psect	bssBANK0,class=BANK0,space=1
+   177                           global __pbssBANK0
+   178  0020                     __pbssBANK0:
+   179  0020                     _blinks_h:
+   180  0020                            ds      4
+   181                           
+   182  0024                     _blinks_l:
+   183  0024                            ds      4
+   184                           
+   185  0028                     _rear_state:
+   186  0028                            ds      1
+   187                           
+   188                           ; Clear objects allocated to BITCOMMON
+   189                           psect cinit,class=CODE,delta=2
+   190                           	global __pbitbssCOMMON
+   191  027D  01FC               	clrf	((__pbitbssCOMMON/8)+0)&07Fh
+   192                           ; Clear objects allocated to COMMON
+   193                           psect cinit,class=CODE,delta=2
+   194                           	global __pbssCOMMON
+   195  027E  01FD               	clrf	((__pbssCOMMON)+0)&07Fh
+   196                           ; Clear objects allocated to BANK0
+   197                           psect cinit,class=CODE,delta=2
+   198                           	global __pbssBANK0
+   199  027F  01A0               	clrf	((__pbssBANK0)+0)&07Fh
+   200  0280  01A1               	clrf	((__pbssBANK0)+1)&07Fh
+   201  0281  01A2               	clrf	((__pbssBANK0)+2)&07Fh
+   202  0282  01A3               	clrf	((__pbssBANK0)+3)&07Fh
+   203  0283  01A4               	clrf	((__pbssBANK0)+4)&07Fh
+   204  0284  01A5               	clrf	((__pbssBANK0)+5)&07Fh
+   205  0285  01A6               	clrf	((__pbssBANK0)+6)&07Fh
+   206  0286  01A7               	clrf	((__pbssBANK0)+7)&07Fh
+   207  0287  01A8               	clrf	((__pbssBANK0)+8)&07Fh
+   208                           psect cinit,class=CODE,delta=2
+   209                           global end_of_initialization
+   210                           
+   211                           ;End of C runtime variable initialization code
+   212                           
+   213  0288                     end_of_initialization:
+   214  0288  0020               movlb 0
+   215  0289  3182  2A8B         ljmp _main	;jump to C main() function
+   216                           psect	cstackCOMMON,class=COMMON,space=1
+   217                           global __pcstackCOMMON
+   218  0070                     __pcstackCOMMON:
+   219                           	global	?_setup
+   220  0070                     ?_setup:	; 0 bytes @ 0x0
+   221                           	global	?_set_PWM_Duty
+   222  0070                     ?_set_PWM_Duty:	; 0 bytes @ 0x0
+   223                           	global	?_update_lights
+   224  0070                     ?_update_lights:	; 0 bytes @ 0x0
+   225                           	global	?_ISR
+   226  0070                     ?_ISR:	; 0 bytes @ 0x0
+   227                           	global	?i1_set_PWM_Duty
+   228  0070                     ?i1_set_PWM_Duty:	; 0 bytes @ 0x0
+   229                           	global	??i1_set_PWM_Duty
+   230  0070                     ??i1_set_PWM_Duty:	; 0 bytes @ 0x0
+   231                           	global	?_get_PWM_Duty
+   232  0070                     ?_get_PWM_Duty:	; 2 bytes @ 0x0
+   233                           	global	?___awmod
+   234  0070                     ?___awmod:	; 2 bytes @ 0x0
+   235                           	global	___awmod@divisor
+   236  0070                     ___awmod@divisor:	; 2 bytes @ 0x0
+   237  0070                     	ds	1
+   238                           	global	i1set_PWM_Duty@duty
+   239  0071                     i1set_PWM_Duty@duty:	; 1 bytes @ 0x1
+   240  0071                     	ds	1
+   241                           	global	??_get_PWM_Duty
+   242  0072                     ??_get_PWM_Duty:	; 0 bytes @ 0x2
+   243                           	global	___awmod@dividend
+   244  0072                     ___awmod@dividend:	; 2 bytes @ 0x2
+   245  0072                     	ds	2
+   246                           	global	??___awmod
+   247  0074                     ??___awmod:	; 0 bytes @ 0x4
+   248  0074                     	ds	1
+   249                           	global	___awmod@counter
+   250  0075                     ___awmod@counter:	; 1 bytes @ 0x5
+   251  0075                     	ds	1
+   252                           	global	___awmod@sign
+   253  0076                     ___awmod@sign:	; 1 bytes @ 0x6
+   254  0076                     	ds	4
+   255                           	global	??_update_lights
+   256  007A                     ??_update_lights:	; 0 bytes @ 0xA
+   257                           	global	??_ISR
+   258  007A                     ??_ISR:	; 0 bytes @ 0xA
+   259  007A                     	ds	2
+   260                           psect	cstackBANK0,class=BANK0,space=1
+   261                           global __pcstackBANK0
+   262  0029                     __pcstackBANK0:
+   263                           	global	??_set_PWM_Duty
+   264  0029                     ??_set_PWM_Duty:	; 0 bytes @ 0x0
+   265  0029                     	ds	1
+   266                           	global	set_PWM_Duty@duty
+   267  002A                     set_PWM_Duty@duty:	; 1 bytes @ 0x1
+   268  002A                     	ds	1
+   269                           	global	??_setup
+   270  002B                     ??_setup:	; 0 bytes @ 0x2
+   271                           	global	?_main
+   272  002B                     ?_main:	; 2 bytes @ 0x2
+   273                           	global	main@argc
+   274  002B                     main@argc:	; 2 bytes @ 0x2
+   275  002B                     	ds	2
+   276                           	global	main@argv
+   277  002D                     main@argv:	; 2 bytes @ 0x4
+   278  002D                     	ds	2
+   279                           	global	??_main
+   280  002F                     ??_main:	; 0 bytes @ 0x6
+   281 ;;Data sizes: Strings 0, constant 0, data 0, bss 10, persistent 0 stack 0
+   282 ;;Auto spaces:   Size  Autos    Used
+   283 ;; COMMON          14     12      14
+   284 ;; BANK0           80      6      15
+   285 ;; BANK1           80      0       0
+   286 ;; BANK2           80      0       0
+   287 ;; BANK3           80      0       0
+   288 ;; BANK4           80      0       0
+   289 ;; BANK5           80      0       0
+   290 ;; BANK6           80      0       0
+   291 ;; BANK7           80      0       0
+   292 ;; BANK8           80      0       0
+   293 ;; BANK9           80      0       0
+   294 ;; BANK10          80      0       0
+   295 ;; BANK11          80      0       0
+   296 ;; BANK12          48      0       0
+   297                           
+   298 ;;
+   299 ;; Pointer list with targets:
+   300                           
+   301 ;; ?___awmod	int  size(1) Largest target is 0
+   302 ;;
+   303 ;; ?_get_PWM_Duty	unsigned int  size(1) Largest target is 0
+   304 ;;
+   305                           
+   306                           
+   307 ;;
+   308 ;; Critical Paths under _main in COMMON
+   309 ;;
+   310 ;;   None.
+   311 ;;
+   312 ;; Critical Paths under _ISR in COMMON
+   313 ;;
+   314 ;;   _update_lights->_get_PWM_Duty
+   315 ;;
+   316 ;; Critical Paths under _main in BANK0
+   317 ;;
+   318 ;;   _setup->_set_PWM_Duty
+   319 ;;
+   320 ;; Critical Paths under _ISR in BANK0
+   321 ;;
+   322 ;;   None.
+   323 ;;
+   324 ;; Critical Paths under _main in BANK1
+   325 ;;
+   326 ;;   None.
+   327 ;;
+   328 ;; Critical Paths under _ISR in BANK1
+   329 ;;
+   330 ;;   None.
+   331 ;;
+   332 ;; Critical Paths under _main in BANK2
+   333 ;;
+   334 ;;   None.
+   335 ;;
+   336 ;; Critical Paths under _ISR in BANK2
+   337 ;;
+   338 ;;   None.
+   339 ;;
+   340 ;; Critical Paths under _main in BANK3
+   341 ;;
+   342 ;;   None.
+   343 ;;
+   344 ;; Critical Paths under _ISR in BANK3
+   345 ;;
+   346 ;;   None.
+   347 ;;
+   348 ;; Critical Paths under _main in BANK4
+   349 ;;
+   350 ;;   None.
+   351 ;;
+   352 ;; Critical Paths under _ISR in BANK4
+   353 ;;
+   354 ;;   None.
+   355 ;;
+   356 ;; Critical Paths under _main in BANK5
+   357 ;;
+   358 ;;   None.
+   359 ;;
+   360 ;; Critical Paths under _ISR in BANK5
+   361 ;;
+   362 ;;   None.
+   363 ;;
+   364 ;; Critical Paths under _main in BANK6
+   365 ;;
+   366 ;;   None.
+   367 ;;
+   368 ;; Critical Paths under _ISR in BANK6
+   369 ;;
+   370 ;;   None.
+   371 ;;
+   372 ;; Critical Paths under _main in BANK7
+   373 ;;
+   374 ;;   None.
+   375 ;;
+   376 ;; Critical Paths under _ISR in BANK7
+   377 ;;
+   378 ;;   None.
+   379 ;;
+   380 ;; Critical Paths under _main in BANK8
+   381 ;;
+   382 ;;   None.
+   383 ;;
+   384 ;; Critical Paths under _ISR in BANK8
+   385 ;;
+   386 ;;   None.
+   387 ;;
+   388 ;; Critical Paths under _main in BANK9
+   389 ;;
+   390 ;;   None.
+   391 ;;
+   392 ;; Critical Paths under _ISR in BANK9
+   393 ;;
+   394 ;;   None.
+   395 ;;
+   396 ;; Critical Paths under _main in BANK10
+   397 ;;
+   398 ;;   None.
+   399 ;;
+   400 ;; Critical Paths under _ISR in BANK10
+   401 ;;
+   402 ;;   None.
+   403 ;;
+   404 ;; Critical Paths under _main in BANK11
+   405 ;;
+   406 ;;   None.
+   407 ;;
+   408 ;; Critical Paths under _ISR in BANK11
+   409 ;;
+   410 ;;   None.
+   411 ;;
+   412 ;; Critical Paths under _main in BANK12
+   413 ;;
+   414 ;;   None.
+   415 ;;
+   416 ;; Critical Paths under _ISR in BANK12
+   417 ;;
+   418 ;;   None.
+   419                           
+   420 ;;
+   421 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   422 ;;
+   423                           
+   424 ;;
+   425 ;;Call Graph Tables:
+   426 ;;
+   427 ;; ---------------------------------------------------------------------------------
+   428 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   429 ;; ---------------------------------------------------------------------------------
+   430 ;; (0) _main                                                 4     0      4      66
+   431 ;;                                              2 BANK0      4     0      4
+   432 ;;                              _setup
+   433 ;; ---------------------------------------------------------------------------------
+   434 ;; (1) _setup                                                0     0      0      66
+   435 ;;                       _set_PWM_Duty
+   436 ;; ---------------------------------------------------------------------------------
+   437 ;; (2) _set_PWM_Duty                                         2     2      0      66
+   438 ;;                                              0 BANK0      2     2      0
+   439 ;; ---------------------------------------------------------------------------------
+   440 ;; Estimated maximum stack depth 2
+   441 ;; ---------------------------------------------------------------------------------
+   442 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   443 ;; ---------------------------------------------------------------------------------
+   444 ;; (3) _ISR                                                  2     2      0     515
+   445 ;;                                             10 COMMON     2     2      0
+   446 ;;                            ___awmod
+   447 ;;                      _update_lights
+   448 ;; ---------------------------------------------------------------------------------
+   449 ;; (4) _update_lights                                        0     0      0     219
+   450 ;;                       _get_PWM_Duty
+   451 ;;                     i1_set_PWM_Duty
+   452 ;; ---------------------------------------------------------------------------------
+   453 ;; (5) i1_set_PWM_Duty                                       2     2      0     219
+   454 ;;                                              0 COMMON     2     2      0
+   455 ;; ---------------------------------------------------------------------------------
+   456 ;; (4) ___awmod                                              7     3      4     296
+   457 ;;                                              0 COMMON     7     3      4
+   458 ;; ---------------------------------------------------------------------------------
+   459 ;; (5) _get_PWM_Duty                                        10     8      2       0
+   460 ;;                                              0 COMMON    10     8      2
+   461 ;; ---------------------------------------------------------------------------------
+   462 ;; Estimated maximum stack depth 5
+   463 ;; ---------------------------------------------------------------------------------
+   464                           
+   465 ;; Call Graph Graphs:
+   466                           
+   467 ;; _main (ROOT)
+   468 ;;   _setup
+   469 ;;     _set_PWM_Duty
+   470 ;;
+   471 ;; _ISR (ROOT)
+   472 ;;   ___awmod
+   473 ;;   _update_lights
+   474 ;;     _get_PWM_Duty
+   475 ;;     i1_set_PWM_Duty
+   476 ;;
+   477                           
+   478 ;; Address spaces:
+   479                           
+   480 ;;Name               Size   Autos  Total    Cost      Usage
+   481 ;;BIGRAM             3F0      0       0       0        0.0%
+   482 ;;EEDATA             100      0       0       0        0.0%
+   483 ;;NULL                 0      0       0       0        0.0%
+   484 ;;CODE                 0      0       0       0        0.0%
+   485 ;;BITCOMMON            E      0       1       1        7.1%
+   486 ;;BITSFR0              0      0       0       1        0.0%
+   487 ;;SFR0                 0      0       0       1        0.0%
+   488 ;;COMMON               E      C       E       2      100.0%
+   489 ;;BITSFR1              0      0       0       2        0.0%
+   490 ;;SFR1                 0      0       0       2        0.0%
+   491 ;;BITSFR2              0      0       0       3        0.0%
+   492 ;;SFR2                 0      0       0       3        0.0%
+   493 ;;STACK                0      0       8       3        0.0%
+   494 ;;BITBANK0            50      0       0       4        0.0%
+   495 ;;BITSFR3              0      0       0       4        0.0%
+   496 ;;SFR3                 0      0       0       4        0.0%
+   497 ;;BANK0               50      6       F       5       18.8%
+   498 ;;BITSFR4              0      0       0       5        0.0%
+   499 ;;SFR4                 0      0       0       5        0.0%
+   500 ;;BITBANK1            50      0       0       6        0.0%
+   501 ;;BITSFR5              0      0       0       6        0.0%
+   502 ;;SFR5                 0      0       0       6        0.0%
+   503 ;;BANK1               50      0       0       7        0.0%
+   504 ;;BITSFR6              0      0       0       7        0.0%
+   505 ;;SFR6                 0      0       0       7        0.0%
+   506 ;;BITBANK2            50      0       0       8        0.0%
+   507 ;;BITSFR7              0      0       0       8        0.0%
+   508 ;;SFR7                 0      0       0       8        0.0%
+   509 ;;BANK2               50      0       0       9        0.0%
+   510 ;;BITSFR8              0      0       0       9        0.0%
+   511 ;;SFR8                 0      0       0       9        0.0%
+   512 ;;BITBANK3            50      0       0      10        0.0%
+   513 ;;BITSFR9              0      0       0      10        0.0%
+   514 ;;SFR9                 0      0       0      10        0.0%
+   515 ;;BANK3               50      0       0      11        0.0%
+   516 ;;BITSFR10             0      0       0      11        0.0%
+   517 ;;SFR10                0      0       0      11        0.0%
+   518 ;;BITBANK4            50      0       0      12        0.0%
+   519 ;;BITSFR11             0      0       0      12        0.0%
+   520 ;;SFR11                0      0       0      12        0.0%
+   521 ;;BANK4               50      0       0      13        0.0%
+   522 ;;BITSFR12             0      0       0      13        0.0%
+   523 ;;SFR12                0      0       0      13        0.0%
+   524 ;;BITBANK5            50      0       0      14        0.0%
+   525 ;;BITSFR13             0      0       0      14        0.0%
+   526 ;;SFR13                0      0       0      14        0.0%
+   527 ;;BANK5               50      0       0      15        0.0%
+   528 ;;BITSFR14             0      0       0      15        0.0%
+   529 ;;SFR14                0      0       0      15        0.0%
+   530 ;;BITBANK6            50      0       0      16        0.0%
+   531 ;;BITSFR15             0      0       0      16        0.0%
+   532 ;;SFR15                0      0       0      16        0.0%
+   533 ;;BANK6               50      0       0      17        0.0%
+   534 ;;BITSFR16             0      0       0      17        0.0%
+   535 ;;SFR16                0      0       0      17        0.0%
+   536 ;;BITBANK7            50      0       0      18        0.0%
+   537 ;;BITSFR17             0      0       0      18        0.0%
+   538 ;;SFR17                0      0       0      18        0.0%
+   539 ;;BANK7               50      0       0      19        0.0%
+   540 ;;BITSFR18             0      0       0      19        0.0%
+   541 ;;SFR18                0      0       0      19        0.0%
+   542 ;;BITSFR19             0      0       0      20        0.0%
+   543 ;;SFR19                0      0       0      20        0.0%
+   544 ;;ABS                  0      0      1D      20        0.0%
+   545 ;;BITBANK8            50      0       0      21        0.0%
+   546 ;;BITSFR20             0      0       0      21        0.0%
+   547 ;;SFR20                0      0       0      21        0.0%
+   548 ;;BANK8               50      0       0      22        0.0%
+   549 ;;BITSFR21             0      0       0      22        0.0%
+   550 ;;SFR21                0      0       0      22        0.0%
+   551 ;;BITBANK9            50      0       0      23        0.0%
+   552 ;;BITSFR22             0      0       0      23        0.0%
+   553 ;;SFR22                0      0       0      23        0.0%
+   554 ;;BANK9               50      0       0      24        0.0%
+   555 ;;BITSFR23             0      0       0      24        0.0%
+   556 ;;SFR23                0      0       0      24        0.0%
+   557 ;;BITBANK10           50      0       0      25        0.0%
+   558 ;;BITSFR24             0      0       0      25        0.0%
+   559 ;;SFR24                0      0       0      25        0.0%
+   560 ;;BANK10              50      0       0      26        0.0%
+   561 ;;BITSFR25             0      0       0      26        0.0%
+   562 ;;SFR25                0      0       0      26        0.0%
+   563 ;;BITBANK11           50      0       0      27        0.0%
+   564 ;;BITSFR26             0      0       0      27        0.0%
+   565 ;;SFR26                0      0       0      27        0.0%
+   566 ;;BANK11              50      0       0      28        0.0%
+   567 ;;BITSFR27             0      0       0      28        0.0%
+   568 ;;SFR27                0      0       0      28        0.0%
+   569 ;;BITBANK12           30      0       0      29        0.0%
+   570 ;;BITSFR28             0      0       0      29        0.0%
+   571 ;;SFR28                0      0       0      29        0.0%
+   572 ;;BANK12              30      0       0      30        0.0%
+   573 ;;BITSFR29             0      0       0      30        0.0%
+   574 ;;SFR29                0      0       0      30        0.0%
+   575 ;;BITSFR30             0      0       0      31        0.0%
+   576 ;;SFR30                0      0       0      31        0.0%
+   577 ;;DATA                 0      0      25      31        0.0%
+   578 ;;BITSFR31             0      0       0      32        0.0%
+   579 ;;SFR31                0      0       0      32        0.0%
+   580                           
+   581                           	global	_main
+   582                           psect	maintext,global,class=CODE,delta=2
+   583                           global __pmaintext
+   584  028B                     __pmaintext:
+   585                           
+   586 ;; *************** function _main *****************
+   587 ;; Defined at:
+   588 ;;		line 62 in file "main.c"
+   589 ;; Parameters:    Size  Location     Type
+   590 ;;  argc            2    2[BANK0 ] int 
+   591 ;;  argv            2    4[BANK0 ] PTR PTR unsigned char 
+   592 ;; Auto vars:     Size  Location     Type
+   593 ;;		None
+   594 ;; Return value:  Size  Location     Type
+   595 ;;                  2    2[BANK0 ] int 
+   596 ;; Registers used:
+   597 ;;		wreg, status,2, status,0, pclath, cstack
+   598 ;; Tracked objects:
+   599 ;;		On entry : 17F/0
+   600 ;;		On exit  : 0/0
+   601 ;;		Unchanged: 0/0
+   602 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+       1  BANK12
+   603 ;;      Params:         0       4       0       0       0       0       0       0       0       0       0       0       
+       0       0
+   604 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0
+   605 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0
+   606 ;;      Totals:         0       4       0       0       0       0       0       0       0       0       0       0       
+       0       0
+   607 ;;Total ram usage:        4 bytes
+   608 ;; Hardware stack levels required when called:    5
+   609 ;; This function calls:
+   610 ;;		_setup
+   611 ;; This function is called by:
+   612 ;;		Startup code after reset
+   613 ;; This function uses a non-reentrant model
+   614 ;;
+   615                           psect	maintext
+   616                           	file	"main.c"
+   617                           	line	62
+   618                           	global	__size_of_main
+   619  0007                     	__size_of_main	equ	__end_of_main-_main
+   620                           	
+   621  028B                     _main:	
+   622                           	opt	stack 11
+   623                           ; Regs used in _main: [wreg+status,2+status,0+pclath+cstack]
+   624                           	line	63
+   625                           	
+   626  028B                     l4508:	
+   627                           ;main.c: 63: setup();
+   628  028B  3182  2212  3182   	fcall	_setup
+   629  028E  2A8F               	goto	l1468
+   630                           	line	65
+   631                           ;main.c: 65: while (1);
+   632                           	
+   633  028F                     l1467:	
+   634                           	
+   635  028F                     l1468:	
+   636  028F  2A8F               	goto	l1468
+   637                           	
+   638  0290                     l1469:	
+   639                           	line	67
+   640                           ;main.c: 66: return (0);
+   641                           ;	Return value of _main is never used
+   642                           	
+   643  0290                     l1470:	
+   644                           	global	start
+   645  0290  3180  28AF         	ljmp	start
+   646                           	opt stack 0
+   647                           GLOBAL	__end_of_main
+   648  0292                     	__end_of_main:
+   649 ;; =============== function _main ends ============
+   650                           
+   651                           	signat	_main,8314
+   652                           	global	_setup
+   653                           psect	text228,local,class=CODE,delta=2
+   654                           global __ptext228
+   655  0212                     __ptext228:
+   656                           
+   657 ;; *************** function _setup *****************
+   658 ;; Defined at:
+   659 ;;		line 70 in file "main.c"
+   660 ;; Parameters:    Size  Location     Type
+   661 ;;		None
+   662 ;; Auto vars:     Size  Location     Type
+   663 ;;		None
+   664 ;; Return value:  Size  Location     Type
+   665 ;;		None               void
+   666 ;; Registers used:
+   667 ;;		wreg, status,2, status,0, pclath, cstack
+   668 ;; Tracked objects:
+   669 ;;		On entry : 0/0
+   670 ;;		On exit  : 0/0
+   671 ;;		Unchanged: 0/0
+   672 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+       1  BANK12
+   673 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0
+   674 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0
+   675 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0
+   676 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0
+   677 ;;Total ram usage:        0 bytes
+   678 ;; Hardware stack levels used:    1
+   679 ;; Hardware stack levels required when called:    4
+   680 ;; This function calls:
+   681 ;;		_set_PWM_Duty
+   682 ;; This function is called by:
+   683 ;;		_main
+   684 ;; This function uses a non-reentrant model
+   685 ;;
+   686                           psect	text228
+   687                           	file	"main.c"
+   688                           	line	70
+   689                           	global	__size_of_setup
+   690  0026                     	__size_of_setup	equ	__end_of_setup-_setup
+   691                           	
+   692  0212                     _setup:	
+   693                           	opt	stack 11
+   694                           ; Regs used in _setup: [wreg+status,2+status,0+pclath+cstack]
+   695                           	line	71
+   696                           	
+   697  0212                     l4468:	
+   698                           # 71 "main.c"
+   699                           	psect config,class=CONFIG,delta=2 ;#
+   700                           # 71 "main.c"
+   701  8007  DDD4               	dw 0xFFFC & 0xFFFF & 0xFFF7 & 0xFFDF & 0xFFFF & 0xFFFF & 0xFFFF & 0xFDFF & 0xFFFF & 0xD
+                                 FFF & 0xFFFC & 0xFFFF & 0xFDFF & 0xDFFF ;#
+   702                           psect	text228
+   703                           	line	74
+   704                           	
+   705  0212                     l4470:	
+   706                           ;main.c: 74: TMR2 = 0;
+   707  0212  0020               	movlb 0	; select bank0
+   708  0213  019A               	clrf	(26)	;volatile
+   709                           	line	76
+   710                           	
+   711  0214                     l4472:	
+   712                           ;main.c: 76: GIE = 1;
+   713  0214  178B               	bsf	(95/8),(95)&7
+   714                           	line	77
+   715                           	
+   716  0215                     l4474:	
+   717                           ;main.c: 77: PEIE = 1;
+   718  0215  170B               	bsf	(94/8),(94)&7
+   719                           	line	79
+   720                           	
+   721  0216                     l4476:	
+   722                           ;main.c: 79: SCS0 = 1;
+   723  0216  0021               	movlb 1	; select bank1
+   724  0217  1419               	bsf	(1224/8)^080h,(1224)&7
+   725                           	line	80
+   726                           	
+   727  0218                     l4478:	
+   728                           ;main.c: 80: SCS1 = 1;
+   729  0218  1499               	bsf	(1225/8)^080h,(1225)&7
+   730                           	line	82
+   731                           	
+   732  0219                     l4480:	
+   733                           ;main.c: 82: IRCF0 = 0;
+   734  0219  1199               	bcf	(1227/8)^080h,(1227)&7
+   735                           	line	83
+   736                           	
+   737  021A                     l4482:	
+   738                           ;main.c: 83: IRCF1 = 1;
+   739  021A  1619               	bsf	(1228/8)^080h,(1228)&7
+   740                           	line	84
+   741                           	
+   742  021B                     l4484:	
+   743                           ;main.c: 84: IRCF2 = 1;
+   744  021B  1699               	bsf	(1229/8)^080h,(1229)&7
+   745                           	line	85
+   746                           	
+   747  021C                     l4486:	
+   748                           ;main.c: 85: IRCF3 = 1;
+   749  021C  1719               	bsf	(1230/8)^080h,(1230)&7
+   750                           	line	86
+   751                           	
+   752  021D                     l4488:	
+   753                           ;main.c: 86: OPTION_REG = 0b11000111;
+   754  021D  30C7               	movlw	(0C7h)
+   755  021E  0095               	movwf	(149)^080h	;volatile
+   756                           	line	88
+   757                           	
+   758  021F                     l4490:	
+   759                           ;main.c: 88: nWPUEN = 0;
+   760  021F  1395               	bcf	(1199/8)^080h,(1199)&7
+   761                           	line	89
+   762                           	
+   763  0220                     l4492:	
+   764                           ;main.c: 89: WPUA = 0xFF;
+   765  0220  30FF               	movlw	(0FFh)
+   766  0221  0024               	movlb 4	; select bank4
+   767  0222  008C               	movwf	(524)^0200h	;volatile
+   768                           	line	90
+   769                           ;main.c: 90: WPUC = 0x00;
+   770  0223  018E               	clrf	(526)^0200h	;volatile
+   771                           	line	92
+   772                           	
+   773  0224                     l4494:	
+   774                           ;main.c: 92: TRISA = 0xFF;
+   775  0224  30FF               	movlw	(0FFh)
+   776  0225  0021               	movlb 1	; select bank1
+   777  0226  008C               	movwf	(140)^080h	;volatile
+   778                           	line	93
+   779                           	
+   780  0227                     l4496:	
+   781                           ;main.c: 93: TRISC = 0x00;
+   782  0227  018E               	clrf	(142)^080h	;volatile
+   783                           	line	95
+   784                           	
+   785  0228                     l4498:	
+   786                           ;main.c: 95: IOCIE = 1;
+   787  0228  158B               	bsf	(91/8),(91)&7
+   788                           	line	96
+   789                           ;main.c: 96: IOCAP = 0xFF;
+   790  0229  30FF               	movlw	(0FFh)
+   791  022A  0027               	movlb 7	; select bank7
+   792  022B  0091               	movwf	(913)^0380h	;volatile
+   793                           	line	97
+   794                           	
+   795  022C                     l4500:	
+   796                           ;main.c: 97: IOCAN = 0x00;
+   797  022C  0192               	clrf	(914)^0380h	;volatile
+   798                           	line	100
+   799                           	
+   800  022D                     l4502:	
+   801                           ;main.c: 100: PR2 = 0xFF;;
+   802  022D  30FF               	movlw	(0FFh)
+   803  022E  0020               	movlb 0	; select bank0
+   804  022F  009B               	movwf	(27)	;volatile
+   805                           	line	101
+   806                           	
+   807  0230                     l4504:	
+   808                           ;main.c: 101: CCP1CON = 0b00111100;
+   809  0230  303C               	movlw	(03Ch)
+   810  0231  0025               	movlb 5	; select bank5
+   811  0232  0093               	movwf	(659)^0280h	;volatile
+   812                           	line	102
+   813                           	
+   814  0233                     l4506:	
+   815                           ;main.c: 102: set_PWM_Duty(0b0001111111);
+   816  0233  307F               	movlw	(07Fh)
+   817  0234  3182  2238  3182   	fcall	_set_PWM_Duty
+   818                           	line	103
+   819                           	
+   820  0237                     l1473:	
+   821  0237  0008               	return
+   822                           	opt stack 0
+   823                           GLOBAL	__end_of_setup
+   824  0238                     	__end_of_setup:
+   825 ;; =============== function _setup ends ============
+   826                           
+   827                           	signat	_setup,88
+   828                           	global	_set_PWM_Duty
+   829                           psect	text229,local,class=CODE,delta=2
+   830                           global __ptext229
+   831  0238                     __ptext229:
+   832                           
+   833 ;; *************** function _set_PWM_Duty *****************
+   834 ;; Defined at:
+   835 ;;		line 173 in file "main.c"
+   836 ;; Parameters:    Size  Location     Type
+   837 ;;  duty            1    wreg     unsigned char 
+   838 ;; Auto vars:     Size  Location     Type
+   839 ;;  duty            1    1[BANK0 ] unsigned char 
+   840 ;; Return value:  Size  Location     Type
+   841 ;;		None               void
+   842 ;; Registers used:
+   843 ;;		wreg, status,2, status,0
+   844 ;; Tracked objects:
+   845 ;;		On entry : 0/0
+   846 ;;		On exit  : 0/0
+   847 ;;		Unchanged: 0/0
+   848 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+       1  BANK12
+   849 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0
+   850 ;;      Locals:         0       1       0       0       0       0       0       0       0       0       0       0       
+       0       0
+   851 ;;      Temps:          0       1       0       0       0       0       0       0       0       0       0       0       
+       0       0
+   852 ;;      Totals:         0       2       0       0       0       0       0       0       0       0       0       0       
+       0       0
+   853 ;;Total ram usage:        2 bytes
+   854 ;; Hardware stack levels used:    1
+   855 ;; Hardware stack levels required when called:    3
+   856 ;; This function calls:
+   857 ;;		Nothing
+   858 ;; This function is called by:
+   859 ;;		_setup
+   860 ;; This function uses a non-reentrant model
+   861 ;;
+   862                           psect	text229
+   863                           	file	"main.c"
+   864                           	line	173
+   865                           	global	__size_of_set_PWM_Duty
+   866  0024                     	__size_of_set_PWM_Duty	equ	__end_of_set_PWM_Duty-_set_PWM_Duty
+   867                           	
+   868  0238                     _set_PWM_Duty:	
+   869                           	opt	stack 11
+   870                           ; Regs used in _set_PWM_Duty: [wreg+status,2+status,0]
+   871                           ;set_PWM_Duty@duty stored from wreg
+   872  0238  0020               	movlb 0	; select bank0
+   873  0239  00AA               	movwf	(set_PWM_Duty@duty)
+   874                           	line	174
+   875                           	
+   876  023A                     l4310:	
+   877                           ;main.c: 174: CCPR1L = duty >> 2;
+   878  023A  082A               	movf	(set_PWM_Duty@duty),w
+   879  023B  00A9               	movwf	(??_set_PWM_Duty+0)+0
+   880  023C  3002               	movlw	02h
+   881  023D                     u2625:
+   882  023D  36A9               	lsrf	(??_set_PWM_Duty+0)+0,f
+   883  023E  0B89               	decfsz	wreg,f
+   884  023F  2A3D               	goto	u2625
+   885  0240  0829               	movf	0+(??_set_PWM_Duty+0)+0,w
+   886  0241  0025               	movlb 5	; select bank5
+   887  0242  0091               	movwf	(657)^0280h	;volatile
+   888                           	line	175
+   889                           	
+   890  0243                     l4312:	
+   891                           ;main.c: 175: DC1B0 = duty & 0b1;
+   892  0243  0020               	movlb 0	; select bank0
+   893  0244  182A               	btfsc	(set_PWM_Duty@duty),0
+   894  0245  2A47               	goto	u2631
+   895  0246  2A4A               	goto	u2630
+   896                           	
+   897  0247                     u2631:
+   898  0247  0025               	movlb 5	; select bank5
+   899  0248  1613               	bsf	(5276/8)^0280h,(5276)&7
+   900  0249  2A4C               	goto	u2644
+   901  024A                     u2630:
+   902  024A  0025               	movlb 5	; select bank5
+   903  024B  1213               	bcf	(5276/8)^0280h,(5276)&7
+   904  024C                     u2644:
+   905                           	line	176
+   906                           ;main.c: 176: DC1B1 = (duty & 0b10) >> 1;
+   907  024C  0020               	movlb 0	; select bank0
+   908  024D  082A               	movf	(set_PWM_Duty@duty),w
+   909  024E  00A9               	movwf	(??_set_PWM_Duty+0)+0
+   910  024F  3001               	movlw	01h
+   911  0250                     u2655:
+   912  0250  36A9               	lsrf	(??_set_PWM_Duty+0)+0,f
+   913  0251  0B89               	decfsz	wreg,f
+   914  0252  2A50               	goto	u2655
+   915  0253  1829               	btfsc	0+(??_set_PWM_Duty+0)+0,0
+   916  0254  2A56               	goto	u2661
+   917  0255  2A59               	goto	u2660
+   918                           	
+   919  0256                     u2661:
+   920  0256  0025               	movlb 5	; select bank5
+   921  0257  1693               	bsf	(5277/8)^0280h,(5277)&7
+   922  0258  2A5B               	goto	u2674
+   923  0259                     u2660:
+   924  0259  0025               	movlb 5	; select bank5
+   925  025A  1293               	bcf	(5277/8)^0280h,(5277)&7
+   926  025B                     u2674:
+   927                           	line	178
+   928                           	
+   929  025B                     l1507:	
+   930  025B  0008               	return
+   931                           	opt stack 0
+   932                           GLOBAL	__end_of_set_PWM_Duty
+   933  025C                     	__end_of_set_PWM_Duty:
+   934 ;; =============== function _set_PWM_Duty ends ============
+   935                           
+   936                           	signat	_set_PWM_Duty,4216
+   937                           	global	_ISR
+   938                           psect	intentry,class=CODE,delta=2
+   939                           global __pintentry
+   940  0004                     __pintentry:
+   941                           
+   942 ;; *************** function _ISR *****************
+   943 ;; Defined at:
+   944 ;;		line 186 in file "main.c"
+   945 ;; Parameters:    Size  Location     Type
+   946 ;;		None
+   947 ;; Auto vars:     Size  Location     Type
+   948 ;;		None
+   949 ;; Return value:  Size  Location     Type
+   950 ;;		None               void
+   951 ;; Registers used:
+   952 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+   953 ;; Tracked objects:
+   954 ;;		On entry : 0/0
+   955 ;;		On exit  : 0/0
+   956 ;;		Unchanged: 0/0
+   957 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+       1  BANK12
+   958 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0
+   959 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0
+   960 ;;      Temps:          2       0       0       0       0       0       0       0       0       0       0       0       
+       0       0
+   961 ;;      Totals:         2       0       0       0       0       0       0       0       0       0       0       0       
+       0       0
+   962 ;;Total ram usage:        2 bytes
+   963 ;; Hardware stack levels used:    1
+   964 ;; Hardware stack levels required when called:    2
+   965 ;; This function calls:
+   966 ;;		___awmod
+   967 ;;		_update_lights
+   968 ;; This function is called by:
+   969 ;;		Interrupt level 1
+   970 ;; This function uses a non-reentrant model
+   971 ;;
+   972                           psect	intentry
+   973                           	file	"main.c"
+   974                           	line	186
+   975                           	global	__size_of_ISR
+   976  00AB                     	__size_of_ISR	equ	__end_of_ISR-_ISR
+   977                           	
+   978  0004                     _ISR:	
+   979                           	opt	stack 11
+   980                           ; Regs used in _ISR: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+   981                           psect	intentry
+   982  0004  3180               	pagesel	$
+   983  0005  0020               	movlb 0	; select bank0
+   984  0006  087F               	movf	btemp+1,w
+   985  0007  00FB               	movwf	(??_ISR+1)
+   986                           	line	187
+   987                           	
+   988  0008                     i1l4378:	
+   989                           ;main.c: 187: if (TMR0IE && TMR0IF)
+   990  0008  1E8B               	btfss	(93/8),(93)&7
+   991  0009  280B               	goto	u284_21
+   992  000A  280C               	goto	u284_20
+   993  000B                     u284_21:
+   994  000B  284E               	goto	i1l1513
+   995  000C                     u284_20:
+   996                           	
+   997  000C                     i1l4380:	
+   998  000C  1D0B               	btfss	(90/8),(90)&7
+   999  000D  280F               	goto	u285_21
+  1000  000E  2810               	goto	u285_20
+  1001  000F                     u285_21:
+  1002  000F  284E               	goto	i1l1513
+  1003  0010                     u285_20:
+  1004                           	line	190
+  1005                           	
+  1006  0010                     i1l4382:	
+  1007                           ;main.c: 188: {
+  1008                           ;main.c: 190: TMR0IF = 0;
+  1009  0010  110B               	bcf	(90/8),(90)&7
+  1010                           	line	191
+  1011                           	
+  1012  0011                     i1l4384:	
+  1013                           ;main.c: 191: TMR0 = 0xF;
+  1014  0011  300F               	movlw	(0Fh)
+  1015  0012  0095               	movwf	(21)	;volatile
+  1016                           	line	192
+  1017                           ;main.c: 192: blink_state = ~blink_state;
+  1018  0013  3004               	movlw	1<<((_blink_state)&7)
+  1019  0014  06FC               	xorwf	((_blink_state)/8),f
+  1020                           	line	193
+  1021                           	
+  1022  0015                     i1l4386:	
+  1023                           ;main.c: 193: if (blink_state)
+  1024  0015  1D7C               	btfss	(_blink_state/8),(_blink_state)&7
+  1025  0016  2818               	goto	u286_21
+  1026  0017  2819               	goto	u286_20
+  1027  0018                     u286_21:
+  1028  0018  28A8               	goto	i1l4428
+  1029  0019                     u286_20:
+  1030                           	line	195
+  1031                           	
+  1032  0019                     i1l4388:	
+  1033                           ;main.c: 194: {
+  1034                           ;main.c: 195: if (blinks_l++ == -1)
+  1035  0019  3001               	movlw	01h
+  1036  001A  07A4               	addwf	(_blinks_l),f
+  1037  001B  3000               	movlw	0
+  1038  001C  3DA5               	addwfc	(_blinks_l+1),f
+  1039  001D  3000               	movlw	0
+  1040  001E  3DA6               	addwfc	(_blinks_l+2),f
+  1041  001F  3000               	movlw	0
+  1042  0020  3DA7               	addwfc	(_blinks_l+3),f
+  1043  0021  0827               	movf	((_blinks_l+3)),w
+  1044  0022  0426               	iorwf	((_blinks_l+2)),w
+  1045  0023  0425               	iorwf	((_blinks_l+1)),w
+  1046  0024  0424               	iorwf	((_blinks_l)),w
+  1047  0025  1D03               	skipz
+  1048  0026  2828               	goto	u287_21
+  1049  0027  2829               	goto	u287_20
+  1050  0028                     u287_21:
+  1051  0028  28A8               	goto	i1l4428
+  1052  0029                     u287_20:
+  1053                           	line	196
+  1054                           	
+  1055  0029                     i1l4390:	
+  1056                           ;main.c: 196: if (blinks_h++ == -1)
+  1057  0029  3001               	movlw	01h
+  1058  002A  07A0               	addwf	(_blinks_h),f
+  1059  002B  3000               	movlw	0
+  1060  002C  3DA1               	addwfc	(_blinks_h+1),f
+  1061  002D  3000               	movlw	0
+  1062  002E  3DA2               	addwfc	(_blinks_h+2),f
+  1063  002F  3000               	movlw	0
+  1064  0030  3DA3               	addwfc	(_blinks_h+3),f
+  1065  0031  0823               	movf	((_blinks_h+3)),w
+  1066  0032  0422               	iorwf	((_blinks_h+2)),w
+  1067  0033  0421               	iorwf	((_blinks_h+1)),w
+  1068  0034  0420               	iorwf	((_blinks_h)),w
+  1069  0035  1D03               	skipz
+  1070  0036  2838               	goto	u288_21
+  1071  0037  2839               	goto	u288_20
+  1072  0038                     u288_21:
+  1073  0038  28A8               	goto	i1l4428
+  1074  0039                     u288_20:
+  1075                           	line	198
+  1076                           	
+  1077  0039                     i1l4392:	
+  1078                           ;main.c: 197: {
+  1079                           ;main.c: 198: blinks_l = 0;
+  1080  0039  3000               	movlw	0
+  1081  003A  00A7               	movwf	(_blinks_l+3)
+  1082  003B  3000               	movlw	0
+  1083  003C  00A6               	movwf	(_blinks_l+2)
+  1084  003D  3000               	movlw	0
+  1085  003E  00A5               	movwf	(_blinks_l+1)
+  1086  003F  3000               	movlw	0
+  1087  0040  00A4               	movwf	(_blinks_l)
+  1088                           
+  1089                           	line	199
+  1090                           ;main.c: 199: blinks_h = 0;
+  1091  0041  3000               	movlw	0
+  1092  0042  00A3               	movwf	(_blinks_h+3)
+  1093  0043  3000               	movlw	0
+  1094  0044  00A2               	movwf	(_blinks_h+2)
+  1095  0045  3000               	movlw	0
+  1096  0046  00A1               	movwf	(_blinks_h+1)
+  1097  0047  3000               	movlw	0
+  1098  0048  00A0               	movwf	(_blinks_h)
+  1099                           
+  1100                           	line	200
+  1101                           	
+  1102  0049                     i1l4394:	
+  1103                           # 200 "main.c"
+  1104  0049  0063               sleep ;#
+  1105                           psect	intentry
+  1106  004A  28A8               	goto	i1l4428
+  1107                           	line	201
+  1108                           	
+  1109  004B                     i1l1516:	
+  1110  004B  28A8               	goto	i1l4428
+  1111                           	line	202
+  1112                           	
+  1113  004C                     i1l1515:	
+  1114  004C  28A8               	goto	i1l4428
+  1115                           	
+  1116  004D                     i1l1514:	
+  1117                           	line	203
+  1118                           ;main.c: 201: }
+  1119                           ;main.c: 202: }
+  1120                           ;main.c: 203: }
+  1121  004D  28A8               	goto	i1l4428
+  1122                           	line	204
+  1123                           	
+  1124  004E                     i1l1513:	
+  1125                           ;main.c: 204: else if (IOCIE && IOCAF)
+  1126  004E  1D8B               	btfss	(91/8),(91)&7
+  1127  004F  2851               	goto	u289_21
+  1128  0050  2852               	goto	u289_20
+  1129  0051                     u289_21:
+  1130  0051  28A8               	goto	i1l4428
+  1131  0052                     u289_20:
+  1132                           	
+  1133  0052                     i1l4396:	
+  1134  0052  0027               	movlb 7	; select bank7
+  1135  0053  0813               	movf	(915)^0380h,w	;volatile
+  1136  0054  1D03               	skipz
+  1137  0055  2857               	goto	u290_20
+  1138  0056  28A8               	goto	i1l4428
+  1139  0057                     u290_20:
+  1140                           	line	210
+  1141                           	
+  1142  0057                     i1l4398:	
+  1143                           ;main.c: 205: {
+  1144                           ;main.c: 210: if (IOCAF & 0b1)
+  1145  0057  1C13               	btfss	(915)^0380h,(0)&7
+  1146  0058  285A               	goto	u291_21
+  1147  0059  285B               	goto	u291_20
+  1148  005A                     u291_21:
+  1149  005A  285F               	goto	i1l4404
+  1150  005B                     u291_20:
+  1151                           	line	212
+  1152                           	
+  1153  005B                     i1l4400:	
+  1154                           ;main.c: 211: {
+  1155                           ;main.c: 212: IOCAF0 = 0;
+  1156  005B  1013               	bcf	(7320/8)^0380h,(7320)&7
+  1157                           	line	213
+  1158                           	
+  1159  005C                     i1l4402:	
+  1160                           ;main.c: 213: blink_R = ~blink_R;
+  1161  005C  3002               	movlw	1<<((_blink_R)&7)
+  1162  005D  06FC               	xorwf	((_blink_R)/8),f
+  1163  005E  285F               	goto	i1l4404
+  1164                           	line	214
+  1165                           	
+  1166  005F                     i1l1519:	
+  1167                           	line	216
+  1168                           	
+  1169  005F                     i1l4404:	
+  1170                           ;main.c: 214: }
+  1171                           ;main.c: 216: if (IOCAF & 0b10)
+  1172  005F  1C93               	btfss	(915)^0380h,(1)&7
+  1173  0060  2862               	goto	u292_21
+  1174  0061  2863               	goto	u292_20
+  1175  0062                     u292_21:
+  1176  0062  2867               	goto	i1l4410
+  1177  0063                     u292_20:
+  1178                           	line	218
+  1179                           	
+  1180  0063                     i1l4406:	
+  1181                           ;main.c: 217: {
+  1182                           ;main.c: 218: IOCAF1 = 0;
+  1183  0063  1093               	bcf	(7321/8)^0380h,(7321)&7
+  1184                           	line	219
+  1185                           	
+  1186  0064                     i1l4408:	
+  1187                           ;main.c: 219: blink_L = ~blink_L;
+  1188  0064  3001               	movlw	1<<((_blink_L)&7)
+  1189  0065  06FC               	xorwf	((_blink_L)/8),f
+  1190  0066  2867               	goto	i1l4410
+  1191                           	line	220
+  1192                           	
+  1193  0067                     i1l1520:	
+  1194                           	line	222
+  1195                           	
+  1196  0067                     i1l4410:	
+  1197                           ;main.c: 220: }
+  1198                           ;main.c: 222: if (IOCAF & 0b100)
+  1199  0067  1D13               	btfss	(915)^0380h,(2)&7
+  1200  0068  286A               	goto	u293_21
+  1201  0069  286B               	goto	u293_20
+  1202  006A                     u293_21:
+  1203  006A  287F               	goto	i1l4416
+  1204  006B                     u293_20:
+  1205                           	line	224
+  1206                           	
+  1207  006B                     i1l4412:	
+  1208                           ;main.c: 223: {
+  1209                           ;main.c: 224: IOCAF2 = 0;
+  1210  006B  1113               	bcf	(7322/8)^0380h,(7322)&7
+  1211                           	line	225
+  1212                           	
+  1213  006C                     i1l4414:	
+  1214                           ;main.c: 225: front_state = (front_state + 1) % 5;
+  1215  006C  3005               	movlw	low(05h)
+  1216  006D  00F0               	movwf	(?___awmod)
+  1217  006E  3000               	movlw	high(05h)
+  1218  006F  00F1               	movwf	((?___awmod))+1
+  1219  0070  087D               	movf	(_front_state),w
+  1220  0071  3E01               	addlw	low(01h)
+  1221  0072  00F2               	movwf	0+(?___awmod)+02h
+  1222  0073  3000               	movlw	high(01h)
+  1223  0074  1803               	skipnc
+  1224  0075  3001               	movlw	(high(01h)+1)&0ffh
+  1225  0076  00F3               	movwf	(0+(?___awmod)+02h)+1
+  1226  0077  3181  2188  3180   	fcall	___awmod
+  1227  007A  0870               	movf	(0+(?___awmod)),w
+  1228  007B  00FA               	movwf	(??_ISR+0)+0
+  1229  007C  087A               	movf	(??_ISR+0)+0,w
+  1230  007D  00FD               	movwf	(_front_state)
+  1231  007E  287F               	goto	i1l4416
+  1232                           	line	226
+  1233                           	
+  1234  007F                     i1l1521:	
+  1235                           	line	228
+  1236                           	
+  1237  007F                     i1l4416:	
+  1238                           ;main.c: 226: }
+  1239                           ;main.c: 228: if (IOCAF & 0b1000)
+  1240  007F  0027               	movlb 7	; select bank7
+  1241  0080  1D93               	btfss	(915)^0380h,(3)&7
+  1242  0081  2883               	goto	u294_21
+  1243  0082  2884               	goto	u294_20
+  1244  0083                     u294_21:
+  1245  0083  2885               	goto	i1l1522
+  1246  0084                     u294_20:
+  1247                           	line	230
+  1248                           	
+  1249  0084                     i1l4418:	
+  1250                           ;main.c: 229: {
+  1251                           ;main.c: 230: IOCAF3 = 0;
+  1252  0084  1193               	bcf	(7323/8)^0380h,(7323)&7
+  1253                           	line	231
+  1254                           	
+  1255  0085                     i1l1522:	
+  1256                           	line	233
+  1257                           ;main.c: 231: }
+  1258                           ;main.c: 233: if (IOCAF & 0b10000)
+  1259  0085  1E13               	btfss	(915)^0380h,(4)&7
+  1260  0086  2888               	goto	u295_21
+  1261  0087  2889               	goto	u295_20
+  1262  0088                     u295_21:
+  1263  0088  289F               	goto	i1l4424
+  1264  0089                     u295_20:
+  1265                           	line	235
+  1266                           	
+  1267  0089                     i1l4420:	
+  1268                           ;main.c: 234: {
+  1269                           ;main.c: 235: IOCAF4 = 0;
+  1270  0089  1213               	bcf	(7324/8)^0380h,(7324)&7
+  1271                           	line	236
+  1272                           	
+  1273  008A                     i1l4422:	
+  1274                           ;main.c: 236: rear_state = (rear_state + 1) % 3;
+  1275  008A  3003               	movlw	low(03h)
+  1276  008B  00F0               	movwf	(?___awmod)
+  1277  008C  3000               	movlw	high(03h)
+  1278  008D  00F1               	movwf	((?___awmod))+1
+  1279  008E  0020               	movlb 0	; select bank0
+  1280  008F  0828               	movf	(_rear_state),w
+  1281  0090  3E01               	addlw	low(01h)
+  1282  0091  00F2               	movwf	0+(?___awmod)+02h
+  1283  0092  3000               	movlw	high(01h)
+  1284  0093  1803               	skipnc
+  1285  0094  3001               	movlw	(high(01h)+1)&0ffh
+  1286  0095  00F3               	movwf	(0+(?___awmod)+02h)+1
+  1287  0096  3181  2188  3180   	fcall	___awmod
+  1288  0099  0870               	movf	(0+(?___awmod)),w
+  1289  009A  00FA               	movwf	(??_ISR+0)+0
+  1290  009B  087A               	movf	(??_ISR+0)+0,w
+  1291  009C  0020               	movlb 0	; select bank0
+  1292  009D  00A8               	movwf	(_rear_state)
+  1293  009E  289F               	goto	i1l4424
+  1294                           	line	237
+  1295                           	
+  1296  009F                     i1l1523:	
+  1297                           	line	239
+  1298                           	
+  1299  009F                     i1l4424:	
+  1300                           ;main.c: 237: }
+  1301                           ;main.c: 239: if (IOCAF & 0b100000)
+  1302  009F  0027               	movlb 7	; select bank7
+  1303  00A0  1E93               	btfss	(915)^0380h,(5)&7
+  1304  00A1  28A3               	goto	u296_21
+  1305  00A2  28A4               	goto	u296_20
+  1306  00A3                     u296_21:
+  1307  00A3  28A8               	goto	i1l4428
+  1308  00A4                     u296_20:
+  1309                           	line	241
+  1310                           	
+  1311  00A4                     i1l4426:	
+  1312                           ;main.c: 240: {
+  1313                           ;main.c: 241: IOCAF5 = 0;
+  1314  00A4  1293               	bcf	(7325/8)^0380h,(7325)&7
+  1315  00A5  28A8               	goto	i1l4428
+  1316                           	line	243
+  1317                           	
+  1318  00A6                     i1l1524:	
+  1319  00A6  28A8               	goto	i1l4428
+  1320                           	line	244
+  1321                           	
+  1322  00A7                     i1l1518:	
+  1323  00A7  28A8               	goto	i1l4428
+  1324                           	line	245
+  1325                           	
+  1326  00A8                     i1l1517:	
+  1327                           	
+  1328  00A8                     i1l4428:	
+  1329                           ;main.c: 243: }
+  1330                           ;main.c: 244: }
+  1331                           ;main.c: 245: update_lights();
+  1332  00A8  3180  20B2  3180   	fcall	_update_lights
+  1333                           	line	246
+  1334                           	
+  1335  00AB                     i1l1525:	
+  1336  00AB  087B               	movf	(??_ISR+1),w
+  1337  00AC  0020               	movlb 0	; select bank0
+  1338  00AD  00FF               	movwf	btemp+1
+  1339  00AE  0009               	retfie
+  1340                           	opt stack 0
+  1341                           GLOBAL	__end_of_ISR
+  1342  00AF                     	__end_of_ISR:
+  1343 ;; =============== function _ISR ends ============
+  1344                           
+  1345                           	signat	_ISR,88
+  1346                           	global	_update_lights
+  1347                           psect	text231,local,class=CODE,delta=2
+  1348                           global __ptext231
+  1349  00B2                     __ptext231:
+  1350                           
+  1351 ;; *************** function _update_lights *****************
+  1352 ;; Defined at:
+  1353 ;;		line 106 in file "main.c"
+  1354 ;; Parameters:    Size  Location     Type
+  1355 ;;		None
+  1356 ;; Auto vars:     Size  Location     Type
+  1357 ;;		None
+  1358 ;; Return value:  Size  Location     Type
+  1359 ;;		None               void
+  1360 ;; Registers used:
+  1361 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+  1362 ;; Tracked objects:
+  1363 ;;		On entry : 0/0
+  1364 ;;		On exit  : 0/0
+  1365 ;;		Unchanged: 0/0
+  1366 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+       1  BANK12
+  1367 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0
+  1368 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0
+  1369 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0
+  1370 ;;      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0
+  1371 ;;Total ram usage:        0 bytes
+  1372 ;; Hardware stack levels used:    1
+  1373 ;; Hardware stack levels required when called:    1
+  1374 ;; This function calls:
+  1375 ;;		_get_PWM_Duty
+  1376 ;;		i1_set_PWM_Duty
+  1377 ;; This function is called by:
+  1378 ;;		_ISR
+  1379 ;; This function uses a non-reentrant model
+  1380 ;;
+  1381                           psect	text231
+  1382                           	file	"main.c"
+  1383                           	line	106
+  1384                           	global	__size_of_update_lights
+  1385  00D6                     	__size_of_update_lights	equ	__end_of_update_lights-_update_lights
+  1386                           	
+  1387  00B2                     _update_lights:	
+  1388                           	opt	stack 11
+  1389                           ; Regs used in _update_lights: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+  1390                           	line	108
+  1391                           	
+  1392  00B2                     i1l4314:	
+  1393                           ;main.c: 108: if (!(front_state || rear_state || blink_L || blink_R) || (blinks_h == -1)
+                                 )
+  1394  00B2  08FD               	movf	(_front_state),f
+  1395  00B3  1D03               	skipz
+  1396  00B4  28B6               	goto	u268_21
+  1397  00B5  28B7               	goto	u268_20
+  1398  00B6                     u268_21:
+  1399  00B6  28C6               	goto	i1l4322
+  1400  00B7                     u268_20:
+  1401                           	
+  1402  00B7                     i1l4316:	
+  1403  00B7  0020               	movlb 0	; select bank0
+  1404  00B8  08A8               	movf	(_rear_state),f
+  1405  00B9  1D03               	skipz
+  1406  00BA  28BC               	goto	u269_21
+  1407  00BB  28BD               	goto	u269_20
+  1408  00BC                     u269_21:
+  1409  00BC  28C6               	goto	i1l4322
+  1410  00BD                     u269_20:
+  1411                           	
+  1412  00BD                     i1l4318:	
+  1413  00BD  187C               	btfsc	(_blink_L/8),(_blink_L)&7
+  1414  00BE  28C0               	goto	u270_21
+  1415  00BF  28C1               	goto	u270_20
+  1416  00C0                     u270_21:
+  1417  00C0  28C6               	goto	i1l4322
+  1418  00C1                     u270_20:
+  1419                           	
+  1420  00C1                     i1l4320:	
+  1421  00C1  1CFC               	btfss	(_blink_R/8),(_blink_R)&7
+  1422  00C2  28C4               	goto	u271_21
+  1423  00C3  28C5               	goto	u271_20
+  1424  00C4                     u271_21:
+  1425  00C4  28DA               	goto	i1l4324
+  1426  00C5                     u271_20:
+  1427  00C5  28C6               	goto	i1l4322
+  1428                           	
+  1429  00C6                     i1l1480:	
+  1430                           	
+  1431  00C6                     i1l4322:	
+  1432  00C6  30FF               	movlw	0FFh
+  1433  00C7  0020               	movlb 0	; select bank0
+  1434  00C8  0623               	xorwf	(_blinks_h+3),w
+  1435  00C9  1D03               	skipz
+  1436  00CA  28D5               	goto	u272_25
+  1437  00CB  30FF               	movlw	0FFh
+  1438  00CC  0622               	xorwf	(_blinks_h+2),w
+  1439  00CD  1D03               	skipz
+  1440  00CE  28D5               	goto	u272_25
+  1441  00CF  30FF               	movlw	0FFh
+  1442  00D0  0621               	xorwf	(_blinks_h+1),w
+  1443  00D1  1D03               	skipz
+  1444  00D2  28D5               	goto	u272_25
+  1445  00D3  30FF               	movlw	0FFh
+  1446  00D4  0620               	xorwf	(_blinks_h),w
+  1447  00D5                     u272_25:
+  1448  00D5  1D03               	skipz
+  1449  00D6  28D8               	goto	u272_21
+  1450  00D7  28D9               	goto	u272_20
+  1451  00D8                     u272_21:
+  1452  00D8  2962               	goto	i1l4366
+  1453  00D9                     u272_20:
+  1454  00D9  28DA               	goto	i1l4324
+  1455                           	
+  1456  00DA                     i1l1478:	
+  1457                           	line	110
+  1458                           	
+  1459  00DA                     i1l4324:	
+  1460                           ;main.c: 109: {
+  1461                           ;main.c: 110: blinks_h = 0;
+  1462  00DA  3000               	movlw	0
+  1463  00DB  00A3               	movwf	(_blinks_h+3)
+  1464  00DC  3000               	movlw	0
+  1465  00DD  00A2               	movwf	(_blinks_h+2)
+  1466  00DE  3000               	movlw	0
+  1467  00DF  00A1               	movwf	(_blinks_h+1)
+  1468  00E0  3000               	movlw	0
+  1469  00E1  00A0               	movwf	(_blinks_h)
+  1470                           
+  1471                           	line	111
+  1472                           ;main.c: 111: blinks_l = 0;
+  1473  00E2  3000               	movlw	0
+  1474  00E3  00A7               	movwf	(_blinks_l+3)
+  1475  00E4  3000               	movlw	0
+  1476  00E5  00A6               	movwf	(_blinks_l+2)
+  1477  00E6  3000               	movlw	0
+  1478  00E7  00A5               	movwf	(_blinks_l+1)
+  1479  00E8  3000               	movlw	0
+  1480  00E9  00A4               	movwf	(_blinks_l)
+  1481                           
+  1482                           	line	112
+  1483                           	
+  1484  00EA                     i1l4326:	
+  1485                           # 112 "main.c"
+  1486  00EA  0063               sleep ;#
+  1487                           psect	text231
+  1488                           	line	113
+  1489                           ;main.c: 113: }
+  1490  00EB  2987               	goto	i1l1504
+  1491                           	line	114
+  1492                           	
+  1493  00EC                     i1l1476:	
+  1494                           	line	116
+  1495                           ;main.c: 114: else
+  1496                           ;main.c: 115: {
+  1497                           ;main.c: 116: switch (front_state)
+  1498  00EC  2962               	goto	i1l4366
+  1499                           	line	118
+  1500                           ;main.c: 117: {
+  1501                           ;main.c: 118: case LOW_SLD:
+  1502                           	
+  1503  00ED                     i1l1483:	
+  1504                           	line	119
+  1505                           	
+  1506  00ED                     i1l4328:	
+  1507                           ;main.c: 119: if (get_PWM_Duty() == 0b0001111111)
+  1508  00ED  3181  21E8  3180   	fcall	_get_PWM_Duty
+  1509  00F0  307F               	movlw	07Fh
+  1510  00F1  0670               	xorwf	(0+(?_get_PWM_Duty)),w
+  1511  00F2  0471               	iorwf	(1+(?_get_PWM_Duty)),w
+  1512  00F3  1D03               	skipz
+  1513  00F4  28F6               	goto	u273_21
+  1514  00F5  28F7               	goto	u273_20
+  1515  00F6                     u273_21:
+  1516  00F6  28F9               	goto	i1l4332
+  1517  00F7                     u273_20:
+  1518  00F7  297D               	goto	i1l4372
+  1519                           	line	120
+  1520                           	
+  1521  00F8                     i1l4330:	
+  1522                           ;main.c: 120: break;
+  1523  00F8  297D               	goto	i1l4372
+  1524                           	
+  1525  00F9                     i1l1484:	
+  1526                           	line	121
+  1527                           	
+  1528  00F9                     i1l4332:	
+  1529                           ;main.c: 121: set_PWM_Duty(0b0001111111);
+  1530  00F9  307F               	movlw	(07Fh)
+  1531  00FA  3182  225C  3180   	fcall	i1_set_PWM_Duty
+  1532                           	line	122
+  1533                           ;main.c: 122: break;
+  1534  00FD  297D               	goto	i1l4372
+  1535                           	line	123
+  1536                           ;main.c: 123: case LOW_BLK:
+  1537                           	
+  1538  00FE                     i1l1486:	
+  1539                           	line	124
+  1540                           ;main.c: 124: if (blink_state)
+  1541  00FE  1D7C               	btfss	(_blink_state/8),(_blink_state)&7
+  1542  00FF  2901               	goto	u274_21
+  1543  0100  2902               	goto	u274_20
+  1544  0101                     u274_21:
+  1545  0101  2913               	goto	i1l4340
+  1546  0102                     u274_20:
+  1547                           	line	126
+  1548                           	
+  1549  0102                     i1l4334:	
+  1550                           ;main.c: 125: {
+  1551                           ;main.c: 126: if (get_PWM_Duty() == 0b0001111111)
+  1552  0102  3181  21E8  3180   	fcall	_get_PWM_Duty
+  1553  0105  307F               	movlw	07Fh
+  1554  0106  0670               	xorwf	(0+(?_get_PWM_Duty)),w
+  1555  0107  0471               	iorwf	(1+(?_get_PWM_Duty)),w
+  1556  0108  1D03               	skipz
+  1557  0109  290B               	goto	u275_21
+  1558  010A  290C               	goto	u275_20
+  1559  010B                     u275_21:
+  1560  010B  290E               	goto	i1l4338
+  1561  010C                     u275_20:
+  1562  010C  297D               	goto	i1l4372
+  1563                           	line	127
+  1564                           	
+  1565  010D                     i1l4336:	
+  1566                           ;main.c: 127: break;
+  1567  010D  297D               	goto	i1l4372
+  1568                           	
+  1569  010E                     i1l1488:	
+  1570                           	line	128
+  1571                           	
+  1572  010E                     i1l4338:	
+  1573                           ;main.c: 128: set_PWM_Duty(0b1111111111);
+  1574  010E  30FF               	movlw	(0FFh)
+  1575  010F  3182  225C  3180   	fcall	i1_set_PWM_Duty
+  1576                           	line	129
+  1577                           ;main.c: 129: }
+  1578  0112  297D               	goto	i1l4372
+  1579                           	line	130
+  1580                           	
+  1581  0113                     i1l1487:	
+  1582                           	line	132
+  1583                           	
+  1584  0113                     i1l4340:	
+  1585                           ;main.c: 130: else
+  1586                           ;main.c: 131: {
+  1587                           ;main.c: 132: if (get_PWM_Duty() == 0b0000000000)
+  1588  0113  3181  21E8  3180   	fcall	_get_PWM_Duty
+  1589  0116  0871               	movf	((1+(?_get_PWM_Duty))),w
+  1590  0117  0470               	iorwf	((0+(?_get_PWM_Duty))),w
+  1591  0118  1D03               	skipz
+  1592  0119  291B               	goto	u276_21
+  1593  011A  291C               	goto	u276_20
+  1594  011B                     u276_21:
+  1595  011B  291E               	goto	i1l4344
+  1596  011C                     u276_20:
+  1597  011C  297D               	goto	i1l4372
+  1598                           	line	133
+  1599                           	
+  1600  011D                     i1l4342:	
+  1601                           ;main.c: 133: break;
+  1602  011D  297D               	goto	i1l4372
+  1603                           	
+  1604  011E                     i1l1490:	
+  1605                           	line	134
+  1606                           	
+  1607  011E                     i1l4344:	
+  1608                           ;main.c: 134: set_PWM_Duty(0b0000000000);
+  1609  011E  3000               	movlw	(0)
+  1610  011F  3182  225C  3180   	fcall	i1_set_PWM_Duty
+  1611  0122  297D               	goto	i1l4372
+  1612                           	line	135
+  1613                           	
+  1614  0123                     i1l1489:	
+  1615                           	line	136
+  1616                           ;main.c: 135: }
+  1617                           ;main.c: 136: break;
+  1618  0123  297D               	goto	i1l4372
+  1619                           	line	137
+  1620                           ;main.c: 137: case HIGH_SLD:
+  1621                           	
+  1622  0124                     i1l1491:	
+  1623                           	line	138
+  1624                           	
+  1625  0124                     i1l4346:	
+  1626                           ;main.c: 138: if (get_PWM_Duty() == 0b1111111111)
+  1627  0124  3181  21E8  3180   	fcall	_get_PWM_Duty
+  1628  0127  3003               	movlw	high(03FFh)
+  1629  0128  0671               	xorwf	(1+(?_get_PWM_Duty)),w
+  1630  0129  1D03               	skipz
+  1631  012A  292D               	goto	u277_25
+  1632  012B  30FF               	movlw	low(03FFh)
+  1633  012C  0670               	xorwf	(0+(?_get_PWM_Duty)),w
+  1634  012D                     u277_25:
+  1635                           
+  1636  012D  1D03               	skipz
+  1637  012E  2930               	goto	u277_21
+  1638  012F  2931               	goto	u277_20
+  1639  0130                     u277_21:
+  1640  0130  2933               	goto	i1l4350
+  1641  0131                     u277_20:
+  1642  0131  297D               	goto	i1l4372
+  1643                           	line	139
+  1644                           	
+  1645  0132                     i1l4348:	
+  1646                           ;main.c: 139: break;
+  1647  0132  297D               	goto	i1l4372
+  1648                           	
+  1649  0133                     i1l1492:	
+  1650                           	line	140
+  1651                           	
+  1652  0133                     i1l4350:	
+  1653                           ;main.c: 140: set_PWM_Duty(0b1111111111);
+  1654  0133  30FF               	movlw	(0FFh)
+  1655  0134  3182  225C  3180   	fcall	i1_set_PWM_Duty
+  1656                           	line	141
+  1657                           ;main.c: 141: break;
+  1658  0137  297D               	goto	i1l4372
+  1659                           	line	142
+  1660                           ;main.c: 142: case HIGH_BLK:
+  1661                           	
+  1662  0138                     i1l1493:	
+  1663                           	line	143
+  1664                           ;main.c: 143: if (blink_state)
+  1665  0138  1D7C               	btfss	(_blink_state/8),(_blink_state)&7
+  1666  0139  293B               	goto	u278_21
+  1667  013A  293C               	goto	u278_20
+  1668  013B                     u278_21:
+  1669  013B  2950               	goto	i1l4358
+  1670  013C                     u278_20:
+  1671                           	line	145
+  1672                           	
+  1673  013C                     i1l4352:	
+  1674                           ;main.c: 144: {
+  1675                           ;main.c: 145: if (get_PWM_Duty() == 0b1111111111)
+  1676  013C  3181  21E8  3180   	fcall	_get_PWM_Duty
+  1677  013F  3003               	movlw	high(03FFh)
+  1678  0140  0671               	xorwf	(1+(?_get_PWM_Duty)),w
+  1679  0141  1D03               	skipz
+  1680  0142  2945               	goto	u279_25
+  1681  0143  30FF               	movlw	low(03FFh)
+  1682  0144  0670               	xorwf	(0+(?_get_PWM_Duty)),w
+  1683  0145                     u279_25:
+  1684                           
+  1685  0145  1D03               	skipz
+  1686  0146  2948               	goto	u279_21
+  1687  0147  2949               	goto	u279_20
+  1688  0148                     u279_21:
+  1689  0148  294B               	goto	i1l4356
+  1690  0149                     u279_20:
+  1691  0149  297D               	goto	i1l4372
+  1692                           	line	146
+  1693                           	
+  1694  014A                     i1l4354:	
+  1695                           ;main.c: 146: break;
+  1696  014A  297D               	goto	i1l4372
+  1697                           	
+  1698  014B                     i1l1495:	
+  1699                           	line	147
+  1700                           	
+  1701  014B                     i1l4356:	
+  1702                           ;main.c: 147: set_PWM_Duty(0b1111111111);
+  1703  014B  30FF               	movlw	(0FFh)
+  1704  014C  3182  225C  3180   	fcall	i1_set_PWM_Duty
+  1705                           	line	148
+  1706                           ;main.c: 148: }
+  1707  014F  297D               	goto	i1l4372
+  1708                           	line	149
+  1709                           	
+  1710  0150                     i1l1494:	
+  1711                           	line	151
+  1712                           	
+  1713  0150                     i1l4358:	
+  1714                           ;main.c: 149: else
+  1715                           ;main.c: 150: {
+  1716                           ;main.c: 151: if (get_PWM_Duty() == 0b0000000000)
+  1717  0150  3181  21E8  3180   	fcall	_get_PWM_Duty
+  1718  0153  0871               	movf	((1+(?_get_PWM_Duty))),w
+  1719  0154  0470               	iorwf	((0+(?_get_PWM_Duty))),w
+  1720  0155  1D03               	skipz
+  1721  0156  2958               	goto	u280_21
+  1722  0157  2959               	goto	u280_20
+  1723  0158                     u280_21:
+  1724  0158  295B               	goto	i1l4362
+  1725  0159                     u280_20:
+  1726  0159  297D               	goto	i1l4372
+  1727                           	line	152
+  1728                           	
+  1729  015A                     i1l4360:	
+  1730                           ;main.c: 152: break;
+  1731  015A  297D               	goto	i1l4372
+  1732                           	
+  1733  015B                     i1l1497:	
+  1734                           	line	153
+  1735                           	
+  1736  015B                     i1l4362:	
+  1737                           ;main.c: 153: set_PWM_Duty(0b0000000000);
+  1738  015B  3000               	movlw	(0)
+  1739  015C  3182  225C  3180   	fcall	i1_set_PWM_Duty
+  1740  015F  297D               	goto	i1l4372
+  1741                           	line	154
+  1742                           	
+  1743  0160                     i1l1496:	
+  1744                           	line	155
+  1745                           ;main.c: 154: }
+  1746                           ;main.c: 155: break;
+  1747  0160  297D               	goto	i1l4372
+  1748                           	line	156
+  1749                           	
+  1750  0161                     i1l4364:	
+  1751                           ;main.c: 156: }
+  1752  0161  297D               	goto	i1l4372
+  1753                           	line	116
+  1754                           	
+  1755  0162                     i1l1482:	
+  1756                           	
+  1757  0162                     i1l4366:	
+  1758  0162  087D               	movf	(_front_state),w
+  1759                           	; Switch size 1, requested type "space"
+  1760                           ; Number of cases is 4, Range of values is 1 to 4
+  1761                           ; switch strategies available:
+  1762                           ; Name         Instructions Cycles
+  1763                           ; simple_byte           13     7 (average)
+  1764                           ; direct_byte           17     9 (fixed)
+  1765                           ; jumptable            263     9 (fixed)
+  1766                           ;	Chosen strategy is simple_byte
+  1767                           
+  1768                           	opt asmopt_off
+  1769  0163  3A01               	xorlw	1^0	; case 1
+  1770  0164  1903               	skipnz
+  1771  0165  28ED               	goto	i1l4328
+  1772  0166  3A03               	xorlw	2^1	; case 2
+  1773  0167  1903               	skipnz
+  1774  0168  2924               	goto	i1l4346
+  1775  0169  3A01               	xorlw	3^2	; case 3
+  1776  016A  1903               	skipnz
+  1777  016B  28FE               	goto	i1l1486
+  1778  016C  3A07               	xorlw	4^3	; case 4
+  1779  016D  1903               	skipnz
+  1780  016E  2938               	goto	i1l1493
+  1781  016F  297D               	goto	i1l4372
+  1782                           	opt asmopt_on
+  1783                           
+  1784                           	line	156
+  1785                           	
+  1786  0170                     i1l1485:	
+  1787                           	line	157
+  1788                           ;main.c: 157: switch (rear_state)
+  1789  0170  297D               	goto	i1l4372
+  1790                           	line	159
+  1791                           ;main.c: 158: {
+  1792                           ;main.c: 159: case BLINK:
+  1793                           	
+  1794  0171                     i1l1499:	
+  1795                           	line	160
+  1796                           ;main.c: 160: if (blink_state)
+  1797  0171  1D7C               	btfss	(_blink_state/8),(_blink_state)&7
+  1798  0172  2974               	goto	u281_21
+  1799  0173  2975               	goto	u281_20
+  1800  0174                     u281_21:
+  1801  0174  2977               	goto	i1l1500
+  1802  0175                     u281_20:
+  1803                           	line	161
+  1804                           	
+  1805  0175                     i1l4368:	
+  1806                           ;main.c: 161: RC2 = 1;
+  1807  0175  150E               	bsf	(114/8),(114)&7
+  1808  0176  2987               	goto	i1l1504
+  1809                           	line	162
+  1810                           	
+  1811  0177                     i1l1500:	
+  1812                           	line	163
+  1813                           ;main.c: 162: else
+  1814                           ;main.c: 163: RC2 = 0;
+  1815  0177  110E               	bcf	(114/8),(114)&7
+  1816  0178  2987               	goto	i1l1504
+  1817                           	
+  1818  0179                     i1l1501:	
+  1819                           	line	164
+  1820                           ;main.c: 164: break;
+  1821  0179  2987               	goto	i1l1504
+  1822                           	line	165
+  1823                           ;main.c: 165: case SOLID:
+  1824                           	
+  1825  017A                     i1l1503:	
+  1826                           	line	166
+  1827                           ;main.c: 166: RC2 = 1;
+  1828  017A  150E               	bsf	(114/8),(114)&7
+  1829                           	line	167
+  1830                           ;main.c: 167: break;
+  1831  017B  2987               	goto	i1l1504
+  1832                           	line	168
+  1833                           	
+  1834  017C                     i1l4370:	
+  1835                           ;main.c: 168: }
+  1836  017C  2987               	goto	i1l1504
+  1837                           	line	157
+  1838                           	
+  1839  017D                     i1l1498:	
+  1840                           	
+  1841  017D                     i1l4372:	
+  1842  017D  0020               	movlb 0	; select bank0
+  1843  017E  0828               	movf	(_rear_state),w
+  1844                           	; Switch size 1, requested type "space"
+  1845                           ; Number of cases is 2, Range of values is 1 to 2
+  1846                           ; switch strategies available:
+  1847                           ; Name         Instructions Cycles
+  1848                           ; simple_byte            7     4 (average)
+  1849                           ; direct_byte           13     9 (fixed)
+  1850                           ; jumptable            263     9 (fixed)
+  1851                           ;	Chosen strategy is simple_byte
+  1852                           
+  1853                           	opt asmopt_off
+  1854  017F  3A01               	xorlw	1^0	; case 1
+  1855  0180  1903               	skipnz
+  1856  0181  2971               	goto	i1l1499
+  1857  0182  3A03               	xorlw	2^1	; case 2
+  1858  0183  1903               	skipnz
+  1859  0184  297A               	goto	i1l1503
+  1860  0185  2987               	goto	i1l1504
+  1861                           	opt asmopt_on
+  1862                           
+  1863                           	line	168
+  1864                           	
+  1865  0186                     i1l1502:	
+  1866  0186  2987               	goto	i1l1504
+  1867                           	line	169
+  1868                           	
+  1869  0187                     i1l1481:	
+  1870                           	line	170
+  1871                           	
+  1872  0187                     i1l1504:	
+  1873  0187  0008               	return
+  1874                           	opt stack 0
+  1875                           GLOBAL	__end_of_update_lights
+  1876  0188                     	__end_of_update_lights:
+  1877 ;; =============== function _update_lights ends ============
+  1878                           
+  1879                           	signat	_update_lights,88
+  1880                           	global	i1_set_PWM_Duty
+  1881                           psect	text232,local,class=CODE,delta=2
+  1882                           global __ptext232
+  1883  025C                     __ptext232:
+  1884                           
+  1885 ;; *************** function i1_set_PWM_Duty *****************
+  1886 ;; Defined at:
+  1887 ;;		line 173 in file "main.c"
+  1888 ;; Parameters:    Size  Location     Type
+  1889 ;;  set_PWM_Duty    1    wreg     unsigned char 
+  1890 ;; Auto vars:     Size  Location     Type
+  1891 ;;  set_PWM_Duty    1    1[COMMON] unsigned char 
+  1892 ;; Return value:  Size  Location     Type
+  1893 ;;		None               void
+  1894 ;; Registers used:
+  1895 ;;		wreg, status,2, status,0
+  1896 ;; Tracked objects:
+  1897 ;;		On entry : 0/0
+  1898 ;;		On exit  : 0/0
+  1899 ;;		Unchanged: 0/0
+  1900 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+       1  BANK12
+  1901 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0
+  1902 ;;      Locals:         1       0       0       0       0       0       0       0       0       0       0       0       
+       0       0
+  1903 ;;      Temps:          1       0       0       0       0       0       0       0       0       0       0       0       
+       0       0
+  1904 ;;      Totals:         2       0       0       0       0       0       0       0       0       0       0       0       
+       0       0
+  1905 ;;Total ram usage:        2 bytes
+  1906 ;; Hardware stack levels used:    1
+  1907 ;; This function calls:
+  1908 ;;		Nothing
+  1909 ;; This function is called by:
+  1910 ;;		_update_lights
+  1911 ;; This function uses a non-reentrant model
+  1912 ;;
+  1913                           psect	text232
+  1914                           	file	"main.c"
+  1915                           	line	173
+  1916                           	global	__size_ofi1_set_PWM_Duty
+  1917  0021                     	__size_ofi1_set_PWM_Duty	equ	__end_ofi1_set_PWM_Duty-i1_set_PWM_Duty
+  1918                           	
+  1919  025C                     i1_set_PWM_Duty:	
+  1920                           	opt	stack 11
+  1921                           ; Regs used in i1_set_PWM_Duty: [wreg+status,2+status,0]
+  1922                           ;i1set_PWM_Duty@duty stored from wreg
+  1923  025C  00F1               	movwf	(i1set_PWM_Duty@duty)
+  1924                           	line	174
+  1925                           	
+  1926  025D                     i1l4464:	
+  1927                           ;main.c: 174: CCPR1L = duty >> 2;
+  1928  025D  0871               	movf	(i1set_PWM_Duty@duty),w
+  1929  025E  00F0               	movwf	(??i1_set_PWM_Duty+0)+0
+  1930  025F  3002               	movlw	02h
+  1931  0260                     u306_25:
+  1932  0260  36F0               	lsrf	(??i1_set_PWM_Duty+0)+0,f
+  1933  0261  0B89               	decfsz	wreg,f
+  1934  0262  2A60               	goto	u306_25
+  1935  0263  0870               	movf	0+(??i1_set_PWM_Duty+0)+0,w
+  1936  0264  0025               	movlb 5	; select bank5
+  1937  0265  0091               	movwf	(657)^0280h	;volatile
+  1938                           	line	175
+  1939                           	
+  1940  0266                     i1l4466:	
+  1941                           ;main.c: 175: DC1B0 = duty & 0b1;
+  1942  0266  1871               	btfsc	(i1set_PWM_Duty@duty),0
+  1943  0267  2A69               	goto	u307_21
+  1944  0268  2A6C               	goto	u307_20
+  1945                           	
+  1946  0269                     u307_21:
+  1947  0269  0025               	movlb 5	; select bank5
+  1948  026A  1613               	bsf	(5276/8)^0280h,(5276)&7
+  1949  026B  2A6E               	goto	u308_24
+  1950  026C                     u307_20:
+  1951  026C  0025               	movlb 5	; select bank5
+  1952  026D  1213               	bcf	(5276/8)^0280h,(5276)&7
+  1953  026E                     u308_24:
+  1954                           	line	176
+  1955                           ;main.c: 176: DC1B1 = (duty & 0b10) >> 1;
+  1956  026E  0871               	movf	(i1set_PWM_Duty@duty),w
+  1957  026F  00F0               	movwf	(??i1_set_PWM_Duty+0)+0
+  1958  0270  3001               	movlw	01h
+  1959  0271                     u309_25:
+  1960  0271  36F0               	lsrf	(??i1_set_PWM_Duty+0)+0,f
+  1961  0272  0B89               	decfsz	wreg,f
+  1962  0273  2A71               	goto	u309_25
+  1963  0274  1870               	btfsc	0+(??i1_set_PWM_Duty+0)+0,0
+  1964  0275  2A77               	goto	u310_21
+  1965  0276  2A7A               	goto	u310_20
+  1966                           	
+  1967  0277                     u310_21:
+  1968  0277  0025               	movlb 5	; select bank5
+  1969  0278  1693               	bsf	(5277/8)^0280h,(5277)&7
+  1970  0279  2A7C               	goto	u311_24
+  1971  027A                     u310_20:
+  1972  027A  0025               	movlb 5	; select bank5
+  1973  027B  1293               	bcf	(5277/8)^0280h,(5277)&7
+  1974  027C                     u311_24:
+  1975                           	line	178
+  1976                           	
+  1977  027C                     i1l1507:	
+  1978  027C  0008               	return
+  1979                           	opt stack 0
+  1980                           GLOBAL	__end_ofi1_set_PWM_Duty
+  1981  027D                     	__end_ofi1_set_PWM_Duty:
+  1982 ;; =============== function i1_set_PWM_Duty ends ============
+  1983                           
+  1984                           	signat	i1_set_PWM_Duty,88
+  1985                           	global	___awmod
+  1986                           psect	text233,local,class=CODE,delta=2
+  1987                           global __ptext233
+  1988  0188                     __ptext233:
+  1989                           
+  1990 ;; *************** function ___awmod *****************
+  1991 ;; Defined at:
+  1992 ;;		line 5 in file "/usr/hitech/picc/9.83/sources/awmod.c"
+  1993 ;; Parameters:    Size  Location     Type
+  1994 ;;  divisor         2    0[COMMON] int 
+  1995 ;;  dividend        2    2[COMMON] int 
+  1996 ;; Auto vars:     Size  Location     Type
+  1997 ;;  sign            1    6[COMMON] unsigned char 
+  1998 ;;  counter         1    5[COMMON] unsigned char 
+  1999 ;; Return value:  Size  Location     Type
+  2000 ;;                  2    0[COMMON] int 
+  2001 ;; Registers used:
+  2002 ;;		wreg, status,2, status,0
+  2003 ;; Tracked objects:
+  2004 ;;		On entry : 0/0
+  2005 ;;		On exit  : 0/0
+  2006 ;;		Unchanged: 0/0
+  2007 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+       1  BANK12
+  2008 ;;      Params:         4       0       0       0       0       0       0       0       0       0       0       0       
+       0       0
+  2009 ;;      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       
+       0       0
+  2010 ;;      Temps:          1       0       0       0       0       0       0       0       0       0       0       0       
+       0       0
+  2011 ;;      Totals:         7       0       0       0       0       0       0       0       0       0       0       0       
+       0       0
+  2012 ;;Total ram usage:        7 bytes
+  2013 ;; Hardware stack levels used:    1
+  2014 ;; This function calls:
+  2015 ;;		Nothing
+  2016 ;; This function is called by:
+  2017 ;;		_ISR
+  2018 ;; This function uses a non-reentrant model
+  2019 ;;
+  2020                           psect	text233
+  2021                           	file	"/usr/hitech/picc/9.83/sources/awmod.c"
+  2022                           	line	5
+  2023                           	global	__size_of___awmod
+  2024  0060                     	__size_of___awmod	equ	__end_of___awmod-___awmod
+  2025                           	
+  2026  0188                     ___awmod:	
+  2027                           	opt	stack 12
+  2028                           ; Regs used in ___awmod: [wreg+status,2+status,0]
+  2029                           	line	8
+  2030                           	
+  2031  0188                     i1l4430:	
+  2032  0188  01F6               	clrf	(___awmod@sign)
+  2033                           	line	9
+  2034  0189  1FF3               	btfss	(___awmod@dividend+1),7
+  2035  018A  298C               	goto	u297_21
+  2036  018B  298D               	goto	u297_20
+  2037  018C                     u297_21:
+  2038  018C  2996               	goto	i1l4434
+  2039  018D                     u297_20:
+  2040                           	line	10
+  2041                           	
+  2042  018D                     i1l4432:	
+  2043  018D  09F2               	comf	(___awmod@dividend),f
+  2044  018E  09F3               	comf	(___awmod@dividend+1),f
+  2045  018F  0AF2               	incf	(___awmod@dividend),f
+  2046  0190  1903               	skipnz
+  2047  0191  0AF3               	incf	(___awmod@dividend+1),f
+  2048                           	line	11
+  2049  0192  01F6               	clrf	(___awmod@sign)
+  2050  0193  1403               	bsf	status,0
+  2051  0194  0DF6               	rlf	(___awmod@sign),f
+  2052  0195  2996               	goto	i1l4434
+  2053                           	line	12
+  2054                           	
+  2055  0196                     i1l3080:	
+  2056                           	line	13
+  2057                           	
+  2058  0196                     i1l4434:	
+  2059  0196  1FF1               	btfss	(___awmod@divisor+1),7
+  2060  0197  2999               	goto	u298_21
+  2061  0198  299A               	goto	u298_20
+  2062  0199                     u298_21:
+  2063  0199  29A0               	goto	i1l4438
+  2064  019A                     u298_20:
+  2065                           	line	14
+  2066                           	
+  2067  019A                     i1l4436:	
+  2068  019A  09F0               	comf	(___awmod@divisor),f
+  2069  019B  09F1               	comf	(___awmod@divisor+1),f
+  2070  019C  0AF0               	incf	(___awmod@divisor),f
+  2071  019D  1903               	skipnz
+  2072  019E  0AF1               	incf	(___awmod@divisor+1),f
+  2073  019F  29A0               	goto	i1l4438
+  2074                           	
+  2075  01A0                     i1l3081:	
+  2076                           	line	15
+  2077                           	
+  2078  01A0                     i1l4438:	
+  2079  01A0  0871               	movf	(___awmod@divisor+1),w
+  2080  01A1  0470               	iorwf	(___awmod@divisor),w
+  2081  01A2  1903               	skipnz
+  2082  01A3  29A5               	goto	u299_21
+  2083  01A4  29A6               	goto	u299_20
+  2084  01A5                     u299_21:
+  2085  01A5  29D6               	goto	i1l4456
+  2086  01A6                     u299_20:
+  2087                           	line	16
+  2088                           	
+  2089  01A6                     i1l4440:	
+  2090  01A6  01F5               	clrf	(___awmod@counter)
+  2091  01A7  1403               	bsf	status,0
+  2092  01A8  0DF5               	rlf	(___awmod@counter),f
+  2093                           	line	17
+  2094  01A9  29B4               	goto	i1l4446
+  2095                           	
+  2096  01AA                     i1l3084:	
+  2097                           	line	18
+  2098                           	
+  2099  01AA                     i1l4442:	
+  2100  01AA  3001               	movlw	01h
+  2101                           	
+  2102  01AB                     u300_25:
+  2103  01AB  35F0               	lslf	(___awmod@divisor),f
+  2104  01AC  0DF1               	rlf	(___awmod@divisor+1),f
+  2105  01AD  0B89               	decfsz	wreg,f
+  2106  01AE  29AB               	goto	u300_25
+  2107                           	line	19
+  2108                           	
+  2109  01AF                     i1l4444:	
+  2110  01AF  3001               	movlw	(01h)
+  2111  01B0  00F4               	movwf	(??___awmod+0)+0
+  2112  01B1  0874               	movf	(??___awmod+0)+0,w
+  2113  01B2  07F5               	addwf	(___awmod@counter),f
+  2114  01B3  29B4               	goto	i1l4446
+  2115                           	line	20
+  2116                           	
+  2117  01B4                     i1l3083:	
+  2118                           	line	17
+  2119                           	
+  2120  01B4                     i1l4446:	
+  2121  01B4  1FF1               	btfss	(___awmod@divisor+1),(15)&7
+  2122  01B5  29B7               	goto	u301_21
+  2123  01B6  29B8               	goto	u301_20
+  2124  01B7                     u301_21:
+  2125  01B7  29AA               	goto	i1l4442
+  2126  01B8                     u301_20:
+  2127  01B8  29BA               	goto	i1l4448
+  2128                           	
+  2129  01B9                     i1l3085:	
+  2130  01B9  29BA               	goto	i1l4448
+  2131                           	line	21
+  2132                           	
+  2133  01BA                     i1l3086:	
+  2134                           	line	22
+  2135                           	
+  2136  01BA                     i1l4448:	
+  2137  01BA  0871               	movf	(___awmod@divisor+1),w
+  2138  01BB  0273               	subwf	(___awmod@dividend+1),w
+  2139  01BC  1D03               	skipz
+  2140  01BD  29C0               	goto	u302_25
+  2141  01BE  0870               	movf	(___awmod@divisor),w
+  2142  01BF  0272               	subwf	(___awmod@dividend),w
+  2143  01C0                     u302_25:
+  2144  01C0  1C03               	skipc
+  2145  01C1  29C3               	goto	u302_21
+  2146  01C2  29C4               	goto	u302_20
+  2147  01C3                     u302_21:
+  2148  01C3  29C9               	goto	i1l4452
+  2149  01C4                     u302_20:
+  2150                           	line	23
+  2151                           	
+  2152  01C4                     i1l4450:	
+  2153  01C4  0870               	movf	(___awmod@divisor),w
+  2154  01C5  02F2               	subwf	(___awmod@dividend),f
+  2155  01C6  0871               	movf	(___awmod@divisor+1),w
+  2156  01C7  3BF3               	subwfb	(___awmod@dividend+1),f
+  2157  01C8  29C9               	goto	i1l4452
+  2158                           	
+  2159  01C9                     i1l3087:	
+  2160                           	line	24
+  2161                           	
+  2162  01C9                     i1l4452:	
+  2163  01C9  3001               	movlw	01h
+  2164                           	
+  2165  01CA                     u303_25:
+  2166  01CA  36F1               	lsrf	(___awmod@divisor+1),f
+  2167  01CB  0CF0               	rrf	(___awmod@divisor),f
+  2168  01CC  0B89               	decfsz	wreg,f
+  2169  01CD  29CA               	goto	u303_25
+  2170                           	line	25
+  2171                           	
+  2172  01CE                     i1l4454:	
+  2173  01CE  3001               	movlw	low(01h)
+  2174  01CF  02F5               	subwf	(___awmod@counter),f
+  2175  01D0  1D03               	btfss	status,2
+  2176  01D1  29D3               	goto	u304_21
+  2177  01D2  29D4               	goto	u304_20
+  2178  01D3                     u304_21:
+  2179  01D3  29BA               	goto	i1l4448
+  2180  01D4                     u304_20:
+  2181  01D4  29D6               	goto	i1l4456
+  2182                           	
+  2183  01D5                     i1l3088:	
+  2184  01D5  29D6               	goto	i1l4456
+  2185                           	line	26
+  2186                           	
+  2187  01D6                     i1l3082:	
+  2188                           	line	27
+  2189                           	
+  2190  01D6                     i1l4456:	
+  2191  01D6  0876               	movf	(___awmod@sign),w
+  2192  01D7  1D03               	skipz
+  2193  01D8  29DA               	goto	u305_20
+  2194  01D9  29E0               	goto	i1l4460
+  2195  01DA                     u305_20:
+  2196                           	line	28
+  2197                           	
+  2198  01DA                     i1l4458:	
+  2199  01DA  09F2               	comf	(___awmod@dividend),f
+  2200  01DB  09F3               	comf	(___awmod@dividend+1),f
+  2201  01DC  0AF2               	incf	(___awmod@dividend),f
+  2202  01DD  1903               	skipnz
+  2203  01DE  0AF3               	incf	(___awmod@dividend+1),f
+  2204  01DF  29E0               	goto	i1l4460
+  2205                           	
+  2206  01E0                     i1l3089:	
+  2207                           	line	29
+  2208                           	
+  2209  01E0                     i1l4460:	
+  2210  01E0  0873               	movf	(___awmod@dividend+1),w
+  2211  01E1  01F1               	clrf	(?___awmod+1)
+  2212  01E2  07F1               	addwf	(?___awmod+1)
+  2213  01E3  0872               	movf	(___awmod@dividend),w
+  2214  01E4  01F0               	clrf	(?___awmod)
+  2215  01E5  07F0               	addwf	(?___awmod)
+  2216                           
+  2217  01E6  29E7               	goto	i1l3090
+  2218                           	
+  2219  01E7                     i1l4462:	
+  2220                           	line	30
+  2221                           	
+  2222  01E7                     i1l3090:	
+  2223  01E7  0008               	return
+  2224                           	opt stack 0
+  2225                           GLOBAL	__end_of___awmod
+  2226  01E8                     	__end_of___awmod:
+  2227 ;; =============== function ___awmod ends ============
+  2228                           
+  2229                           	signat	___awmod,8314
+  2230                           	global	_get_PWM_Duty
+  2231                           psect	text234,local,class=CODE,delta=2
+  2232                           global __ptext234
+  2233  01E8                     __ptext234:
+  2234                           
+  2235 ;; *************** function _get_PWM_Duty *****************
+  2236 ;; Defined at:
+  2237 ;;		line 181 in file "main.c"
+  2238 ;; Parameters:    Size  Location     Type
+  2239 ;;		None
+  2240 ;; Auto vars:     Size  Location     Type
+  2241 ;;		None
+  2242 ;; Return value:  Size  Location     Type
+  2243 ;;                  2    0[COMMON] unsigned int 
+  2244 ;; Registers used:
+  2245 ;;		wreg, status,2, status,0
+  2246 ;; Tracked objects:
+  2247 ;;		On entry : 0/0
+  2248 ;;		On exit  : 0/0
+  2249 ;;		Unchanged: 0/0
+  2250 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+       1  BANK12
+  2251 ;;      Params:         2       0       0       0       0       0       0       0       0       0       0       0       
+       0       0
+  2252 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0
+  2253 ;;      Temps:          8       0       0       0       0       0       0       0       0       0       0       0       
+       0       0
+  2254 ;;      Totals:        10       0       0       0       0       0       0       0       0       0       0       0       
+       0       0
+  2255 ;;Total ram usage:       10 bytes
+  2256 ;; Hardware stack levels used:    1
+  2257 ;; This function calls:
+  2258 ;;		Nothing
+  2259 ;; This function is called by:
+  2260 ;;		_update_lights
+  2261 ;; This function uses a non-reentrant model
+  2262 ;;
+  2263                           psect	text234
+  2264                           	file	"main.c"
+  2265                           	line	181
+  2266                           	global	__size_of_get_PWM_Duty
+  2267  002A                     	__size_of_get_PWM_Duty	equ	__end_of_get_PWM_Duty-_get_PWM_Duty
+  2268                           	
+  2269  01E8                     _get_PWM_Duty:	
+  2270                           	opt	stack 11
+  2271                           ; Regs used in _get_PWM_Duty: [wreg+status,2+status,0]
+  2272                           	line	182
+  2273                           	
+  2274  01E8                     i1l4374:	
+  2275                           ;main.c: 182: return CCPR1L << 2 | DC1B1 << 1 | DC1B0;
+  2276  01E8  1003               	clrc
+  2277  01E9  0025               	movlb 5	; select bank5
+  2278  01EA  1A13               	btfsc	(5276/8)^0280h,(5276)&7
+  2279  01EB  1403               	setc
+  2280  01EC  3000               	movlw	0
+  2281  01ED  3D09               	addwfc	wreg,w
+  2282  01EE  00F2               	movwf	(??_get_PWM_Duty+0)+0
+  2283  01EF  01F3               	clrf	(??_get_PWM_Duty+0)+0+1
+  2284  01F0  1003               	clrc
+  2285  01F1  1A93               	btfsc	(5277/8)^0280h,(5277)&7
+  2286  01F2  1403               	setc
+  2287  01F3  3000               	movlw	0
+  2288  01F4  3D09               	addwfc	wreg,w
+  2289  01F5  00F4               	movwf	(??_get_PWM_Duty+2)+0
+  2290  01F6  01F5               	clrf	(??_get_PWM_Duty+2)+0+1
+  2291  01F7  3001               	movlw	01h
+  2292  01F8                     u282_25:
+  2293  01F8  35F4               	lslf	(??_get_PWM_Duty+2)+0,f
+  2294  01F9  0DF5               	rlf	(??_get_PWM_Duty+2)+1,f
+  2295  01FA  0B89               	decfsz	wreg,f
+  2296  01FB  29F8               	goto	u282_25
+  2297  01FC  0811               	movf	(657)^0280h,w	;volatile
+  2298  01FD  00F6               	movwf	(??_get_PWM_Duty+4)+0
+  2299  01FE  01F7               	clrf	(??_get_PWM_Duty+4)+0+1
+  2300  01FF  3002               	movlw	02h
+  2301  0200                     u283_25:
+  2302  0200  35F6               	lslf	(??_get_PWM_Duty+4)+0,f
+  2303  0201  0DF7               	rlf	(??_get_PWM_Duty+4)+1,f
+  2304  0202  0B89               	decfsz	wreg,f
+  2305  0203  2A00               	goto	u283_25
+  2306  0204  0874               	movf	0+(??_get_PWM_Duty+2)+0,w
+  2307  0205  0476               	iorwf	0+(??_get_PWM_Duty+4)+0,w
+  2308  0206  00F8               	movwf	(??_get_PWM_Duty+6)+0
+  2309  0207  0875               	movf	1+(??_get_PWM_Duty+2)+0,w
+  2310  0208  0477               	iorwf	1+(??_get_PWM_Duty+4)+0,w
+  2311  0209  00F9               	movwf	1+(??_get_PWM_Duty+6)+0
+  2312  020A  0872               	movf	0+(??_get_PWM_Duty+0)+0,w
+  2313  020B  0478               	iorwf	0+(??_get_PWM_Duty+6)+0,w
+  2314  020C  00F0               	movwf	(?_get_PWM_Duty)
+  2315  020D  0873               	movf	1+(??_get_PWM_Duty+0)+0,w
+  2316  020E  0479               	iorwf	1+(??_get_PWM_Duty+6)+0,w
+  2317  020F  00F1               	movwf	1+(?_get_PWM_Duty)
+  2318  0210  2A11               	goto	i1l1510
+  2319                           	
+  2320  0211                     i1l4376:	
+  2321                           	line	183
+  2322                           	
+  2323  0211                     i1l1510:	
+  2324  0211  0008               	return
+  2325                           	opt stack 0
+  2326                           GLOBAL	__end_of_get_PWM_Duty
+  2327  0212                     	__end_of_get_PWM_Duty:
+  2328 ;; =============== function _get_PWM_Duty ends ============
+  2329                           
+  2330                           	signat	_get_PWM_Duty,90
+  2331                           psect	text235,local,class=CODE,delta=2
+  2332                           global __ptext235
+  2333  0000                     __ptext235:
+  2334                           	global	btemp
+  2335  007E                     	btemp set 07Eh
+  2336                           
+  2337                           	DABS	1,126,2	;btemp
+  2338                           	global	wtemp0
+  2339  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.83 build 10920 
+Symbol Table                                                                                   Sat Jul 28 18:27:40 2012
+
+          _update_lights 00B2                       _RD 0CA8                       _WR 0CA9  
+                    _GIE 005F                      _RC2 0072                      _PR2 001B  
+                    _ISR 0004             ___awmod@sign 0076                      wreg 0009  
+                   ?_ISR 0070                     l1507 025B                     l1470 0290  
+                   l1473 0237                     l1467 028F                     l1468 028F  
+                   l1469 0290                     l4310 023A                     l4312 0243  
+                   l4500 022C                     l4502 022D                     l4504 0230  
+                   l4506 0233                     l4508 028B                     l4470 0212  
+                   l4480 0219                     l4472 0214                     l4490 021F  
+                   l4482 021A                     l4474 0215                     l4492 0220  
+                   l4484 021B                     l4476 0216                     l4468 0212  
+                   l4494 0224                     l4486 021C                     l4478 0218  
+                   l4496 0227                     l4488 021D                     l4498 0228  
+                   u2630 024A                     u2631 0247                     u2625 023D  
+                   u2660 0259                     u2644 024C                     u2661 0256  
+                   u2655 0250                     u2674 025B                     _PEIE 005E  
+                   _SCS0 04C8                     _SCS1 04C9                     _TMR0 0015  
+                   _TMR2 001A                     _WREN 0CAA                     _WPUA 020C  
+                   _WPUC 020E                     _main 028B                     btemp 007E  
+                   start 00AF                    ??_ISR 007A           ?_update_lights 0070  
+                  _DC1B0 149C                    _DC1B1 149D                    ?_main 002B  
+                  _EEADR 0191          __end_of___awmod 01E8                    _CARRY 0018  
+                  _IOCAF 0393                    _IOCAN 0392                    _IOCAP 0391  
+                  _IRCF0 04CB                    _IRCF1 04CC                    _IRCF2 04CD  
+                  _IRCF3 04CE                    _IOCIE 005B                    _TRISA 008C  
+                  _TRISC 008E                    _setup 0212           __pbitbssCOMMON 03E0  
+                  status 0003                    wtemp0 007E     __end_of_get_PWM_Duty 0212  
+           __end_of_main 0292                   ??_main 002F                   _EEDATA 0193  
+                 _CCPR1L 0291                   _EECON1 0195                   _EECON2 0196  
+                 ?_setup 0070                   _IOCAF0 1C98                   _IOCAF1 1C99  
+                 _IOCAF2 1C9A                   _IOCAF3 1C9B                   _IOCAF4 1C9C  
+                 _IOCAF5 1C9D                   i1l1500 0177                   i1l1501 0179  
+                 i1l1510 0211                   i1l1502 0186                   i1l1503 017A  
+                 i1l1504 0187                   i1l1520 0067                   i1l1521 007F  
+                 i1l1513 004E                   i1l1522 0085                   i1l1514 004D  
+                 i1l1507 027C                   i1l1523 009F                   i1l1515 004C  
+                 i1l1524 00A6                   i1l1516 004B                   i1l1525 00AB  
+                 i1l1517 00A8                   i1l1518 00A7                   i1l1519 005F  
+                 i1l3080 0196                   i1l1480 00C6                   i1l3081 01A0  
+                 i1l1481 0187                   i1l3090 01E7                   i1l3082 01D6  
+                 i1l1482 0162                   i1l1490 011E                   i1l3083 01B4  
+                 i1l1491 0124                   i1l1483 00ED                   i1l3084 01AA  
+                 i1l1492 0133                   i1l1484 00F9                   i1l1476 00EC  
+                 i1l3085 01B9                   i1l1485 0170                   i1l1493 0138  
+                 i1l3086 01BA                   i1l1494 0150                   i1l1486 00FE  
+                 i1l1478 00DA                   i1l3087 01C9                   i1l1495 014B  
+                 i1l1487 0113                   i1l3088 01D5                   i1l1496 0160  
+                 i1l1488 010E                   i1l4320 00C1                   i1l4400 005B  
+                 i1l3089 01E0                   i1l1497 015B                   i1l1489 0123  
+                 i1l1498 017D                   i1l4330 00F8                   i1l4322 00C6  
+                 i1l4314 00B2                   i1l4410 0067                   i1l4402 005C  
+                 i1l1499 0171                   i1l4340 0113                   i1l4332 00F9  
+                 i1l4324 00DA                   i1l4316 00B7                   i1l4420 0089  
+                 i1l4412 006B                   i1l4404 005F                   i1l4430 0188  
+                 i1l4350 0133                   i1l4342 011D                   i1l4334 0102  
+                 i1l4326 00EA                   i1l4318 00BD                   i1l4422 008A  
+                 i1l4414 006C                   i1l4406 0063                   i1l4440 01A6  
+                 i1l4432 018D                   i1l4360 015A                   i1l4352 013C  
+                 i1l4344 011E                   i1l4336 010D                   i1l4328 00ED  
+                 i1l4424 009F                   i1l4416 007F                   i1l4408 0064  
+                 i1l4450 01C4                   i1l4442 01AA                   i1l4434 0196  
+                 i1l4370 017C                   i1l4362 015B                   i1l4354 014A  
+                 i1l4346 0124                   i1l4338 010E                   i1l4426 00A4  
+                 i1l4418 0084                   i1l4460 01E0                   i1l4452 01C9  
+                 i1l4444 01AF                   i1l4436 019A                   i1l4364 0161  
+                 i1l4356 014B                   i1l4348 0132                   i1l4372 017D  
+                 i1l4428 00A8                   i1l4380 000C                   i1l4374 01E8  
+                 i1l4462 01E7                   i1l4454 01CE                   i1l4446 01B4  
+                 i1l4438 01A0                   i1l4358 0150                   i1l4366 0162  
+                 i1l4390 0029                   i1l4382 0010                   i1l4376 0211  
+                 i1l4448 01BA                   i1l4456 01D6                   i1l4464 025D  
+                 i1l4368 0175                   i1l4392 0039                   i1l4384 0011  
+                 i1l4458 01DA                   i1l4466 0266                   i1l4394 0049  
+                 i1l4386 0015                   i1l4378 0008                   i1l4396 0052  
+                 i1l4388 0019                   u300_25 01AB                   i1l4398 0057  
+                 u301_20 01B8                   u301_21 01B7                   u302_20 01C4  
+                 u310_20 027A                   u302_21 01C3                   u310_21 0277  
+                 u302_25 01C0                   u311_24 027C                   u303_25 01CA  
+                 u304_20 01D4                   u304_21 01D3                   u305_20 01DA  
+                 u306_25 0260                   u307_20 026C                   u307_21 0269  
+                 u308_24 026E                   u309_25 0271                   u270_20 00C1  
+                 u270_21 00C0                   u271_20 00C5                   u271_21 00C4  
+                 u280_20 0159                   u272_20 00D9                   u280_21 0158  
+                 u272_21 00D8                   u272_25 00D5                   u281_20 0175  
+                 u273_20 00F7                   u281_21 0174                   u273_21 00F6  
+                 u274_20 0102                   u290_20 0057                   u274_21 0101  
+                 u282_25 01F8                   u275_20 010C                   u291_20 005B  
+                 u275_21 010B                   u291_21 005A                   u283_25 0200  
+                 u276_20 011C                   u268_20 00B7                   u292_20 0063  
+                 u284_20 000C                   u276_21 011B                   u268_21 00B6  
+                 u292_21 0062                   u284_21 000B                   u277_20 0131  
+                 u269_20 00BD                   u293_20 006B                   u285_20 0010  
+                 u277_21 0130                   u269_21 00BC                   u293_21 006A  
+                 u285_21 000F                   u277_25 012D                   u278_20 013C  
+                 u294_20 0084                   u286_20 0019                   u278_21 013B  
+                 u294_21 0083                   u286_21 0018                   u279_20 0149  
+                 u295_20 0089                   u287_20 0029                   u279_21 0148  
+                 u295_21 0088                   u287_21 0028                   u279_25 0145  
+                 u296_20 00A4                   u288_20 0039                   u296_21 00A3  
+                 u288_21 0038                   u297_20 018D                   u289_20 0052  
+                 u297_21 018C                   u289_21 0051                   u298_20 019A  
+                 u298_21 0199                   u299_20 01A6                   u299_21 01A5  
+                 _TMR0IE 005D                   _TMR0IF 005A          ??_update_lights 007A  
+                 _nWPUEN 04AF                ??___awmod 0074          ___awmod@divisor 0070  
+        ___awmod@counter 0075         ??i1_set_PWM_Duty 0070           __pcstackCOMMON 0070  
+          __end_of_setup 0238            ?_set_PWM_Duty 0070                  ??_setup 002B  
+             __pbssBANK0 0020    __size_of_get_PWM_Duty 002A               __pmaintext 028B  
+             __pintentry 0004                  _CCP1CON 0293             _get_PWM_Duty 01E8  
+         ??_set_PWM_Duty 0029                  ___awmod 0188                  _blink_L 03E0  
+                _blink_R 03E1             __size_of_ISR 00AB         ___awmod@dividend 0072  
+             _rear_state 0028     end_of_initialization 0288     __end_of_set_PWM_Duty 025C  
+  __end_of_update_lights 0188      start_initialization 027D              __end_of_ISR 00AF  
+            __pbssCOMMON 007D            __pcstackBANK0 0029  __size_ofi1_set_PWM_Duty 0021  
+              __ptext231 00B2                __ptext232 025C                __ptext233 0188  
+              __ptext234 01E8                __ptext235 0000                __ptext227 0000  
+              __ptext228 0212                __ptext229 0238                 ?___awmod 0070  
+            _blink_state 03E2           __size_of_setup 0026    __size_of_set_PWM_Duty 0024  
+           _set_PWM_Duty 0238         __size_of___awmod 0060         set_PWM_Duty@duty 002A  
+               _blinks_h 0020                 _blinks_l 0024              _front_state 007D  
+         i1_set_PWM_Duty 025C            __size_of_main 0007                 main@argc 002B  
+               main@argv 002D            ?_get_PWM_Duty 0070   __end_ofi1_set_PWM_Duty 027D  
+ __size_of_update_lights 00D6                 intlevel1 0000               _OPTION_REG 0095  
+         ??_get_PWM_Duty 0072          ?i1_set_PWM_Duty 0070       i1set_PWM_Duty@duty 0071  

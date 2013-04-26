@@ -1,0 +1,6 @@
+Error[1224] ../../Downloads/PIC/USB-Blaster6/build/main6.c 64 : configuration setting 'PLLDIV' not recognized
+Error[1224] ../../Downloads/PIC/USB-Blaster6/build/main6.c 65 : configuration setting 'CPUDIV' not recognized
+Error[1224] ../../Downloads/PIC/USB-Blaster6/build/main6.c 66 : configuration setting 'USBDIV' not recognized
+Error[1224] ../../Downloads/PIC/USB-Blaster6/build/main6.c 67 : configuration setting 'FOSC' not recognized
+Error[1224] ../../Downloads/PIC/USB-Blaster6/build/main6.c 71 : configuration setting 'BOR' not recognized
+Error[1224] ../../Downloads/PIC/USB-Blaster6/build/main6.c 73 : configuration setting 'VREGEN' not recognized
